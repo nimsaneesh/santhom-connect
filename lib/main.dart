@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:santhom_connect/values/constants.dart';
 import 'core/app_export.dart';
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
@@ -17,8 +18,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // SystemChrome.
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color.fromARGB(255, 234, 234, 245), // Status bar color
+    ));
     return Sizer(
       builder: (context, orientation, deviceType) {
         return ChangeNotifierProvider(

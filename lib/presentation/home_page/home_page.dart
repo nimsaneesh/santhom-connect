@@ -1,6 +1,7 @@
+import 'package:santhom_connect/presentation/home_page/model/bulletin_model.dart';
+
 import 'widgets/fortynine_item_widget.dart';
 import 'models/fortynine_item_model.dart';
-import 'models/home_model.dart';
 import 'widgets/catogorychip_item_widget.dart';
 import 'models/catogorychip_item_model.dart';
 import 'widgets/fortyfive_item_widget.dart';
@@ -33,6 +34,7 @@ class HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    Provider.of<HomeProvider>(context, listen: false).getHome();
   }
 
   @override
@@ -40,6 +42,7 @@ class HomePageState extends State<HomePage>
     return SafeArea(
       child: Scaffold(
         body: SizedBox(
+          height: 200,
           width: SizeUtils.width,
           child: SingleChildScrollView(
             child: Column(
@@ -56,17 +59,6 @@ class HomePageState extends State<HomePage>
                         SizedBox(height: 13.v),
                         _buildFortyNine(context),
                         SizedBox(height: 24.v),
-                        Padding(
-                          padding: EdgeInsets.only(left: 1.h),
-                          child: Text(
-                            "lbl_bulletin".tr,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                        ),
-                        SizedBox(height: 4.v),
-                        _buildCatogoryChip(context),
-                        SizedBox(height: 12.v),
-                        _buildFortyFive(context),
                       ],
                     ),
                   ),
@@ -176,37 +168,4 @@ class HomePageState extends State<HomePage>
     );
   }
 
-  /// Section Widget
-  Widget _buildFortyFive(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 1.h,
-        right: 22.h,
-      ),
-      child: Consumer<HomeProvider>(
-        builder: (context, provider, child) {
-          return ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            separatorBuilder: (
-              context,
-              index,
-            ) {
-              return SizedBox(
-                height: 12.v,
-              );
-            },
-            itemCount: provider.homeModelObj.fortyfiveItemList.length,
-            itemBuilder: (context, index) {
-              FortyfiveItemModel model =
-                  provider.homeModelObj.fortyfiveItemList[index];
-              return FortyfiveItemWidget(
-                model,
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
 }

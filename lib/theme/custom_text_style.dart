@@ -7,6 +7,116 @@ import 'package:santhom_connect/theme/theme_helper.dart';
 /// Additionally, this class includes extensions on [TextStyle] to easily apply specific font families to text.
 
 class CustomTextStyles {
+  static get bodyMediumBluegray600ab => theme.textTheme.bodyMedium!.copyWith(
+        color: appTheme.blueGray600Ab,
+        fontSize: 13.fSize,
+      );
+
+  static get titleSmallIndigo40001 => theme.textTheme.titleSmall!.copyWith(
+        color: appTheme.indigo40001,
+        fontSize: 14.fSize,
+        fontWeight: FontWeight.w600,
+      );
+
+  static get titleSmallPoppinsffffffff12 =>
+      theme.textTheme.titleSmall!.poppins.copyWith(
+        color: Color(0XFFFFFFFF),
+        fontSize: 12.fSize,
+        fontWeight: FontWeight.w400,
+      );
+
+  static get titleSmallPoppinsffffffff16 =>
+      theme.textTheme.titleSmall!.poppins.copyWith(
+        color: Color(0XFFFFFFFF),
+        fontSize: 16.fSize,
+        letterSpacing: 0.7,
+        fontWeight: FontWeight.w800,
+      );
+  static get titleSmallPoppinsffffffff =>
+      theme.textTheme.titleSmall!.poppins.copyWith(
+        color: Color(0XFFFFFFFF),
+        fontSize: 14.fSize,
+        fontWeight: FontWeight.w600,
+      );
+
+  static get bodyMediumBluegray600 => theme.textTheme.bodyMedium!.copyWith(
+        color: appTheme.blueGray600,
+      );
+  static get bodyMediumOrangeA400 => theme.textTheme.bodyMedium!.copyWith(
+        color: appTheme.orangeA400.withOpacity(0.67),
+        fontSize: 13.fSize,
+      );
+
+  static get titleSmallPoppinsffffc885 =>
+      theme.textTheme.titleSmall!.poppins.copyWith(
+        color: Color(0XFFFFC885),
+        fontSize: 14.fSize,
+        fontWeight: FontWeight.w600,
+      );
+  static get bodyMediumPoppinsffffffff =>
+      theme.textTheme.bodyMedium!.poppins.copyWith(
+        color: Color(0XFFFFFFFF),
+      );
+  static get splashtext => theme.textTheme.displaySmall!.canela.copyWith(
+        color: appTheme.whiteA700,
+        fontSize: 38.fSize,
+      );
+
+  static get titleMediumBluegray900 => theme.textTheme.titleMedium!.copyWith(
+        color: appTheme.blueGray900,
+        fontSize: 16.fSize,
+        fontWeight: FontWeight.w500,
+      );
+
+  static get headingBlackMono => theme.textTheme.bodyMedium!.manrope.copyWith(
+        color: appTheme.black900,
+        fontWeight: FontWeight.w600,
+        fontSize: 26.fSize,
+      );
+
+  static get subHeadingBlackMono =>
+      theme.textTheme.bodyMedium!.manrope.copyWith(
+        color: appTheme.black900,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 1,
+        fontSize: 16.fSize,
+      );
+
+  static get displaySmallRobotoBlueA400 =>
+      theme.textTheme.displaySmall!.roboto.copyWith(
+        color: appTheme.blueA400,
+        fontSize: 38.fSize,
+      );
+  static get displaySmallRobotoBlueA40038 =>
+      theme.textTheme.displaySmall!.roboto.copyWith(
+        color: appTheme.blueA400,
+        fontSize: 38.fSize,
+      );
+  static get titleMediumPoppinsWhiteA700 =>
+      theme.textTheme.titleMedium!.poppins.copyWith(
+        color: appTheme.whiteA700,
+      );
+  // Label text style
+  static get bodySmallPoppins => theme.textTheme.bodySmall!.poppins;
+  static get titleMediumff214d6c => theme.textTheme.titleMedium!.copyWith(
+        color: Color(0XFF214D6C),
+        fontWeight: FontWeight.w600,
+      );
+  static get bodyLargeff214d6c => theme.textTheme.bodyLarge!.copyWith(
+        color: Color(0XFF214D6C),
+      );
+  static get titleSmallGray600 => theme.textTheme.titleSmall!.copyWith(
+        color: appTheme.gray600,
+        fontSize: 14.fSize,
+      );
+  static get labelLargeWhiteA700 => theme.textTheme.labelLarge!.copyWith(
+        color: appTheme.whiteA700,
+      );
+  static get titleSmallIndigoA700 => theme.textTheme.titleSmall!.copyWith(
+        color: appTheme.indigoA700,
+        fontSize: 14.fSize,
+        fontWeight: FontWeight.w600,
+      );
   // Body text style
   static get bodyMediumGray60002 => theme.textTheme.bodyMedium!.copyWith(
         color: appTheme.gray60002,
@@ -90,11 +200,7 @@ class CustomTextStyles {
         fontSize: 16.fSize,
         fontWeight: FontWeight.w500,
       );
-  static get titleMediumBluegray900 => theme.textTheme.titleMedium!.copyWith(
-        color: appTheme.blueGray900.withOpacity(0.64),
-        fontSize: 16.fSize,
-        fontWeight: FontWeight.w500,
-      );
+
   static get titleMediumBluegray90002 => theme.textTheme.titleMedium!.copyWith(
         color: appTheme.blueGray90002,
         fontSize: 16.fSize,
@@ -157,6 +263,10 @@ class CustomTextStyles {
         fontSize: 14.fSize,
         fontWeight: FontWeight.w600,
       );
+
+  static get bodyMediumff767676 => theme.textTheme.bodyMedium!.copyWith(
+        color: Color(0XFF767676),
+      );
 }
 
 extension on TextStyle {
@@ -169,6 +279,12 @@ extension on TextStyle {
   TextStyle get sFPro {
     return copyWith(
       fontFamily: 'SF Pro',
+    );
+  }
+
+  TextStyle get roboto {
+    return copyWith(
+      fontFamily: 'Roboto',
     );
   }
 

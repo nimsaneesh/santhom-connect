@@ -10,7 +10,8 @@ class ImageConstant {
   static String imgFamily21 = '$imagePath/img_family_2_1.svg';
 
   static String imgWhatsappImage = '$imagePath/img_whatsapp_image.png';
-
+  static String imgRectangle2573x73 = '$imagePath/img_rectangle_25_73x73.png';
+  static String imgSend = '$imagePath/img_send.svg';
   // Home images
   static String imgLove1 = '$imagePath/img_love_1.svg';
 
@@ -26,9 +27,11 @@ class ImageConstant {
   static String imgRectangle95551 = '$imagePath/img_rectangle_9555_1.png';
 
   static String imgDocumentPdf1 = '$imagePath/img_document_pdf_1.svg';
+  static String imgCalendar2 = '$imagePath/img_calendar_2.svg';
 
   static String imgFile1 = '$imagePath/img_file_1.svg';
 
+  static String imgCloudcomputing1 = '$imagePath/img_cloudcomputing_1.svg';
   // Directory images
   static String imgEllipse43 = '$imagePath/img_ellipse_43.png';
 
@@ -84,10 +87,12 @@ class ImageConstant {
   static String imgMail = '$imagePath/img_mail.svg';
 
   static String imgTelephone = '$imagePath/img_telephone.svg';
+  static String homeAddress = '$imagePath/home-address.png';
 
   static String imgChristianity = '$imagePath/img_christianity.svg';
 
   static String imgHome = '$imagePath/img_home.svg';
+  static String logo_drawer = '$imagePath/logo_drawer.png';
 
   // Common images
   static String imgGroup6 = '$imagePath/img_group_6.svg';
@@ -124,4 +129,36 @@ class ImageConstant {
       '$imagePath/img_nav_directory_indigo_400_01.svg';
 
   static String imageNotFound = 'assets/images/image_not_found.png';
+
+  static String imgMaximize = '$imagePath/img_maximize.svg';
+
+  static String img_backgrond = '$imagePath/img_splash.png';
+  // static String img_backgrond= '$imagePath/img_background.png';
+  static String imgSplash = '$imagePath/Splash.png';
+
+  // Verify Email images
+  static String imgGroup1626 = '$imagePath/img_group_1626.png';
+
+  static String imgClockBlack900 = '$imagePath/img_clock_black_900.svg';
+
+  static String imgClockWhiteA700 = '$imagePath/img_clock_white_a700.svg';
+
+  static String imgMother = '$imagePath/img_mother.svg';
+
+  static String imgFamily1 = '$imagePath/img_family_1.svg';
+
+  static String imgThumbsupBlueGray50001 =
+      '$imagePath/img_thumbsup_blue_gray_500_01.svg';
+
+  static String imgAddress1 = '$imagePath/img_address_1.svg';
+
+  static String imgG10368 = '$imagePath/img_g10368.svg';
+
+  static String imgGroup162496 = '$imagePath/img_group_162496.svg';
+
+  static String imgEllipse2851 = '$imagePath/img_ellipse_2851.png';
+
+  static String imgImage = '$imagePath/img_image.png';
+  static String pdf_icon = '$imagePath/icons8-pdf-96.png';
+  static String oval_copy = '$imagePath/oval_copy.png';
 }

@@ -146,4 +146,10 @@ extension TextFormFieldStyleHelper on CustomTextFormField {
           color: appTheme.gray20001,
         ),
       );
+
+  static UnderlineInputBorder get underLineWhiteA => UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: appTheme.whiteA700,
+        ),
+      );
 }

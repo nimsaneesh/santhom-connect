@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:santhom_connect/core/app_export.dart';
 
 class CustomBottomBar extends StatefulWidget {
-  CustomBottomBar({this.onChanged});
+  final Function(BottomBarEnum)? onChanged;
 
-  Function(BottomBarEnum)? onChanged;
+  CustomBottomBar({this.onChanged});
 
   @override
   CustomBottomBarState createState() => CustomBottomBarState();
@@ -12,8 +12,7 @@ class CustomBottomBar extends StatefulWidget {
 
 class CustomBottomBarState extends State<CustomBottomBar> {
   int selectedIndex = 0;
-
-  List<BottomMenuModel> bottomMenuList = [
+  final List<BottomMenuModel> bottomMenuList = [
     BottomMenuModel(
       icon: ImageConstant.imgNavHome,
       activeIcon: ImageConstant.imgNavHome,
@@ -35,7 +34,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
     BottomMenuModel(
       icon: ImageConstant.imgNavUpdates,
       activeIcon: ImageConstant.imgNavUpdates,
-      title: "lbl_updates".tr,
+      title: "Calender",
       type: BottomBarEnum.Updates,
     ),
     BottomMenuModel(
@@ -43,7 +42,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
       activeIcon: ImageConstant.imgNavProfile,
       title: "lbl_profile".tr,
       type: BottomBarEnum.Profile,
-    )
+    ),
   ];
 
   @override
@@ -60,10 +59,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
             color: appTheme.black900.withOpacity(0.03),
             spreadRadius: 2.h,
             blurRadius: 2.h,
-            offset: Offset(
-              0,
-              -10,
-            ),
+            offset: Offset(0, -10),
           ),
         ],
       ),
@@ -77,57 +73,47 @@ class CustomBottomBarState extends State<CustomBottomBar> {
         type: BottomNavigationBarType.fixed,
         items: List.generate(bottomMenuList.length, (index) {
           return BottomNavigationBarItem(
-            icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomImageView(
-                  imagePath: bottomMenuList[index].icon,
-                  height: 19.v,
-                  width: 17.h,
-                  color: appTheme.gray400,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 7.v),
-                  child: Text(
-                    bottomMenuList[index].title ?? "",
-                    style: CustomTextStyles.bodySmallGray60001.copyWith(
-                      color: appTheme.gray60001,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            activeIcon: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomImageView(
-                  imagePath: bottomMenuList[index].activeIcon,
-                  height: 21.v,
-                  width: 23.h,
-                  color: appTheme.indigo400,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 5.v),
-                  child: Text(
-                    bottomMenuList[index].title ?? "",
-                    style: theme.textTheme.labelMedium!.copyWith(
-                      color: appTheme.blue700,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            icon: _buildIcon(
+                bottomMenuList[index].icon, bottomMenuList[index].title),
+            activeIcon: _buildIcon(
+                bottomMenuList[index].activeIcon, bottomMenuList[index].title,
+                isActive: true),
             label: '',
           );
         }),
         onTap: (index) {
-          selectedIndex = index;
+          setState(() {
+            selectedIndex = index;
+          });
           widget.onChanged?.call(bottomMenuList[index].type);
-          setState(() {});
         },
       ),
+    );
+  }
+
+  Widget _buildIcon(String imagePath, String? title, {bool isActive = false}) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomImageView(
+          imagePath: imagePath,
+          height: isActive ? 21.v : 19.v,
+          width: isActive ? 23.h : 17.h,
+          color: isActive ? appTheme.indigo400 : appTheme.gray400,
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: isActive ? 5.v : 7.v),
+          child: Text(
+            title ?? "",
+            style: isActive
+                ? CustomTextStyles.bodySmallGray60001
+                    .copyWith(color: appTheme.blue700)
+                : CustomTextStyles.bodySmallGray60001
+                    .copyWith(color: appTheme.gray60001),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -141,27 +127,24 @@ enum BottomBarEnum {
 }
 
 class BottomMenuModel {
+  final String icon;
+  final String activeIcon;
+  final String? title;
+  final BottomBarEnum type;
+
   BottomMenuModel({
     required this.icon,
     required this.activeIcon,
     this.title,
     required this.type,
   });
-
-  String icon;
-
-  String activeIcon;
-
-  String? title;
-
-  BottomBarEnum type;
 }
 
 class DefaultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xffffffff),
+      color: Colors.white,
       padding: EdgeInsets.all(10),
       child: Center(
         child: Column(

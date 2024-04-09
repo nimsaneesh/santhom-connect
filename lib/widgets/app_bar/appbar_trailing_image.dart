@@ -8,11 +8,13 @@ class AppbarTrailingImage extends StatelessWidget {
     this.imagePath,
     this.margin,
     this.onTap,
+    this.text,
   }) : super(
           key: key,
         );
 
   String? imagePath;
+  String? text;
 
   EdgeInsetsGeometry? margin;
 
@@ -22,16 +24,29 @@ class AppbarTrailingImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onTap!.call();
+        onTap?.call();
       },
-      child: Padding(
-        padding: margin ?? EdgeInsets.zero,
-        child: CustomImageView(
-          imagePath: imagePath,
-          height: 19.v,
-          width: 24.h,
-          fit: BoxFit.contain,
-        ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomImageView(
+            imagePath: imagePath,
+            height: 21.h,
+            width: 24.h,
+            fit: BoxFit.contain,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            text ?? "",
+            style: theme.textTheme.titleMedium,
+          ),
+          SizedBox(
+            width: 25,
+          )
+        ],
       ),
     );
   }

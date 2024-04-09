@@ -1,17 +1,16 @@
 final Map<String, String> enUs = {
   // Login Screen
   "lbl_email": "Email",
-  "lbl_family_code": "Family Code",
+  "lbl_family_code": "Family Code :",
   "lbl_santhom_connect": "Santhom Connect",
   "lbl_sign_in": "Sign In",
   "lbl_welcome_to": "Welcome to",
   "msg_app_by_st_thomas":
-      "App By St. Thomas Malankara Syrian Catholic Church, Nalanchira, Thiruvananthapuram. 695015",
+      "A universal app of St.Thomas Malankara Syrian Catholic Church, Nalanchira, Thiruvananthapuram. 695015",
   "msg_jacobthomas_gmail_com": "jacobthomas@gmail.com",
   "msg_major_archieparchy": "Major Archieparchy of Thiruvananthapuram",
 
   // Home Screen
-  "lbl": "സമയക്രമം",
   "lbl2": "ഓർമ്മ",
   "lbl3": "വി  ഡോൺ ബോസ്കോ",
   "lbl4": "വേദഭാഗങ്ങൾ",
@@ -25,6 +24,7 @@ final Map<String, String> enUs = {
   "lbl_event": "#Event",
   "lbl_news": "#News",
   "lbl_news_events": "News & Events",
+  "lbl_bulletin": "Bulletin",
   "lbl_obituary": "Obituary",
   "lbl_obituary2": "#Obituary",
   "msg": "കുശവർക്കൽ ചാപ്പൽ",
@@ -90,7 +90,7 @@ final Map<String, String> enUs = {
   "msg_leader_peter_mammen": "Leader : Peter Mammen",
 
   // Directory - Search Results - Tab Container Screen
-  "lbl_ak": "‘Ak’", "lbl_all2": "All",
+  "lbl_ak": "Search", "lbl_all2": "All",
 
   // Directory Profile Screen
   "lbl_91_8876542526": "+91 8876542526",
@@ -134,7 +134,6 @@ final Map<String, String> enUs = {
   "msg_relationship_status2": "Relationship Status: ",
 
   // Common String
-  "lbl_bulletin": "Bulletin",
   "lbl_business": "Business",
   "lbl_directory": "Directory",
   "lbl_entertainment": "Entertainment",
@@ -156,4 +155,61 @@ final Map<String, String> enUs = {
 
   // Validation Error String
   "err_msg_please_enter_valid_email": "Please enter valid email",
+
+  // Verify Email Screen
+  "lbl": "**",
+  "lbl_submit": "Submit",
+  "msg_please_check_your":
+      "Please check your email and type the four digit \ncode to continue.",
+  "msg_verify_your_email": "Verify your email",
+
+  // Profile Screen
+  "lbl_add_member": "Add Member",
+  "lbl_address": "Address : ",
+  "lbl_anne_jacob": "Anne Jacob",
+  "lbl_edit_profile": "Edit Profile",
+  "lbl_grandson": ": Grandson",
+  "lbl_jacob_thomas": "Jacob Thomas",
+  "lbl_jaidan_jeffin": "Jaidan Jeffin ",
+  "lbl_jeffin_jacob": "Jeffin Jacob",
+  "lbl_logout": "Logout",
+  "lbl_my_profile": "My Profile",
+  "lbl_treesa_jeffin": "Treesa Jeffin",
+  "lbl_vadakke_veetil": "Vadakke Veetil",
+  "lbl_vadj0013": "VADJ0013",
+  "lbl_wife": " : Wife ",
+  "msg_address_vadakke":
+      "Address : Vadakke veettil, Moolamattom P.O, Thodupuzha, Kerala",
+  "msg_anne_jacob_wife": "Anne Jacob : Wife ",
+  "msg_daughter_in_law": " : Daughter in Law",
+  "msg_family_code_vadj0013": "Family Code : VADJ0013",
+  "msg_family_information": "Family Information",
+  "msg_head_of_the_family": "Head of The family: Jacob Thomas",
+  "msg_head_of_the_family2": "Head of The family: ",
+  "msg_jacob_thomas_family": "Jacob Thomas : Family Head",
+  "msg_jaidan_jeffin": "Jaidan Jeffin : Grandson",
+  "msg_jeffin_jacob_son": "Jeffin Jacob : Son",
+  "msg_selin_jacob_daughter": "Selin Jacob : Daughter",
+  "msg_treesa_jeffin": "Treesa Jeffin : Daughter in Law",
+  "msg_vadakke_veettil": "Vadakke veettil, Moolamattom P.O, Thodupuzha, Kerala",
+
+  // Updates Screen
+  "lbl_thevakkal_house": "Thevakkal House",
+  // "msg3": "ലീജിയൻ ഓഫ്  മേരി - വ്യാകുല മാതാപ്രസി ഡിയം - മീറ്റിംഗ് ",
+  // "msg4": "ദൈവാലയ നവീകരണം - അനുദിന ജപമാല പ്രാർത്ഥന",
+  // "msg5": "സംയുക്ത ജപമാല ( റോസറി ക്ലബ് )",
+  // "msg_10_00pm_11_00_pm": "10-00PM-11-00 PM",
+  "msg_celin_roy_s_birthday": "Celin Roy’s Birthday",
+  "msg_thomas_jacob_s_birthday": "Thomas Jacob’s Birthday",
+  // "msg_valiyaparambil_house": "Valiyaparambil House",
+
+  // Updates - Tab Container Screen
+  "lbl_30": "30",
+  "lbl_anniversary": "Anniversary",
+  // "lbl_daily_reading": "Daily Reading",
+  // "lbl_daily_schedule": "Daily Schedule",
+  "lbl_february": "February",
+  "lbl_mon": "Mon",
+  // "lbl_vicar_s_message": "Vicar’s Message",
+  "msg_death_anniversary": "Death Anniversary",
 };

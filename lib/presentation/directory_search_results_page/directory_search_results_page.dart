@@ -1,4 +1,5 @@
 import 'package:grouped_list/grouped_list.dart';
+import 'package:santhom_connect/presentation/home_page/model/directory_model.dart';
 import 'models/monday_item_model.dart';
 import '../directory_search_results_page/widgets/monday_item_widget.dart';
 import 'models/directory_search_results_model.dart';
@@ -7,31 +8,10 @@ import 'package:santhom_connect/core/app_export.dart';
 import 'provider/directory_search_results_provider.dart';
 
 // ignore_for_file: must_be_immutable
-class DirectorySearchResultsPage extends StatefulWidget {
-  const DirectorySearchResultsPage({Key? key})
-      : super(
-          key: key,
-        );
+class DirectorySearchResultsPage extends StatelessWidget {
+  List<Lists>? list;
 
-  @override
-  DirectorySearchResultsPageState createState() =>
-      DirectorySearchResultsPageState();
-  static Widget builder(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DirectorySearchResultsProvider(),
-      child: DirectorySearchResultsPage(),
-    );
-  }
-}
-
-class DirectorySearchResultsPageState extends State<DirectorySearchResultsPage>
-    with AutomaticKeepAliveClientMixin<DirectorySearchResultsPage> {
-  @override
-  bool get wantKeepAlive => true;
-  @override
-  void initState() {
-    super.initState();
-  }
+  DirectorySearchResultsPage(this.list);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +23,7 @@ class DirectorySearchResultsPageState extends State<DirectorySearchResultsPage>
             child: Column(
               children: [
                 SizedBox(height: 24.v),
-                _buildMonday(context),
+                _buildMonday(context, list),
               ],
             ),
           ),
@@ -53,47 +33,15 @@ class DirectorySearchResultsPageState extends State<DirectorySearchResultsPage>
   }
 
   /// Section Widget
-  Widget _buildMonday(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 23.h),
-      child: Consumer<DirectorySearchResultsProvider>(
-        builder: (context, provider, child) {
-          return GroupedListView<MondayItemModel, String>(
-            shrinkWrap: true,
-            stickyHeaderBackgroundColor: Colors.transparent,
-            elements:
-                provider.directorySearchResultsModelObj.mondayItemList ?? [],
-            groupBy: (element) => element.groupBy!,
-            sort: false,
-            groupSeparatorBuilder: (String value) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  top: 19.v,
-                  bottom: 11.v,
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      value,
-                      style: CustomTextStyles.titleMediumMedium.copyWith(
-                        color: theme.colorScheme.onPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            itemBuilder: (context, model) {
-              return MondayItemWidget(
-                model,
-              );
-            },
-            separator: SizedBox(
-              height: 11.v,
-            ),
-          );
-        },
-      ),
+  Widget _buildMonday(BuildContext context, List<Lists>? list) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: list?.length,
+      itemBuilder: (context, index) {
+        Lists item = list![index];
+        return MondayItemWidget(item);
+      },
     );
   }
 }

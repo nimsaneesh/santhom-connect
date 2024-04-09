@@ -1,0 +1,41 @@
+class AppAPIs {
+  const AppAPIs._();
+  static const String login = 'login';
+  static const String verify = 'verify_otp';
+  static const String my_profile = 'my_profile';
+  static const String my_family = 'my_family';
+  static const String bulletin = 'bulletin';
+  static const String directory = 'directory';
+  static const String daily_digest = 'daily_digest';
+  static const String downloads = 'downloads';
+  static const String contributions = 'contributions';
+  static const String daily_calender_events = 'daily_calender_events';
+  static const String yearly_calender_events = 'yearly_calender_events';
+  static const String family_member = 'family_member';
+  static const String update_family = 'update_family';
+  static const String prayer_groups = 'prayer_groups';
+  static const String vicar_messages = 'vicar_messages';
+
+  static const String home1 = 'api/home1';
+  static const String fileUpload = 'api/fileUpload';
+  static const String register = 'api/register';
+  static const String reset = 'api/reset';
+  static const String otp = 'api/otp';
+  static const String usersTax = 'api/taxpayers/user';
+  static const String homeTax = '/api/taxpayers/admin';
+  static const String taxpayers = 'api/taxpayers';
+  static const String homeReport = '/api/adminHome';
+  static const String updateStatus = '/api/updateStatus';
+  static const String updateStatusAdmin = '/api/updateStatusAdmin';
+  static const String send_invoice = '/api/send_invoice';
+  static const String sendPaymentLink = '/api/sendPaymentLink';
+  static const String allTax = '/api/getAllTax';
+  static const String allTaxByParam = '/api/getAllTaxByParam';
+  static const String incompleteFilings = '/api/incompleteFilings';
+  static const String getTaxDetails = 'api/getTaxDetails';
+  static const String getPaymentItems = 'api/getPaymentItems';
+  static const String allStatus = 'api/allStatus';
+  static const String comments = 'api/comments';
+  static const String getInvoiceHistory = 'api/getInvoiceHistory';
+  static const String getPoCode = 'api/get_po_ocode';
+}
