@@ -74,6 +74,12 @@ class CustomTextStyles {
         fontSize: 26.fSize,
       );
 
+  static get sideNavText => theme.textTheme.bodyMedium!.manrope.copyWith(
+        color: appTheme.black900,
+        fontWeight: FontWeight.w600,
+        fontSize: 16.fSize,
+      );
+
   static get subHeadingBlackMono =>
       theme.textTheme.bodyMedium!.manrope.copyWith(
         color: appTheme.black900,
@@ -247,6 +253,11 @@ class CustomTextStyles {
       theme.textTheme.titleSmall!.poppins.copyWith(
         color: appTheme.whiteA70001,
         fontSize: 14.fSize,
+      );
+        static get titleSmallPoppinsWhiteA700012 =>
+      theme.textTheme.titleSmall!.poppins.copyWith(
+        color: appTheme.whiteA70001,
+        fontSize: 12.fSize,
       );
   static get titleSmallPrimary => theme.textTheme.titleSmall!.copyWith(
         color: theme.colorScheme.primary,

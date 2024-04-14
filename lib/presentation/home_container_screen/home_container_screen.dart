@@ -34,17 +34,15 @@ class HomeContainerScreenState extends State<HomeContainerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-          
-          body: Navigator(
-                key: navigatorKey,
-                initialRoute: AppRoutes.homeTabContainerPage,
-                onGenerateRoute: (routeSetting) => PageRouteBuilder(
-                    pageBuilder: (ctx, ani, ani1) =>
-                        getCurrentPage(context, routeSetting.name!),
-                    transitionDuration: Duration(seconds: 0))),
-            bottomNavigationBar: _buildBottomBar(context)));
+    return Scaffold(
+        body: Navigator(
+            key: navigatorKey,
+            initialRoute: AppRoutes.homeTabContainerPage,
+            onGenerateRoute: (routeSetting) => PageRouteBuilder(
+                pageBuilder: (ctx, ani, ani1) =>
+                    getCurrentPage(context, routeSetting.name!),
+                transitionDuration: Duration(seconds: 0))),
+        bottomNavigationBar: _buildBottomBar(context));
   }
 
   /// Section Widget

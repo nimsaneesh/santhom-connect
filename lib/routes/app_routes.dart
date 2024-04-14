@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../presentation/bulletin_screen/bulletin_screen.dart';
 import '../presentation/bulletin_tab_container_screen/bulletin_tab_container_screen.dart';
 import '../presentation/contribution_screen/contribution_screen.dart';
+import '../presentation/directory_family_profile_screen/directory_family_profile_screen.dart';
 import '../presentation/directory_prayer_group_screen/directory_prayer_group_screen.dart';
 import '../presentation/directory_search_results_page/directory_search_results_page.dart';
 import '../presentation/downloads_screen/downloads_screen.dart';
@@ -15,6 +16,7 @@ import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/updates_screen/update_screen.dart';
 import '../presentation/updates_tab_container_page/updates_tab_container_page.dart';
 import '../presentation/verify_email_screen/verify_email_screen.dart';
+import '../presentation/vicars_screen/vicars_screen.dart';
 import '../presentation/vikars_messaage/vikars_message_screen.dart';
 
 class AppRoutes {
@@ -53,6 +55,9 @@ class AppRoutes {
   static const String contributionScreen = '/contribution_screen';
   static const String verifyEmailScreen = '/verify_email_screen';
   static const String updatesScreen = '/updates_screen';
+  static const String vicarsScreen = '/vicars_creen';
+  static const String directoryFamilyProfileScreen =
+      '/directory_family_profile_screen';
   static const String directoryPrayerGroupScreen =
       '/directory_prayer_group_screen';
   static const String editProfileScreen = '/edit_profile_screen';
@@ -77,5 +82,7 @@ class AppRoutes {
         updatesScreen: UpdatesScreen.builder,
         contributionScreen: ContributionScreen.builder,
         vikarsMessageScreen: VikarsMessageScreen.builder,
+        directoryFamilyProfileScreen: DirectoryFamilyProfileScreen.builder,
+        vicarsScreen: VicarsScreen.builder,
       };
 }

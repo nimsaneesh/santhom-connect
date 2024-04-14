@@ -197,12 +197,14 @@ class Lists {
   String? item;
   String? image;
   String? subItem;
+  String? type;
 
   Lists({
     this.id,
     this.item,
     this.image,
     this.subItem,
+    this.type,
   });
 
   Lists.fromJson(Map<String, dynamic> json) {
@@ -210,6 +212,7 @@ class Lists {
     item = json['item'];
     image = json['image'];
     subItem = json['sub_item'];
+    type = json['type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -218,6 +221,7 @@ class Lists {
     data['item'] = this.item;
     data['image'] = this.image;
     data['sub_item'] = this.subItem;
+    data['type'] = this.type;
 
     return data;
   }

@@ -1,6 +1,7 @@
 import 'package:santhom_connect/core/app_export.dart';
 import 'package:santhom_connect/widgets/custom_image_view.dart';
 
+import '../models/directory_prayer_group_model.dart';
 import '../models/directoryprayer_item_model.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class DirectoryprayerItemWidget extends StatelessWidget {
           key: key,
         );
 
-  DirectoryprayerItemModel directoryprayerItemModelObj;
+  Members directoryprayerItemModelObj;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class DirectoryprayerItemWidget extends StatelessWidget {
       child: Row(
         children: [
           CustomImageView(
-            imagePath: directoryprayerItemModelObj?.aakashMathew,
+            imagePath: directoryprayerItemModelObj.image,
             height: 33.adaptSize,
             width: 33.adaptSize,
             radius: BorderRadius.circular(
@@ -36,11 +37,11 @@ class DirectoryprayerItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  directoryprayerItemModelObj.aakashMathew1!,
+                  directoryprayerItemModelObj.name,
                   style: theme.textTheme.titleSmall,
                 ),
                 Text(
-                  directoryprayerItemModelObj.valiyaparambilHouse!,
+                  directoryprayerItemModelObj.familyName,
                   style: theme.textTheme.bodySmall,
                 ),
               ],

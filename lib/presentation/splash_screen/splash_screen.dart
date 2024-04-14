@@ -37,31 +37,30 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            extendBody: true,
-            extendBodyBehindAppBar: true,
-            backgroundColor: appTheme.black900.withOpacity(0.2),
-            body: Container(
-                width: SizeUtils.width,
-                height: SizeUtils.height,
-                decoration: BoxDecoration(
-                    color: appTheme.black900.withOpacity(0.2),
-                    image: DecorationImage(
-                        image: AssetImage(ImageConstant.imgSplash),
-                        fit: BoxFit.cover)),
-                child: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 58.v),
-                    child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      Spacer(),
-                      Text("lbl_santhom_connect".tr,
-                          style: CustomTextStyles.splashtext),
-                      SizedBox(height: 98.v),
-                      CustomImageView(
-                          imagePath: ImageConstant.imgWhatsappImage,
-                          height: 107.adaptSize,
-                          width: 107.adaptSize)
-                    ])))));
+    return Scaffold(
+        // extendBody: true,
+        // extendBodyBehindAppBar: true,
+        backgroundColor: appTheme.black900.withOpacity(0.2),
+        body: Container(
+            width: SizeUtils.width,
+            height: SizeUtils.height,
+            decoration: BoxDecoration(
+                color: appTheme.black900.withOpacity(0.2),
+                image: DecorationImage(
+                    image: AssetImage(ImageConstant.imgSplash),
+                    fit: BoxFit.cover)),
+            child: Container(
+                width: double.maxFinite,
+                padding: EdgeInsets.symmetric(vertical: 58.v),
+                child: Column(mainAxisSize: MainAxisSize.min, children: [
+                  Spacer(),
+                  Text("lbl_santhom_connect".tr,
+                      style: CustomTextStyles.splashtext),
+                  SizedBox(height: 98.v),
+                  CustomImageView(
+                      imagePath: ImageConstant.imgWhatsappImage,
+                      height: 107.adaptSize,
+                      width: 107.adaptSize)
+                ]))));
   }
 }

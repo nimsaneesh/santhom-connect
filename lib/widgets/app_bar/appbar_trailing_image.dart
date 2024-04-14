@@ -36,16 +36,16 @@ class AppbarTrailingImage extends StatelessWidget {
             width: 24.h,
             fit: BoxFit.contain,
           ),
-          SizedBox(
-            width: 5,
-          ),
-          Text(
-            text ?? "",
-            style: theme.textTheme.titleMedium,
-          ),
-          SizedBox(
-            width: 25,
-          )
+          // SizedBox(
+          //   width: 5,
+          // ),
+          // Text(
+          //   text ?? "",
+          //   style: theme.textTheme.titleMedium,
+          // ),
+          // SizedBox(
+          //   width: 25,
+          // )
         ],
       ),
     );

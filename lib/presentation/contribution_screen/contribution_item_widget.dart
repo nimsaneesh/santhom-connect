@@ -19,9 +19,9 @@ class ContributionItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (() => {
-            NavigatorService.pushNamed(
-              AppRoutes.directoryProfileScreen,
-            )
+            // NavigatorService.pushNamed(
+            //   AppRoutes.directoryProfileScreen,
+            // )
           }),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -63,7 +63,7 @@ class ContributionItemWidget extends StatelessWidget {
                   width: 18,
                 ),
                 Text(
-                  item.member ?? "",
+                  item.purpose ?? "",
                   style: TextStyle(
                     color: Color(0XFF000000),
                     fontSize: 15.fSize,

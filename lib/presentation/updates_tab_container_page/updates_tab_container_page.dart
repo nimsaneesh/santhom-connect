@@ -239,10 +239,9 @@ class UpdatesTabContainerPageState extends State<UpdatesTabContainerPage>
             rangeEndDay: _rangeEnd,
             calendarFormat: _calendarFormat,
             rangeSelectionMode: _rangeSelectionMode,
-            // eventLoader: provider.getEvents(),
+            eventLoader: provider.getEventsForDay,
             startingDayOfWeek: StartingDayOfWeek.monday,
             calendarStyle: CalendarStyle(
-              // Use `CalendarStyle` to customize the UI
               outsideDaysVisible: false,
             ),
             onDaySelected: (selectedDay, focusedDay) {
@@ -313,6 +312,9 @@ class UpdatesTabContainerPageState extends State<UpdatesTabContainerPage>
 
   /// Section Widget
   Widget _buildTabview(BuildContext context, List<Widget>? tabItem) {
+    if (tabItem == null) {
+      return SizedBox();
+    }
     return Container(
       height: 60.h,
       decoration: BoxDecoration(color: Colors.white),

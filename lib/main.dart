@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color.fromARGB(255, 234, 234, 245), // Status bar color
-    ));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //   statusBarColor: Color.fromARGB(255, 234, 234, 245), // Status bar color
+    // ));
     return Sizer(
       builder: (context, orientation, deviceType) {
         return ChangeNotifierProvider(
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           child: Consumer<ThemeProvider>(
             builder: (context, provider, child) {
               return MaterialApp(
+                
                 theme: theme,
                 title: 'santhom_connect',
                 navigatorKey: NavigatorService.navigatorKey,

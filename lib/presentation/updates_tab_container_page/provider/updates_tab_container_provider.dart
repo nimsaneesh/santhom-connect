@@ -55,22 +55,24 @@ class UpdatesTabContainerProvider extends ChangeNotifier {
     super.dispose();
   }
 
-  getEvents() {
-    final _kEventSource = <DateTime, List<Event>>{};
-    final LinkedHashMap<DateTime, List<Event>> kEvents =
-        LinkedHashMap<DateTime, List<Event>>(
-      equals: isSameDay,
-      hashCode: getHashCode,
-    )..addAll(_kEventSource);
-
-    if (event_respo.data != null) {
-      event_respo.data!.forEach((element) {
-          DateTime date = DateTime.parse(element.date!);
-        // List<Event> events = event_respo.data!.map((e) => Event(e.l)).toList();
-        // _kEventSource[date] = events;
+  List<Event> getEventsForDay(DateTime day) {
+    List<Event> eventList = [];
+    if (null != event_respo.data) {
+      var itemList = event_respo.data?.where((element) {
+        String formattedDate = DateFormat('yyyy-MM-dd')
+            .format(DateFormat('dd-MM-yyyy').parse(element.date.toString()));
+        DateTime itemDay = DateTime.parse(formattedDate);
+        return isSameDay(itemDay, day);
       });
+      if (itemList!.isNotEmpty) {
+        eventList.clear();
+        for (var item in itemList) {
+          if (item.birthdayEvents != 0)
+            eventList.add(Event(item.birthdayEvents.toString() ?? ""));
+        }
+      }
     }
 
-    return kEvents;
+    return eventList;
   }
 }

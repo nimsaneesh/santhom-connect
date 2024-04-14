@@ -1,5 +1,6 @@
 import '../../core/app_export.dart';
 import 'package:flutter/material.dart';
+import '../../utils/utils.dart';
 import '../../widgets/app_bar/appbar_leading_iconbutton.dart';
 import '../../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/appbar_trailing_image.dart';
@@ -33,7 +34,7 @@ class BulletinScreenState extends State<BulletinScreen> {
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: _buildAppBar(context),
+            appBar: _buildAppBar(context, model),
             body: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(horizontal: 22.h, vertical: 4.v),
@@ -105,7 +106,7 @@ class BulletinScreenState extends State<BulletinScreen> {
   }
 
   /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
+  PreferredSizeWidget _buildAppBar(BuildContext context, Lists model) {
     return CustomAppBar(
         height: 52.v,
         leadingWidth: 51.h,
@@ -123,6 +124,8 @@ class BulletinScreenState extends State<BulletinScreen> {
           //     margin: EdgeInsets.only(left: 22.h, top: 17.v, right: 16.h)),
           AppbarTrailingImage(
               imagePath: ImageConstant.imgSend,
+              onTap: () =>
+                  {shareToWhatsApp(model.item ?? "", model.image ?? "")},
               margin: EdgeInsets.only(left: 5.h, top: 17.v, right: 38.h))
         ]);
   }

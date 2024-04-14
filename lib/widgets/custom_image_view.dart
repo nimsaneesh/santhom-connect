@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:santhom_connect/core/app_export.dart';
 
 class CustomImageView extends StatelessWidget {
   ///[imagePath] is required parameter for showing image
@@ -84,7 +85,9 @@ class CustomImageView extends StatelessWidget {
   }
 
   Widget _buildImageView() {
-    if (imagePath != null) {
+    print("imagePath");
+    print(imagePath);
+    if (null != imagePath && imagePath != "null") {
       switch (imagePath!.imageType) {
         case ImageType.svg:
           return Container(
@@ -103,7 +106,7 @@ class CustomImageView extends StatelessWidget {
           );
         case ImageType.file:
           return Image.file(
-            File(imagePath!),
+            File(imagePath ?? ""),
             height: height,
             width: width,
             fit: fit ?? BoxFit.cover,
@@ -114,7 +117,7 @@ class CustomImageView extends StatelessWidget {
             height: height,
             width: width,
             fit: fit,
-            imageUrl: imagePath!,
+            imageUrl: imagePath ?? "",
             color: color,
             placeholder: (context, url) => Container(
               height: 30,
@@ -141,8 +144,15 @@ class CustomImageView extends StatelessWidget {
             color: color,
           );
       }
+    } else {
+      return Image.asset(
+        ImageConstant.imageNotFound,
+        height: height,
+        width: width,
+        fit: fit ?? BoxFit.cover,
+        color: color,
+      );
     }
-    return SizedBox();
   }
 }
 

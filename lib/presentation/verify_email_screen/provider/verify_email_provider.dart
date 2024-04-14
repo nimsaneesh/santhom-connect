@@ -38,6 +38,7 @@ class VerifyEmailProvider extends ChangeNotifier {
           PrefUtils().setEmail(respo.data?.user?.email ?? "");
           PrefUtils().setfamilyName(respo.data?.user?.familyName ?? "");
           PrefUtils().setfamilyHeadName(respo.data?.user?.familyHeadName ?? "");
+          PrefUtils().setImage(respo.data?.user?.image ?? "");
           NavigatorService.pushNamed(
             AppRoutes.homeContainerScreen,
           );

@@ -12,6 +12,8 @@ class AppAPIs {
   static const String daily_calender_events = 'daily_calender_events';
   static const String yearly_calender_events = 'yearly_calender_events';
   static const String family_member = 'family_member';
+  static const String family = 'family';
+  static const String prayer_group = 'prayer_group_details';
   static const String update_family = 'update_family';
   static const String prayer_groups = 'prayer_groups';
   static const String vicar_messages = 'vicar_messages';

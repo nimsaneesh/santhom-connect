@@ -6,21 +6,13 @@ class DirectoryProfileModel {
 
   DirectoryProfileModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    // if (json['metadata'] != null) {
-    //   metadata = <Null>[];
-    //   json['metadata'].forEach((v) {
-    //     metadata!.add(new Null.fromJson(v));
-    //   });
-    // }
+
     data = json['data'] != null ? new PrayerData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    // if (this.metadata != null) {
-    //   data['metadata'] = this.metadata!.map((v) => v.toJson()).toList();
-    // }
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -48,39 +40,39 @@ class PrayerData {
 }
 
 class Member {
-  int? id;
-  String? title;
-  String? name;
-  String? nickname;
-  int? familyId;
-  int? headOfFamily;
-  String? gender;
-  String? dob;
-  String? dateOfBaptism;
-  int? bloodGroupId;
-  String? maritalStatusId;
-  String? dateOfMarriage;
-  int? relationshipId;
-  String? qualification;
-  String? occupation;
-  String? companyName;
-  String? email;
-  String? mobile;
-  String? altContactNo;
-  String? dateOfDeath;
-  String? image;
-  int? status;
-  int? userType;
-  String? createdAt;
-  String? updatedAt;
-  String? deletedAt;
-  String? familyName;
-  String? familyHeadName;
-  String? prayerGroupName;
-  String? bloodGroupName;
-  String? maritalStatusName;
-  String? relationshipName;
-  String? obituaryId;
+  dynamic id;
+  dynamic title;
+  dynamic name;
+  dynamic nickname;
+  dynamic familyId;
+  dynamic headOfFamily;
+  dynamic gender;
+  dynamic dob;
+  dynamic dateOfBaptism;
+  dynamic bloodGroupId;
+  dynamic maritalStatusId;
+  dynamic dateOfMarriage;
+  dynamic relationshipId;
+  dynamic qualification;
+  dynamic occupation;
+  dynamic companyName;
+  dynamic email;
+  dynamic mobile;
+  dynamic altContactNo;
+  dynamic dateOfDeath;
+  dynamic image;
+  dynamic status;
+  dynamic userType;
+  dynamic createdAt;
+  dynamic updatedAt;
+  dynamic deletedAt;
+  dynamic familyName;
+  dynamic familyHeadName;
+  dynamic prayerGroupName;
+  dynamic bloodGroupName;
+  dynamic maritalStatusName;
+  dynamic relationshipName;
+  dynamic obituaryId;
 
   Member(
       {this.id,

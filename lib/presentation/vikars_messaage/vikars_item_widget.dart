@@ -20,7 +20,8 @@ class VikarsItemWidget extends StatelessWidget {
     return InkWell(
       onTap: (() => {
             NavigatorService.pushNamed(
-              AppRoutes.directoryProfileScreen,
+              AppRoutes.vicarsScreen,
+              arguments: item
             )
           }),
       child: Padding(

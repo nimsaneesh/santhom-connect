@@ -24,6 +24,7 @@ class HomeTabContainerProvider extends ChangeNotifier {
   }
 
   String personName = "";
+  String image = "";
   String familyName = "";
   String familyHeadName = "";
   String search_word = "";
@@ -36,6 +37,7 @@ class HomeTabContainerProvider extends ChangeNotifier {
 
   getHome() {
     personName = PrefUtils().getName();
+    image = PrefUtils().getImage();
     familyName = PrefUtils().getfamilyName();
     familyHeadName = PrefUtils().getfamilyHeadName();
     getDirectory();

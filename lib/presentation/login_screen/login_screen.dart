@@ -83,7 +83,7 @@ class LoginScreenState extends State<LoginScreen> {
                           width: 347.h,
                           child: Text(
                             "msg_app_by_st_thomas".tr,
-                            maxLines: 2,
+                            maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style: CustomTextStyles.titleSmallBluegray900,
                           ),

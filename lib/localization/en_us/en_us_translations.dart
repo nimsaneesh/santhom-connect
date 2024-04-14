@@ -8,7 +8,7 @@ final Map<String, String> enUs = {
   "msg_app_by_st_thomas":
       "A universal app of St.Thomas Malankara Syrian Catholic Church, Nalanchira, Thiruvananthapuram. 695015",
   "msg_jacobthomas_gmail_com": "jacobthomas@gmail.com",
-  "msg_major_archieparchy": "Major Archieparchy of Thiruvananthapuram",
+  "msg_major_archieparchy": "Major Archeparchy of Thiruvananthapuram",
 
   // Home Screen
   "lbl2": "ഓർമ്മ",

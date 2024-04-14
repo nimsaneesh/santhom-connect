@@ -92,6 +92,10 @@ class ImageConstant {
   static String imgChristianity = '$imagePath/img_christianity.svg';
 
   static String imgHome = '$imagePath/img_home.svg';
+  static String Download = '$imagePath/Download.svg';
+  static String notification = '$imagePath/notification.svg';
+  static String contributions = '$imagePath/contributions.svg';
+  static String vicars_message = '$imagePath/vicars_message.svg';
   static String logo_drawer = '$imagePath/logo_drawer.png';
 
   // Common images
@@ -159,6 +163,13 @@ class ImageConstant {
   static String imgEllipse2851 = '$imagePath/img_ellipse_2851.png';
 
   static String imgImage = '$imagePath/img_image.png';
-  static String pdf_icon = '$imagePath/icons8-pdf-96.png';
+  static String pdf_icon = '$imagePath/document-pdf 1';
   static String oval_copy = '$imagePath/oval_copy.png';
+
+  static String mother = '$imagePath/mother.svg';
+  static String son = '$imagePath/son.svg';
+  static String family_head = '$imagePath/family_head.svg';
+  static String daughter = '$imagePath/daughter.svg';
+  static String grand_son = '$imagePath/grand_son.svg';
+  static String daughter_in_law = '$imagePath/daughter_in_law.svg';
 }

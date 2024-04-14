@@ -30,8 +30,8 @@ class VerifyModel {
 }
 
 class Data {
-  String? messsage;
-  String? token;
+  dynamic messsage;
+  dynamic token;
   User? user;
 
   Data({this.messsage, this.token, this.user});
@@ -54,39 +54,39 @@ class Data {
 }
 
 class User {
-  int? id;
-  String? title;
-  String? name;
-  String? nickname;
-  int? familyId;
-  int? headOfFamily;
-  String? gender;
-  String? dob;
-  String? dateOfBaptism;
-  String? bloodGroupId;
-  String? maritalStatusId;
-  String? dateOfMarriage;
-  int? relationshipId;
-  String? qualification;
-  String? occupation;
-  String? companyName;
-  String? email;
-  String? mobile;
-  String? altContactNo;
-  String? dateOfDeath;
-  String? image;
-  int? status;
-  int? userType;
-  String? createdAt;
-  String? updatedAt;
-  String? deletedAt;
-  String? familyName;
-  String? familyHeadName;
-  String? prayerGroupName;
-  String? bloodGroupName;
-  String? maritalStatusName;
-  String? relationshipName;
-  String? obituaryId;
+  dynamic id;
+  dynamic title;
+  dynamic name;
+  dynamic nickname;
+  dynamic familyId;
+  dynamic headOfFamily;
+ dynamic gender;
+  dynamic dob;
+  dynamic dateOfBaptism;
+  dynamic bloodGroupId;
+  dynamic maritalStatusId;
+  dynamic dateOfMarriage;
+  dynamic relationshipId;
+  dynamic qualification;
+  dynamic occupation;
+  dynamic companyName;
+ dynamic email;
+ dynamic mobile;
+ dynamic altContactNo;
+dynamic dateOfDeath;
+  dynamic image;
+  dynamic status;
+  dynamic userType;
+ dynamic createdAt;
+  dynamic updatedAt;
+  dynamic deletedAt;
+  dynamic familyName;
+  dynamic familyHeadName;
+ dynamic prayerGroupName;
+  dynamic bloodGroupName;
+  dynamic maritalStatusName;
+  dynamic relationshipName;
+  dynamic obituaryId;
 
   User(
       {this.id,

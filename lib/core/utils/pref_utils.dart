@@ -71,6 +71,18 @@ class PrefUtils {
     }
   }
 
+  Future<void> setImage(String value) {
+    return _sharedPreferences!.setString('image', value);
+  }
+
+  String getImage() {
+    try {
+      return _sharedPreferences!.getString('image') ?? "";
+    } catch (e) {
+      return "";
+    }
+  }
+
   Future<void> setfamilyHeadName(String value) {
     return _sharedPreferences!.setString('familyHeadName', value);
   }

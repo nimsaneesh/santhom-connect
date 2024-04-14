@@ -87,6 +87,7 @@ class FortyfiveItemWidget extends StatelessWidget {
                   SizedBox(height: 4.v),
                   SizedBox(
                     width: SizeUtils.width - 170,
+                    height: 30,
                     child: Text(
                       model?.details ?? "",
                       style: CustomTextStyles.bodyMediumManropeBluegray600_1,

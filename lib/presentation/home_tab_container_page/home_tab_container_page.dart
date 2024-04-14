@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:santhom_connect/presentation/home_page/update_page.dart';
+import 'package:santhom_connect/presentation/widgets/tab_body_widget.dart';
 import 'package:santhom_connect/utils/extensions.dart';
 import 'package:santhom_connect/widgets/app_bar/custom_app_bar.dart';
 import 'package:santhom_connect/widgets/app_bar/appbar_leading_image.dart';
@@ -14,6 +15,8 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart' as fs;
 import 'package:flutter/material.dart';
 import 'package:santhom_connect/core/app_export.dart';
 import '../home_page/bulletin_page.dart';
+import '../widgets/tab_body_details_widget.dart';
+import '../widgets/tab_item_widget.dart';
 import 'provider/home_tab_container_provider.dart';
 
 // ignore_for_file: must_be_immutable
@@ -88,12 +91,20 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
             Column(
               children: [
                 Text(
-                  provider.familyName ?? "",
+                  provider.familyName.capitalize() ?? "",
                   style: CustomTextStyles.titleMediumPoppinsWhiteA700,
                 ),
-                Text(
-                  provider.familyHeadName ?? "",
-                  style: CustomTextStyles.titleSmallPoppinsffffc885,
+                Row(
+                  children: [
+                    Text(
+                      "Family Head : ",
+                      style: CustomTextStyles.titleMediumWhiteA70001,
+                    ),
+                    Text(
+                      provider.familyHeadName.capitalize() ?? "",
+                      style: CustomTextStyles.titleSmallPoppinsffffc885,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -109,326 +120,262 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Consumer<HomeTabContainerProvider>(
-          builder: (context, provider, child) {
-        List<Widget>? tabViewChildren = [];
-        List<Widget>? tabItem = [];
-        tabItem = provider.bulletin_respo.data?.map((data) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20),
-            child: Tab(
-              child: Text(data.category ?? ""),
-            ),
-          );
-        }).toList();
+    return Consumer<HomeTabContainerProvider>(
+        builder: (context, provider, child) {
+      List<Widget>? tabViewChildren = [];
+      List<Widget>? tabItem = [];
+      List<Widget>? tabViewChildrenDir = [];
+      List<Widget>? tabItemDir = [];
 
-        tabViewChildren = provider.bulletin_respo.data?.map((data) {
-          return BulletinPage(data.list);
-        }).toList();
+      tabItemDir = provider.directory_respo.data?.map((data) {
+        return TabItemWidget(data.category ?? "");
+      }).toList();
 
-        List<Widget>? tabViewChildrenDir = [];
-        List<Widget>? tabItemDir = [];
-        tabItemDir = provider.directory_respo.data?.map((data) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20),
-            child: Tab(
-              child: Text(data.category ?? ""),
-            ),
-          );
-        }).toList();
+      tabViewChildrenDir = provider.directory_respo.data?.map((data) {
+        return UpdatePage(data.list);
+      }).toList();
 
-        tabViewChildrenDir = provider.directory_respo.data?.map((data) {
-          return UpdatePage(data.list);
-        }).toList();
+      tabItem = provider.bulletin_respo.data?.map((data) {
+        return TabItemWidget(data.category ?? "");
+      }).toList();
+      tabViewChildren = provider.bulletin_respo.data?.map((data) {
+        return BulletinPage(data.list);
+      }).toList();
 
-        tabviewController = TabController(
-            length: provider.directory_respo.data?.length ?? 0, vsync: this);
-
-        tabviewControllerBulletin = TabController(
-            length: provider.bulletin_respo.data?.length ?? 0, vsync: this);
-
-        return Scaffold(
-          key: _scaffoldKey,
-          drawer: Drawer(
-            elevation: 0,
-            backgroundColor: Colors.white,
-            // Add a ListView to the drawer. This ensures the user can scroll
-            // through the options in the drawer if there isn't enough vertical
-            // space to fit everything.
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
-                    // Important: Remove any padding from the ListView.
-                    padding: EdgeInsets.zero,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, top: 20),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              AppbarLeadingIconbutton(
-                                  imagePath: ImageConstant.imgArrowLeft,
-                                  onTap: () {
-                                    onTapArrowLeft(context);
-                                  }),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              AppbarTitle(
-                                text: "Menu",
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20.0, right: 20.0, top: 20, bottom: 16),
-                        child: _buildOctober(context, provider),
-                      ),
-                      ListTile(
-                        title: Container(
-                            child: Row(
-                          children: [
-                            CustomImageView(
-                              imagePath: ImageConstant.imgTelephone,
-                              height: 14.v,
-                              width: 14.h,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('Vicar’s Messages'),
-                          ],
-                        )),
-                        onTap: () {
-                          _scaffoldKey.currentState?.closeDrawer();
-                          NavigatorService.pushNamed(
-                              AppRoutes.vikarsMessageScreen);
-                          // Update the state of the app.
-                          // ...
-                        },
-                      ),
-                      ListTile(
-                        title: Container(
-                            child: Row(
-                          children: [
-                            CustomImageView(
-                              imagePath: ImageConstant.imgTelephone,
-                              height: 14.v,
-                              width: 14.h,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('Downloads'),
-                          ],
-                        )),
-                        onTap: () {
-                          _scaffoldKey.currentState?.closeDrawer();
-                          NavigatorService.pushNamed(AppRoutes.downloadsScreen);
-                          // Update the state of the app.
-                          // ...
-                        },
-                      ),
-                      ListTile(
-                        title: Container(
-                            child: Row(
-                          children: [
-                            CustomImageView(
-                              imagePath: ImageConstant.imgTelephone,
-                              height: 14.v,
-                              width: 14.h,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('My Contributions'),
-                          ],
-                        )),
-                        onTap: () {
-                          _scaffoldKey.currentState?.closeDrawer();
-                          NavigatorService.pushNamed(
-                              AppRoutes.contributionScreen);
-                        },
-                      ),
-                      ListTile(
-                        title: Container(
-                            child: Row(
-                          children: [
-                            CustomImageView(
-                              imagePath: ImageConstant.imgTelephone,
-                              height: 14.v,
-                              width: 14.h,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('Notifications'),
-                          ],
-                        )),
-                        onTap: () {
-                          _scaffoldKey.currentState?.closeDrawer();
-                          // Update the state of the app.
-                          // ...
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(14),
-                            child: Image.asset(ImageConstant.logo_drawer)),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Santhom Connect',
-                        style: TextStyle(
-                          color: Color(0XFF000000),
-                          fontSize: 16.fSize,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Text(
-                        'App version 1.0.12',
-                        style: TextStyle(
-                          color: Color(0XFF000000),
-                          fontSize: 12.fSize,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w200,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          body: Stack(
+      tabviewController = TabController(
+          length: provider.directory_respo.data?.length ?? 0, vsync: this);
+      tabviewControllerBulletin = TabController(
+          length: provider.bulletin_respo.data?.length ?? 0, vsync: this);
+      return Scaffold(
+        key: _scaffoldKey,
+        drawer: Drawer(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          child: Column(
             children: [
-              Container(
-                width: double.maxFinite,
-                decoration: AppDecoration.fillGray,
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(
+              Expanded(
+                child: ListView(
+                  // Important: Remove any padding from the ListView.
+                  padding: EdgeInsets.zero,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, top: 20),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            AppbarLeadingIconbutton(
+                                imagePath: ImageConstant.imgArrowLeft,
+                                onTap: () {
+                                  onTapArrowLeft(context);
+                                }),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            AppbarTitle(
+                              text: "Menu",
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, top: 20, bottom: 16),
+                      child: _buildOctober(context, provider),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    ListTile(
+                      title: Container(
+                          child: Row(
                         children: [
-                          buildBackground(context),
-                          _buildToolBar(context, provider.personName),
-                          Column(
-                            children: [
-                              SizedBox(height: 10.v),
-                              _buildTelevision(context, provider),
-                            ],
+                          CustomImageView(
+                            imagePath: ImageConstant.vicars_message,
+                            height: 24.v,
+                            width: 24.h,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Vicar’s Messages',
+                            style: CustomTextStyles.sideNavText,
                           ),
                         ],
-                      ),
-                      SizedBox(height: 20.v),
-                      Padding(
-                        padding: EdgeInsets.only(left: 20.h),
-                        child: Text(
-                          "lbl_updates".tr,
-                          style: theme.textTheme.titleMedium,
-                        ),
-                      ),
-                      SizedBox(height: 2.v),
-                      _buildHomeUpdate(context, tabItemDir),
-                      SizedBox(
-                        height: 537.v,
-                        child: TabBarView(
-                            controller: tabviewController,
-                            children: tabViewChildrenDir ?? []),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 20.h),
-                        child: Text(
-                          "lbl_bulletin".tr,
-                          style: theme.textTheme.titleMedium,
-                        ),
-                      ),
-                      SizedBox(height: 2.v),
-                      _buildBulletin(context, tabItem),
-                      SizedBox(
-                        height: 337.v,
-                        child: TabBarView(
-                          controller: tabviewControllerBulletin,
-                          children: tabViewChildren ?? [],
-                        ),
-                      ),
-                    ],
-                  ),
+                      )),
+                      onTap: () {
+                        _scaffoldKey.currentState?.closeDrawer();
+                        NavigatorService.pushNamed(
+                            AppRoutes.vikarsMessageScreen);
+                        // Update the state of the app.
+                        // ...
+                      },
+                    ),
+                    ListTile(
+                      title: Container(
+                          child: Row(
+                        children: [
+                          CustomImageView(
+                            imagePath: ImageConstant.Download,
+                            height: 24.v,
+                            width: 24.h,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Downloads',
+                            style: CustomTextStyles.sideNavText,
+                          ),
+                        ],
+                      )),
+                      onTap: () {
+                        _scaffoldKey.currentState?.closeDrawer();
+                        NavigatorService.pushNamed(AppRoutes.downloadsScreen);
+                        // Update the state of the app.
+                        // ...
+                      },
+                    ),
+                    ListTile(
+                      title: Container(
+                          child: Row(
+                        children: [
+                          CustomImageView(
+                            imagePath: ImageConstant.contributions,
+                            height: 24.v,
+                            width: 24.h,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'My Contributions',
+                            style: CustomTextStyles.sideNavText,
+                          ),
+                        ],
+                      )),
+                      onTap: () {
+                        _scaffoldKey.currentState?.closeDrawer();
+                        NavigatorService.pushNamed(
+                            AppRoutes.contributionScreen);
+                      },
+                    ),
+                    ListTile(
+                      title: Container(
+                          child: Row(
+                        children: [
+                          CustomImageView(
+                            imagePath: ImageConstant.notification,
+                            height: 24.v,
+                            width: 24.h,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Notifications',
+                            style: CustomTextStyles.sideNavText,
+                          ),
+                        ],
+                      )),
+                      onTap: () {
+                        _scaffoldKey.currentState?.closeDrawer();
+                        // Update the state of the app.
+                        // ...
+                      },
+                    ),
+                  ],
                 ),
               ),
-              Selector<HomeTabContainerProvider, bool>(
-                selector: (context, provider) => provider.isLoading,
-                builder: (context, value, child) {
-                  return value ? CircularLoader() : SizedBox();
-                },
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(14),
+                          child: Image.asset(ImageConstant.logo_drawer)),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Santhom Connect',
+                      style: TextStyle(
+                        color: Color(0XFF000000),
+                        fontSize: 16.fSize,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Text(
+                      'App version 1.0.12',
+                      style: TextStyle(
+                        color: Color(0XFF000000),
+                        fontSize: 12.fSize,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w200,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    )
+                  ],
+                ),
               ),
             ],
           ),
-        );
-      }),
-    );
-  }
-
-  Widget _buildBulletin(BuildContext context, List<Widget>? tabItem) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 34.0),
-      child: Container(
-        height: 52.v,
-        decoration: CurvedDecoration(color: Colors.white),
-        child: TabBar(
-          controller: tabviewControllerBulletin,
-          isScrollable: true,
-          tabAlignment: TabAlignment.start,
-          labelColor: appTheme.whiteA70001,
-          labelStyle: TextStyle(
-            fontSize: 14.fSize,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w400,
-          ),
-          unselectedLabelColor: theme.colorScheme.secondaryContainer,
-          unselectedLabelStyle: TextStyle(
-            fontSize: 14.fSize,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w400,
-          ),
-          indicatorPadding: EdgeInsets.only(
-              left: 0.0.h, right: 1.0.h, top: 3.0.h, bottom: 3.0.h),
-          indicator: BoxDecoration(
-            color: theme.colorScheme.primary,
-            borderRadius: BorderRadius.circular(
-              18.h,
-            ),
-          ),
-          tabs: tabItem ?? [],
         ),
-      ),
-    );
+        body: Stack(
+          children: [
+            Container(
+              width: double.maxFinite,
+              decoration: AppDecoration.fillGray,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Stack(
+                      children: [
+                        buildBackground(context),
+                        _buildToolBar(
+                            context, provider.personName, provider.image),
+                        Column(
+                          children: [
+                            SizedBox(height: 40.v),
+                            _buildTelevision(context, provider),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20.v),
+                    TabBodyWidget(tabItemDir, tabviewController),
+                    TabBodyDetailsWidget(tabViewChildrenDir, tabviewController),
+                    TabBodyWidget(tabItem, tabviewControllerBulletin),
+                    TabBodyDetailsWidget(
+                        tabViewChildren, tabviewControllerBulletin),
+                  ],
+                ),
+              ),
+            ),
+            Selector<HomeTabContainerProvider, bool>(
+              selector: (context, provider) => provider.isLoading,
+              builder: (context, value, child) {
+                return value ? CircularLoader() : SizedBox();
+              },
+            ),
+          ],
+        ),
+      );
+    });
   }
 
-  /// Section Widget
   Widget _buildTelevision(
       BuildContext context, HomeTabContainerProvider provider) {
     return SizedBox(
@@ -475,14 +422,32 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                           Container(
                             width: 312.h,
                             margin: EdgeInsets.only(right: 2.h),
-                            child: Text(
-                              provider.directory_respo.dailyDigest?.heading ??
-                                  "",
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style:
-                                  CustomTextStyles.titleSmallPoppinsWhiteA70001,
+                            child: Column(
+                              children: [
+                                Text(
+                                  provider.directory_respo.dailyDigest
+                                          ?.heading ??
+                                      "",
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.center,
+                                  style: CustomTextStyles
+                                      .titleSmallPoppinsWhiteA70001,
+                                ),
+                                SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  provider.directory_respo.dailyDigest
+                                          ?.subHeading ??
+                                      "",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.center,
+                                  style: CustomTextStyles
+                                      .titleSmallPoppinsWhiteA700012,
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -499,7 +464,7 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
   }
 
   /// Section Widget
-  Widget _buildToolBar(BuildContext context, String personName) {
+  Widget _buildToolBar(BuildContext context, String personName, String image) {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -523,7 +488,7 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                 child: Row(
                   children: [
                     AppbarTitleCircleimage(
-                      imagePath: ImageConstant.imgEllipse2848,
+                      imagePath: image,
                     ),
                     Container(
                       height: 36.059998.v,
@@ -627,53 +592,6 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
     print(routeName);
     NavigatorService.pushNamed(routeName);
   }
-
-  /// Section Widget
-  Widget _buildHomeUpdate(BuildContext context, List<Widget>? tabItemDir) {
-    return Padding(
-      padding: EdgeInsets.only(left: 20.h),
-      child: Container(
-        height: 60.h,
-        decoration: CurvedDecoration(color: Colors.white),
-        child: TabBar(
-            controller: tabviewController,
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
-            labelColor: appTheme.whiteA70001,
-            indicatorWeight: 0,
-            dividerColor: Colors.transparent,
-            labelStyle: TextStyle(
-              fontSize: 14.fSize,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-            ),
-            unselectedLabelColor: theme.colorScheme.secondaryContainer,
-            unselectedLabelStyle: TextStyle(
-              fontSize: 14.fSize,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-            ),
-            indicatorPadding: EdgeInsets.only(
-                left: 0.0.h, right: 1.0.h, top: 3.0.h, bottom: 3.0.h),
-            indicator: BoxDecoration(
-              color: theme.colorScheme.primary,
-              borderRadius: BorderRadius.circular(
-                100,
-              ),
-            ),
-            tabs: tabItemDir ?? []),
-      ),
-    );
-  }
 }
 
-class CurvedDecoration extends BoxDecoration {
-  CurvedDecoration({Color? color})
-      : super(
-          color: color,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25), // Adjust the radius as needed
-            bottomLeft: Radius.circular(25), // Adjust the radius as needed
-          ),
-        );
-}
+

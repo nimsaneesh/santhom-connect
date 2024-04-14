@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:santhom_connect/widgets/app_bar/custom_app_bar.dart';
 import 'package:santhom_connect/widgets/app_bar/appbar_leading_iconbutton.dart';
 import 'package:santhom_connect/widgets/custom_text_form_field.dart';
@@ -25,8 +26,9 @@ class DirectoryProfileScreenState extends State<DirectoryProfileScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      String profile_id = ModalRoute.of(context)!.settings.arguments as String;
       Provider.of<DirectoryProfileProvider>(context, listen: false)
-          .getProfile();
+          .getProfile(profile_id);
     });
   }
 
@@ -42,7 +44,7 @@ class DirectoryProfileScreenState extends State<DirectoryProfileScreen> {
                       builder: (context, provider, child) {
                     return SingleChildScrollView(
                         child: Column(children: [
-                      _buildArrowLeft(context),
+                      _buildArrowLeft(context, provider),
                       Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: 21.h, vertical: 4.v),
@@ -57,15 +59,25 @@ class DirectoryProfileScreenState extends State<DirectoryProfileScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                      provider.bulletin_respo.data?.member
-                                              ?.familyName ??
-                                          "",
-                                      style: CustomTextStyles
-                                          .titleMediumLightblue900
-                                          .copyWith(
-                                              decoration:
-                                                  TextDecoration.underline)),
+                                  GestureDetector(
+                                    onTap: () => {
+                                      NavigatorService.pushNamed(
+                                          AppRoutes
+                                              .directoryFamilyProfileScreen,
+                                          arguments: provider.bulletin_respo
+                                              .data?.member?.familyId
+                                              .toString())
+                                    },
+                                    child: Text(
+                                        provider.bulletin_respo.data?.member
+                                                ?.familyName ??
+                                            "",
+                                        style: CustomTextStyles
+                                            .titleMediumLightblue900
+                                            .copyWith(
+                                                decoration:
+                                                    TextDecoration.underline)),
+                                  ),
                                   CustomImageView(
                                       imagePath: ImageConstant.imgArrowRight,
                                       height: 12.v,
@@ -588,7 +600,8 @@ class DirectoryProfileScreenState extends State<DirectoryProfileScreen> {
   }
 
   /// Section Widget
-  Widget _buildArrowLeft(BuildContext context) {
+  Widget _buildArrowLeft(
+      BuildContext context, DirectoryProfileProvider provider) {
     return SizedBox(
         height: 236.v,
         width: double.maxFinite,
@@ -621,9 +634,10 @@ class DirectoryProfileScreenState extends State<DirectoryProfileScreen> {
                   width: 121.adaptSize,
                   padding: EdgeInsets.all(3.h),
                   decoration: AppDecoration.outlineWhiteA.copyWith(
+                      color: Colors.white,
                       borderRadius: BorderRadiusStyle.roundedBorder60),
                   child: CustomImageView(
-                      imagePath: ImageConstant.imgRectangle25,
+                      imagePath: provider.bulletin_respo.data?.member?.image,
                       height: 110.adaptSize,
                       width: 110.adaptSize,
                       radius: BorderRadius.circular(55.h),

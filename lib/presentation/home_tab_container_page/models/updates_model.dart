@@ -205,6 +205,8 @@ class ItemList {
   String? subHeading;
   String? date;
   String? image;
+  String? type;
+  String? color;
   String? memoryDayTypeName;
 
   ItemList(
@@ -213,6 +215,8 @@ class ItemList {
       this.subHeading,
       this.date,
       this.image,
+      this.type,
+      this.color,
       this.memoryDayTypeName});
 
   ItemList.fromJson(Map<String, dynamic> json) {
@@ -221,6 +225,8 @@ class ItemList {
     subHeading = json['sub_heading'];
     date = json['date'];
     image = json['image'];
+    type = json['type'];
+    color = json['color'];
     memoryDayTypeName = json['memory_day_type_name'];
   }
 
@@ -231,6 +237,8 @@ class ItemList {
     data['sub_heading'] = this.subHeading;
     data['date'] = this.date;
     data['image'] = this.image;
+    data['type'] = this.type;
+    data['color'] = this.color;
     data['memory_day_type_name'] = this.memoryDayTypeName;
     return data;
   }

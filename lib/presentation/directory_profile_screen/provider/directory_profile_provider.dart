@@ -20,9 +20,9 @@ class DirectoryProfileProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   DirectoryProfileModel _bulletin_respo = DirectoryProfileModel();
   DirectoryProfileModel get bulletin_respo => _bulletin_respo;
-  getProfile() async {
+  getProfile(String profile_id) async {
     loader(true);
-    _bulletin_respo = await _repo.getProfile(id: '204');
+    _bulletin_respo = await _repo.getProfile(id: profile_id);
     notifyListeners();
     loader(false);
   }

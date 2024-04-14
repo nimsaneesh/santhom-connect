@@ -125,13 +125,14 @@ PreferredSizeWidget _buildAppBar(BuildContext context) {
             onTapArrowLeft(context);
           }),
       title: AppbarTitle(
-          text: "Vikars Message", margin: EdgeInsets.only(left: 14.h)),
+          text: "Vicar’s Messages", margin: EdgeInsets.only(left: 14.h)),
       actions: [
         // AppbarSubtitleOne(
         //     text: "lbl_share".tr,
         //     margin: EdgeInsets.only(left: 22.h, top: 17.v, right: 16.h)),
         AppbarTrailingImage(
             imagePath: ImageConstant.imgSend,
+            
             margin: EdgeInsets.only(left: 5.h, top: 17.v, right: 38.h))
       ]);
 }

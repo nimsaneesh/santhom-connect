@@ -49,6 +49,15 @@ class LoginProvider extends ChangeNotifier {
             fontSize: 16.0);
         loader(false);
       }
+    }else{
+         Fluttertoast.showToast(
+            msg: "Please enter email and Family Code",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
     }
   }
 

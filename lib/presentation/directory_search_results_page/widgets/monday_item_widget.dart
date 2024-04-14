@@ -17,9 +17,22 @@ class MondayItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (() => {
-            NavigatorService.pushNamed(
-              AppRoutes.directoryProfileScreen,
-            )
+            if (item.type == "Families")
+              {
+                NavigatorService.pushNamed(
+                    AppRoutes.directoryFamilyProfileScreen,
+                    arguments: item.id.toString()),
+              }
+            else if (item.type == "Prayer Groups")
+              {
+                NavigatorService.pushNamed(AppRoutes.directoryPrayerGroupScreen,
+                    arguments: item.id.toString()),
+              }
+            else
+              {
+                NavigatorService.pushNamed(AppRoutes.directoryProfileScreen,
+                    arguments: item.id.toString())
+              }
           }),
       child: Container(
         child: Padding(
