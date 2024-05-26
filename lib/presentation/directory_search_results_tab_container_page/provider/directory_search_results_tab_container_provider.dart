@@ -10,7 +10,8 @@ import '../repo/directory_repo.dart';
 /// current directorySearchResultsTabContainerModelObj
 class DirectorySearchResultsTabContainerProvider extends ChangeNotifier {
   TextEditingController searchController = TextEditingController();
-
+  int _index = 0;
+  int get index => _index;
   DirectorySearchResultsTabContainerModel
       directorySearchResultsTabContainerModelObj =
       DirectorySearchResultsTabContainerModel();

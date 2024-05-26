@@ -36,30 +36,29 @@ class BulletinScreenState extends State<DownloadsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: _buildAppBar(context),
-            body: Stack(
-              children: [
-                Container(
-                  child: Consumer<DownloadsProvider>(
-                      builder: (context, provider, child) {
-                    print("Consumer");
-                    print(provider.respo.data.toString());
-                    print(provider.respo.data?.length);
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: _buildAppBar(context),
+        body: Stack(
+          children: [
+            Container(
+              child: Consumer<DownloadsProvider>(
+                  builder: (context, provider, child) {
+                print("Consumer");
+                print(provider.respo.data.toString());
+                print(provider.respo.data?.length);
 
-                    return _buildFortyFive(context, provider.respo.data);
-                  }),
-                ),
-                Selector<DownloadsProvider, bool>(
-                  selector: (context, provider) => provider.isLoading,
-                  builder: (context, value, child) {
-                    return value ? CircularLoader() : SizedBox();
-                  },
-                ),
-              ],
-            )));
+                return _buildFortyFive(context, provider.respo.data);
+              }),
+            ),
+            Selector<DownloadsProvider, bool>(
+              selector: (context, provider) => provider.isLoading,
+              builder: (context, value, child) {
+                return value ? CircularLoader() : SizedBox();
+              },
+            ),
+          ],
+        ));
   }
 
   /// Section Widget
@@ -76,12 +75,20 @@ class BulletinScreenState extends State<DownloadsScreen> {
         title:
             AppbarTitle(text: "Downloads", margin: EdgeInsets.only(left: 14.h)),
         actions: [
-          // AppbarSubtitleOne(
-          //     text: "lbl_share".tr,
-          //     margin: EdgeInsets.only(left: 22.h, top: 17.v, right: 16.h)),
-          AppbarTrailingImage(
-              imagePath: ImageConstant.imgSend,
-              margin: EdgeInsets.only(left: 5.h, top: 17.v, right: 38.h))
+          // Text(
+          //   "Share".tr,
+          //   style: TextStyle(
+          //     color: Color(0XFF000000),
+          //     fontSize: 16.fSize,
+          //     fontFamily: 'Roboto',
+          //     fontWeight: FontWeight.w400,
+          //   ),
+          // ),
+          // SizedBox(width: 1.h),
+          // AppbarTrailingImage(
+          //     imagePath: ImageConstant.imgSend,
+          //     margin: EdgeInsets.only(left: 5.h, top: 17.v, right: 38.h)),
+          // SizedBox(width: 25.h)
         ]);
   }
 
@@ -116,7 +123,7 @@ class BulletinScreenState extends State<DownloadsScreen> {
         itemBuilder: (context, index) {
           Data? model = list?[index];
           return Padding(
-            padding: EdgeInsets.only(left: 14.v, top: 8.v),
+            padding: EdgeInsets.only(left: 14.v, top: 0.v),
             child: InkWell(
               onTap: () => openPdfFromUrl(model?.file ?? ""),
               child: Container(
@@ -132,17 +139,27 @@ class BulletinScreenState extends State<DownloadsScreen> {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.only(
+                      bottom: 12.0, left: 12.0, top: 12.0),
                   child: Row(
                     children: [
-                      CustomImageView(
-                        imagePath: ImageConstant.pdf_icon,
-                        height: 50.v,
-                        width: 52.h,
-                        radius: BorderRadius.circular(
-                          12.h,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Color(0XFFE46666),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12), // Adjust the radius as needed
+                          ),
                         ),
-                        margin: EdgeInsets.symmetric(vertical: 3.v),
+                        padding: const EdgeInsets.all(6.0),
+                        child: CustomImageView(
+                          imagePath: ImageConstant.pdf_icon,
+                          height: 50.v,
+                          width: 52.h,
+                          radius: BorderRadius.circular(
+                            12.h,
+                          ),
+                          margin: EdgeInsets.symmetric(vertical: 3.v),
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -153,23 +170,17 @@ class BulletinScreenState extends State<DownloadsScreen> {
                           children: [
                             Row(
                               children: [
-                                Container(
-                                  height: 9.adaptSize,
-                                  width: 9.adaptSize,
-                                  margin: EdgeInsets.only(
-                                    top: 2.v,
-                                    bottom: 6.v,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: appTheme.indigo300,
-                                  ),
-                                ),
+                                CustomImageView(
+                                    imagePath: ImageConstant.oval_download,
+                                    height: 10.v,
+                                    width: 10.h,
+                                    margin: EdgeInsets.only(bottom: 2.v)),
                                 Opacity(
                                   opacity: 0.9,
                                   child: Padding(
                                     padding: EdgeInsets.only(left: 9.h),
                                     child: Text(
-                                      model?.title ?? "",
+                                      model?.date ?? "15 February 2024",
                                       style: CustomTextStyles
                                           .bodySmallBluegray600ab,
                                     ),
@@ -182,9 +193,9 @@ class BulletinScreenState extends State<DownloadsScreen> {
                                     child: SizedBox(
                                       width: SizeUtils.width / 3,
                                       child: Text(
-                                        model?.type ?? "",
+                                        "#Downloads",
                                         style: CustomTextStyles
-                                            .bodySmallPoppinsIndigo300,
+                                            .bodySmallPoppinsIndigoDownload,
                                       ),
                                     ),
                                   ),
@@ -195,11 +206,25 @@ class BulletinScreenState extends State<DownloadsScreen> {
                             SizedBox(
                               width: SizeUtils.width - 170,
                               child: Text(
-                                model?.details ?? "",
-                                style: CustomTextStyles
-                                    .bodyMediumManropeBluegray600_1,
+                                model?.title ?? "",
+                                style: CustomTextStyles.titleMediumBlack,
                               ),
                             ),
+                            SizedBox(height: 4.v),
+                            Row(
+                              children: [
+                                CustomImageView(
+                                    imagePath: ImageConstant.download_icon,
+                                    height: 14.v,
+                                    width: 14.h,
+                                    margin: EdgeInsets.only(bottom: 2.v)),
+                                SizedBox(width: 4.v),
+                                Text(
+                                  "Download PDF Format",
+                                  style: CustomTextStyles.bodyMediumBlack600ab,
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),

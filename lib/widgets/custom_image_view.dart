@@ -10,7 +10,8 @@ import 'package:santhom_connect/core/app_export.dart';
 class CustomImageView extends StatelessWidget {
   ///[imagePath] is required parameter for showing image
   String? imagePath;
-
+  String? personName;
+  double? textSize = 18.0;
   double? height;
   double? width;
   Color? color;
@@ -26,6 +27,8 @@ class CustomImageView extends StatelessWidget {
   /// it will shows the placeholder image if image is not found on network image
   CustomImageView({
     this.imagePath,
+    this.personName,
+    this.textSize,
     this.height,
     this.width,
     this.color,
@@ -87,7 +90,9 @@ class CustomImageView extends StatelessWidget {
   Widget _buildImageView() {
     print("imagePath");
     print(imagePath);
-    if (null != imagePath && imagePath != "null") {
+    print("personName");
+    print(personName);
+    if (null != imagePath && imagePath != "null" && imagePath != "") {
       switch (imagePath!.imageType) {
         case ImageType.svg:
           return Container(
@@ -111,6 +116,7 @@ class CustomImageView extends StatelessWidget {
             width: width,
             fit: fit ?? BoxFit.cover,
             color: color,
+          
           );
         case ImageType.network:
           return CachedNetworkImage(
@@ -145,13 +151,30 @@ class CustomImageView extends StatelessWidget {
           );
       }
     } else {
-      return Image.asset(
-        ImageConstant.imageNotFound,
-        height: height,
-        width: width,
-        fit: fit ?? BoxFit.cover,
-        color: color,
-      );
+      if (personName != null && personName != "" && personName != "null") {
+        return Container(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                personName?.substring(0, 2).toUpperCase() ?? "",
+                style: TextStyle(
+                  color: appTheme.orange700,
+                  fontSize: textSize,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ));
+      } else {
+        return Image.asset(
+          ImageConstant.imageNotFound,
+          height: height,
+          width: width,
+          fit: fit ?? BoxFit.cover,
+          color: color,
+        );
+      }
     }
   }
 }

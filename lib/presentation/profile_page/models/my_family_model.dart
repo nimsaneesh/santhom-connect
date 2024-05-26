@@ -1,27 +1,19 @@
 class MyFamilyModel {
   String? status;
-  List<Null>? metadata;
   Data? data;
 
-  MyFamilyModel({this.status, this.metadata, this.data});
+  MyFamilyModel({this.status, this.data});
 
   MyFamilyModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    // if (json['metadata'] != null) {
-    //   metadata = <Null>[];
-    //   json['metadata'].forEach((v) {
-    //     metadata!.add(new Null.fromJson(v));
-    //   });
-    // }
+
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    // if (this.metadata != null) {
-    //   data['metadata'] = this.metadata!.map((v) => v.toJson()).toList();
-    // }
+
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -31,17 +23,17 @@ class MyFamilyModel {
 
 class Data {
   Family? family;
-  List<Memebers>? memebers;
+  List<Memebers>? members;
 
-  Data({this.family, this.memebers});
+  Data({this.family, this.members});
 
   Data.fromJson(Map<String, dynamic> json) {
     family =
         json['family'] != null ? new Family.fromJson(json['family']) : null;
-    if (json['memebers'] != null) {
-      memebers = <Memebers>[];
-      json['memebers'].forEach((v) {
-        memebers!.add(new Memebers.fromJson(v));
+    if (json['members'] != null) {
+      members = <Memebers>[];
+      json['members'].forEach((v) {
+        members!.add(new Memebers.fromJson(v));
       });
     }
   }
@@ -51,8 +43,8 @@ class Data {
     if (this.family != null) {
       data['family'] = this.family!.toJson();
     }
-    if (this.memebers != null) {
-      data['memebers'] = this.memebers!.map((v) => v.toJson()).toList();
+    if (this.members != null) {
+      data['members'] = this.members!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -60,20 +52,21 @@ class Data {
 
 class Family {
   int? id;
-  String? familyCode;
-  String? familyName;
+  dynamic familyCode;
+  dynamic familyName;
   int? prayerGroupId;
-  String? address1;
-  String? address2;
-  String? postOffice;
-  String? pincode;
-  String? mapLocation;
-  int? status;
+  dynamic address1;
+  dynamic address2;
+  dynamic postOffice;
+  dynamic pincode;
+  dynamic mapLocation;
+  dynamic? status;
   String? createdAt;
   String? updatedAt;
-  String? deletedAt;
-  String? familyHeadName;
-  String? prayerGroupName;
+  dynamic deletedAt;
+  dynamic familyHeadName;
+  dynamic prayerGroupName;
+  dynamic familyHeadImage;
 
   Family(
       {this.id,
@@ -90,7 +83,8 @@ class Family {
       this.updatedAt,
       this.deletedAt,
       this.familyHeadName,
-      this.prayerGroupName});
+      this.prayerGroupName,
+      this.familyHeadImage});
 
   Family.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -108,6 +102,7 @@ class Family {
     deletedAt = json['deleted_at'];
     familyHeadName = json['family_head_name'];
     prayerGroupName = json['prayer_group_name'];
+    familyHeadImage = json['family_head_image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -127,44 +122,47 @@ class Family {
     data['deleted_at'] = this.deletedAt;
     data['family_head_name'] = this.familyHeadName;
     data['prayer_group_name'] = this.prayerGroupName;
+    data['family_head_image'] = this.familyHeadImage;
     return data;
   }
 }
 
 class Memebers {
   int? id;
-  String? title;
-  String? name;
-  Null? nickname;
-  int? familyId;
-  int? headOfFamily;
-  String? gender;
-  String? dob;
-  String? dateOfBaptism;
-  String? bloodGroupId;
-  String? maritalStatusId;
-  String? dateOfMarriage;
-  int? relationshipId;
-  String? qualification;
-  String? occupation;
-  String? companyName;
-  String? email;
-  String? mobile;
-  String? altContactNo;
-  String? dateOfDeath;
-  String? image;
-  int? status;
-  int? userType;
-  String? createdAt;
-  String? updatedAt;
-  String? deletedAt;
-  String? familyName;
-  String? familyHeadName;
-  String? prayerGroupName;
-  String? bloodGroupName;
-  String? maritalStatusName;
-  String? relationshipName;
-  String? obituaryId;
+  dynamic? title;
+  dynamic? name;
+  dynamic? nickname;
+  dynamic? familyId;
+  dynamic? headOfFamily;
+  dynamic? gender;
+  dynamic? dob;
+  dynamic? dateOfBaptism;
+  dynamic? bloodGroupId;
+  dynamic? maritalStatusId;
+  dynamic? remark;
+  dynamic? marrMembId;
+  dynamic? dateOfMarriage;
+  dynamic? relationshipId;
+  dynamic? qualification;
+  dynamic? occupation;
+  dynamic? companyName;
+  dynamic? email;
+  dynamic? mobile;
+  dynamic? altContactNo;
+  dynamic? dateOfDeath;
+  dynamic? image;
+  dynamic? status;
+  dynamic? userType;
+  dynamic? createdAt;
+  dynamic? updatedAt;
+  dynamic? deletedAt;
+  dynamic? familyName;
+  dynamic? familyHeadName;
+  dynamic? prayerGroupName;
+  dynamic? bloodGroupName;
+  dynamic? maritalStatusName;
+  dynamic? relationshipName;
+  dynamic? obituaryId;
 
   Memebers(
       {this.id,
@@ -178,6 +176,8 @@ class Memebers {
       this.dateOfBaptism,
       this.bloodGroupId,
       this.maritalStatusId,
+      this.remark,
+      this.marrMembId,
       this.dateOfMarriage,
       this.relationshipId,
       this.qualification,
@@ -213,6 +213,8 @@ class Memebers {
     dateOfBaptism = json['date_of_baptism'];
     bloodGroupId = json['blood_group_id'];
     maritalStatusId = json['marital_status_id'];
+    remark = json['remark'];
+    marrMembId = json['marr_memb_id'];
     dateOfMarriage = json['date_of_marriage'];
     relationshipId = json['relationship_id'];
     qualification = json['qualification'];
@@ -250,6 +252,8 @@ class Memebers {
     data['date_of_baptism'] = this.dateOfBaptism;
     data['blood_group_id'] = this.bloodGroupId;
     data['marital_status_id'] = this.maritalStatusId;
+    data['remark'] = this.remark;
+    data['marr_memb_id'] = this.marrMembId;
     data['date_of_marriage'] = this.dateOfMarriage;
     data['relationship_id'] = this.relationshipId;
     data['qualification'] = this.qualification;

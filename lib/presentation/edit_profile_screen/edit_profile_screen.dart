@@ -1,5 +1,5 @@
 import '../../core/app_export.dart';
-import '../../widgets/app_bar/appbar_leading_iconbutton_one.dart';
+import '../../widgets/app_bar/appbar_leading_iconbutton.dart';
 import '../../widgets/app_bar/appbar_subtitle.dart';
 import '../../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
@@ -37,160 +37,179 @@ class EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: _buildAppBar(context),
-            body: SizedBox(
-                width: SizeUtils.width,
-                child: SingleChildScrollView(
-                    child: Container(
-                        child:
-                            Stack(alignment: Alignment.bottomCenter, children: [
-                  Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 23.h),
-                          child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                    padding: EdgeInsets.only(left: 2.h),
-                                    child: Text("Family Name".tr,
-                                        style: CustomTextStyles
-                                            .titleSmallGray600)),
-                                SizedBox(height: 6.v),
-                                Selector<EditProfileProvider,
-                                        TextEditingController?>(
-                                    selector: (context, provider) =>
-                                        provider.familyNameController,
-                                    builder: (context, nameController, child) {
-                                      return CustomTextFormField(
-                                          controller: nameController,
-                                          hintText: "Family Name".tr);
-                                    }),
-                                SizedBox(height: 14.v),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 2.h),
-                                    child: Text("Head of the Family".tr,
-                                        style: CustomTextStyles
-                                            .titleSmallGray600)),
-                                SizedBox(height: 6.v),
-                                Selector<EditProfileProvider,
-                                        TextEditingController?>(
-                                    selector: (context, provider) =>
-                                        provider.headOfFamilyController,
-                                    builder: (context, nameController, child) {
-                                      return CustomTextFormField(
-                                          controller: nameController,
-                                          hintText: "Head of the Family".tr);
-                                    }),
-                                SizedBox(height: 14.v),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 2.h),
-                                    child: Text(
-                                        "Email of Head of the Family".tr,
-                                        style: CustomTextStyles
-                                            .titleSmallGray600)),
-                                SizedBox(height: 6.v),
-                                Selector<EditProfileProvider,
-                                        TextEditingController?>(
-                                    selector: (context, provider) =>
-                                        provider.emailController,
-                                    builder: (context, nameController, child) {
-                                      return CustomTextFormField(
-                                          controller: nameController,
-                                          hintText:
-                                              "Email of Head of the Family".tr);
-                                    }),
-                                SizedBox(height: 14.v),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 2.h),
-                                    child: Text("Address".tr,
-                                        style: CustomTextStyles
-                                            .titleSmallGray600)),
-                                SizedBox(height: 6.v),
-                                Selector<EditProfileProvider,
-                                        TextEditingController?>(
-                                    selector: (context, provider) =>
-                                        provider.addressController,
-                                    builder: (context, nameController, child) {
-                                      return CustomTextFormField(
-                                          controller: nameController,
-                                          hintText: "Address".tr);
-                                    }),
-                                SizedBox(height: 14.v),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 2.h),
-                                    child: Text("Pincode".tr,
-                                        style: CustomTextStyles
-                                            .titleSmallGray600)),
-                                SizedBox(height: 6.v),
-                                Selector<EditProfileProvider,
-                                        TextEditingController?>(
-                                    selector: (context, provider) =>
-                                        provider.pincodeController,
-                                    builder: (context, nameController, child) {
-                                      return CustomTextFormField(
-                                          controller: nameController,
-                                          hintText: "Pincode".tr);
-                                    }),
-                                SizedBox(height: 14.v),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 2.h),
-                                    child: Text("Payer Group".tr,
-                                        style: CustomTextStyles
-                                            .titleSmallGray600)),
-                                SizedBox(height: 6.v),
-                                Selector<EditProfileProvider,
-                                        List<SelectionPopupModel>?>(
-                                    selector: (context, provider) =>
-                                        provider.prayerGroupItems,
-                                    builder:
-                                        (context, prayerGroupItems, child) {
-                                      return CustomDropDown(
-                                          hintText: "Prayer Group".tr,
-                                          items: prayerGroupItems ?? [],
-                                          onChanged: (value) {
-                                            context
-                                                .read<
-                                                    EditProfileProvider>()
-                                                .onSelected1(value);
-                                          });
-                                    }),
-                                SizedBox(height: 14.v),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 2.h),
-                                    child: Text("Map Location".tr,
-                                        style: CustomTextStyles
-                                            .titleSmallGray600)),
-                                SizedBox(height: 6.v),
-                                Selector<EditProfileProvider,
-                                        TextEditingController?>(
-                                    selector: (context, provider) =>
-                                        provider.mapLocationGroupController,
-                                    builder: (context, nameController, child) {
-                                      return CustomTextFormField(
-                                          controller: nameController,
-                                          hintText: "Map Location".tr);
-                                    }),
-                                SizedBox(height: 14.v),
-                                SizedBox(height: 21.v),
-                                Row(children: [
-                                  CustomImageView(
-                                      imagePath: ImageConstant.imgMaximize,
-                                      height: 21.adaptSize,
-                                      width: 21.adaptSize,
-                                      margin: EdgeInsets.only(bottom: 3.v)),
-                                  Padding(
-                                      padding: EdgeInsets.only(left: 9.h),
-                                      child: Text("msg_edit_family_members".tr,
-                                          style: CustomTextStyles
-                                              .titleSmallIndigoA700))
-                                ])
-                              ])))
-                ]))))));
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: _buildAppBar(context),
+        body: SizedBox(
+            width: SizeUtils.width,
+            child: SingleChildScrollView(
+                child: Container(
+                    child: Stack(alignment: Alignment.bottomCenter, children: [
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 23.h),
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                                padding: EdgeInsets.only(left: 2.h),
+                                child: Text("Family Name".tr,
+                                    style: CustomTextStyles.titleSmallGray600)),
+                            SizedBox(height: 6.v),
+                            Selector<EditProfileProvider,
+                                    TextEditingController?>(
+                                selector: (context, provider) =>
+                                    provider.familyNameController,
+                                builder: (context, nameController, child) {
+                                  return CustomTextFormField(
+                                      controller: nameController,
+                                      hintText: "Family Name".tr);
+                                }),
+                            SizedBox(height: 14.v),
+                            Padding(
+                                padding: EdgeInsets.only(left: 2.h),
+                                child: Text("Head of the Family".tr,
+                                    style: CustomTextStyles.titleSmallGray600)),
+                            SizedBox(height: 6.v),
+                            Selector<EditProfileProvider,
+                                    TextEditingController?>(
+                                selector: (context, provider) =>
+                                    provider.headOfFamilyController,
+                                builder: (context, nameController, child) {
+                                  return CustomTextFormField(
+                                      controller: nameController,
+                                      hintText: "Head of the Family".tr);
+                                }),
+                            SizedBox(height: 14.v),
+                            // Padding(
+                            //     padding: EdgeInsets.only(left: 2.h),
+                            //     child: Text("Email of Head of the Family".tr,
+                            //         style: CustomTextStyles.titleSmallGray600)),
+                            // SizedBox(height: 6.v),
+                            // Selector<EditProfileProvider,
+                            //         TextEditingController?>(
+                            //     selector: (context, provider) =>
+                            //         provider.emailController,
+                            //     builder: (context, nameController, child) {
+                            //       return CustomTextFormField(
+                            //           controller: nameController,
+                            //           hintText:
+                            //               "Email of Head of the Family".tr);
+                            //     }),
+                            // SizedBox(height: 14.v),
+                            Padding(
+                                padding: EdgeInsets.only(left: 2.h),
+                                child: Text("Address 1".tr,
+                                    style: CustomTextStyles.titleSmallGray600)),
+                            SizedBox(height: 6.v),
+                            Selector<EditProfileProvider,
+                                    TextEditingController?>(
+                                selector: (context, provider) =>
+                                    provider.addressController,
+                                builder: (context, nameController, child) {
+                                  return CustomTextFormField(
+                                      controller: nameController,
+                                      hintText: "Address".tr);
+                                }),
+                            SizedBox(height: 14.v),
+                            Padding(
+                                padding: EdgeInsets.only(left: 2.h),
+                                child: Text("Address 2".tr,
+                                    style: CustomTextStyles.titleSmallGray600)),
+                            SizedBox(height: 6.v),
+                            Selector<EditProfileProvider,
+                                    TextEditingController?>(
+                                selector: (context, provider) =>
+                                    provider.address2Controller,
+                                builder: (context, nameController, child) {
+                                  return CustomTextFormField(
+                                      controller: nameController,
+                                      hintText: "Address".tr);
+                                }),
+                            SizedBox(height: 14.v),
+                            SizedBox(height: 14.v),
+                            Padding(
+                                padding: EdgeInsets.only(left: 2.h),
+                                child: Text("Post office".tr,
+                                    style: CustomTextStyles.titleSmallGray600)),
+                            SizedBox(height: 6.v),
+                            Selector<EditProfileProvider,
+                                    TextEditingController?>(
+                                selector: (context, provider) =>
+                                    provider.postOfficeController,
+                                builder: (context, nameController, child) {
+                                  return CustomTextFormField(
+                                      controller: nameController,
+                                      hintText: "Post Office".tr);
+                                }),
+                            SizedBox(height: 14.v),
+                            Padding(
+                                padding: EdgeInsets.only(left: 2.h),
+                                child: Text("Pincode".tr,
+                                    style: CustomTextStyles.titleSmallGray600)),
+                            SizedBox(height: 6.v),
+                            Selector<EditProfileProvider,
+                                    TextEditingController?>(
+                                selector: (context, provider) =>
+                                    provider.pincodeController,
+                                builder: (context, nameController, child) {
+                                  return CustomTextFormField(
+                                      controller: nameController,
+                                      hintText: "Pincode".tr);
+                                }),
+                            SizedBox(height: 14.v),
+                            Padding(
+                                padding: EdgeInsets.only(left: 2.h),
+                                child: Text("Payer Group".tr,
+                                    style: CustomTextStyles.titleSmallGray600)),
+                            SizedBox(height: 6.v),
+                            Selector<EditProfileProvider,
+                                    List<SelectionPopupModel>?>(
+                                selector: (context, provider) =>
+                                    provider.prayerGroupItems,
+                                builder: (context, prayerGroupItems, child) {
+                                  return CustomDropDown(
+                                      hintText: "Prayer Group".tr,
+                                      items: prayerGroupItems ?? [],
+                                      onChanged: (value) {
+                                        context
+                                            .read<EditProfileProvider>()
+                                            .onSelected1(value);
+                                      });
+                                }),
+                            SizedBox(height: 14.v),
+                            // Padding(
+                            //     padding: EdgeInsets.only(left: 2.h),
+                            //     child: Text("Map Location".tr,
+                            //         style: CustomTextStyles.titleSmallGray600)),
+                            // SizedBox(height: 6.v),
+                            // Selector<EditProfileProvider,
+                            //         TextEditingController?>(
+                            //     selector: (context, provider) =>
+                            //         provider.mapLocationGroupController,
+                            //     builder: (context, nameController, child) {
+                            //       return CustomTextFormField(
+                            //           controller: nameController,
+                            //           hintText: "Map Location".tr);
+                            //     }),
+                            // SizedBox(height: 14.v),
+                            Row(children: [
+                              CustomImageView(
+                                  imagePath: ImageConstant.imgMaximize,
+                                  height: 21.adaptSize,
+                                  width: 21.adaptSize,
+                                  margin: EdgeInsets.only(bottom: 3.v)),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 9.h),
+                                  child: Text("msg_edit_family_members".tr,
+                                      style: CustomTextStyles
+                                          .titleSmallIndigoA700))
+                            ]),
+                            SizedBox(height: 21.v),
+                          ])))
+            ])))));
   }
 
   /// Section Widget
@@ -198,9 +217,9 @@ class EditProfileScreenState extends State<EditProfileScreen> {
     return CustomAppBar(
         height: 54.v,
         leadingWidth: 51.h,
-        leading: AppbarLeadingIconbuttonOne(
+        leading: AppbarLeadingIconbutton(
             imagePath: ImageConstant.imgArrowLeft,
-            margin: EdgeInsets.only(left: 25.h, top: 13.v, bottom: 15.v),
+            margin: EdgeInsets.only(left: 25.h, top: 13.v, bottom: 13.v),
             onTap: () {
               onTapArrowLeft(context);
             }),

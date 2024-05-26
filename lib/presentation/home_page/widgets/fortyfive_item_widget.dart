@@ -1,3 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/widgets.dart';
+import 'package:santhom_connect/data/models/detail_model.dart';
+import 'package:santhom_connect/utils/utils.dart';
+
 import '../model/bulletin_model.dart';
 import 'package:flutter/material.dart';
 import 'package:santhom_connect/core/app_export.dart';
@@ -5,33 +10,38 @@ import 'package:santhom_connect/core/app_export.dart';
 // ignore: must_be_immutable
 class FortyfiveItemWidget extends StatelessWidget {
   Lists? model;
-  FortyfiveItemWidget(this.model);
+  String category;
+  FortyfiveItemWidget(this.model, this.category);
 
   @override
   Widget build(BuildContext context) {
+    DetailModelBulletin detail =
+        DetailModelBulletin(title: category, model: model);
+
     return InkWell(
       onTap: (() => {
             NavigatorService.pushNamed(AppRoutes.bulletinDetails,
-                arguments: model)
+                arguments: detail)
           }),
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: 10.h,
           vertical: 7.v,
         ),
+        margin: EdgeInsets.only(bottom: 5),
         decoration: AppDecoration.fillWhiteA.copyWith(
           borderRadius: BorderRadiusStyle.roundedBorder16,
         ),
         child: Row(
           children: [
-            CustomImageView(
-              imagePath: model?.image,
-              height: 70.v,
-              width: 72.h,
-              radius: BorderRadius.circular(
-                12.h,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: CustomImageView(
+                imagePath: model?.image,
+                height: 70.v,
+                width: 72.h,
+                fit: BoxFit.fitHeight,
               ),
-              margin: EdgeInsets.symmetric(vertical: 3.v),
             ),
             Padding(
               padding: EdgeInsets.only(
@@ -43,17 +53,12 @@ class FortyfiveItemWidget extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        height: 9.adaptSize,
-                        width: 9.adaptSize,
-                        margin: EdgeInsets.only(
-                          top: 2.v,
-                          bottom: 6.v,
-                        ),
-                        decoration: BoxDecoration(
-                          color: appTheme.indigo300,
-                        ),
-                      ),
+                      CustomImageView(
+                          imagePath: ImageConstant.oval_download,
+                          height: 10.v,
+                          width: 10.h,
+                          color: getColor(model?.type),
+                          margin: EdgeInsets.only(bottom: 2.v)),
                       Opacity(
                         opacity: 0.9,
                         child: Padding(
@@ -69,11 +74,12 @@ class FortyfiveItemWidget extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.only(left: 8.h),
                           child: SizedBox(
-                            width: SizeUtils.width / 3,
-                            child: Text(
-                              model?.item ?? "",
-                              style: CustomTextStyles.bodySmallPoppinsIndigo300,
-                            ),
+                            width: SizeUtils.width / 3.5,
+                            child: AutoSizeText("#" + model?.type ?? "",
+                                maxLines: 2,
+                                style: TextStyle(
+                                    color: getColor(model?.type),
+                                    fontSize: 10)),
                           ),
                         ),
                       ),
@@ -88,8 +94,9 @@ class FortyfiveItemWidget extends StatelessWidget {
                   SizedBox(
                     width: SizeUtils.width - 170,
                     height: 30,
-                    child: Text(
+                    child: AutoSizeText(
                       model?.details ?? "",
+                      maxLines: 2,
                       style: CustomTextStyles.bodyMediumManropeBluegray600_1,
                     ),
                   ),
@@ -100,5 +107,8 @@ class FortyfiveItemWidget extends StatelessWidget {
         ),
       ),
     );
+ 
+ 
+ 
   }
 }

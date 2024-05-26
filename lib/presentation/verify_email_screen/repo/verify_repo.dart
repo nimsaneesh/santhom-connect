@@ -7,14 +7,19 @@ import '../../../../values/app_apis.dart';
 
 class VerifyRepo {
   Future<VerifyModel> verify(
-      {required String email, required String otp}) async {
+      {required String email,
+      required String otp,
+      required String familyCode}) async {
     DioBuilderResponse dioBuilderResponse =
         await DioBuilder().buildNonCachedDio(hasAuth: false);
     final response = (await dioBuilderResponse.dio.post(
       AppAPIs.verify,
       options: dioBuilderResponse.dioOptions,
-      data:
-          jsonEncode(<String, String>{'email': email, 'otp': otp}),
+      data: jsonEncode(<String, String>{
+        'email': email,
+        'otp': otp,
+        'family_code': familyCode
+      }),
     ));
 
     VerifyModel registrationDetailsModel = VerifyModel();

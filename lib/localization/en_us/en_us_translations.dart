@@ -2,6 +2,7 @@ final Map<String, String> enUs = {
   // Login Screen
   "lbl_email": "Email",
   "lbl_family_code": "Family Code :",
+  "lbl_family_code_lo": "Family Code",
   "lbl_santhom_connect": "Santhom Connect",
   "lbl_sign_in": "Sign In",
   "lbl_welcome_to": "Welcome to",
@@ -12,6 +13,7 @@ final Map<String, String> enUs = {
 
   // Home Screen
   "lbl2": "ഓർമ്മ",
+  "msg_edit_family_members": "Edit Family Members",
   "lbl3": "വി  ഡോൺ ബോസ്കോ",
   "lbl4": "വേദഭാഗങ്ങൾ",
   "lbl5": "ഭവനങ്ങൾ",

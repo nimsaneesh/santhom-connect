@@ -81,16 +81,18 @@ class CustomDropDown extends StatelessWidget {
           focusNode: focusNode ?? FocusNode(),
           icon: icon,
           autofocus: autofocus!,
-          style: textStyle ?? theme.textTheme.titleMedium,
+          style: textStyle ?? theme.textTheme.titleSmall,
           items: items?.map((SelectionPopupModel item) {
+
             return DropdownMenuItem<SelectionPopupModel>(
               value: item,
               child: Text(
                 item.title,
                 overflow: TextOverflow.ellipsis,
-                style: hintStyle ?? theme.textTheme.titleMedium,
+                style: theme.textTheme.titleSmall,
               ),
             );
+            
           }).toList(),
           decoration: decoration,
           validator: validator,

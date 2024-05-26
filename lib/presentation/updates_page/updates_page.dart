@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:santhom_connect/presentation/updates_tab_container_page/models/updates_tab_container_model.dart';
+import 'package:santhom_connect/utils/utils.dart';
 
 import '../../core/app_export.dart';
 import 'models/updates_model.dart';
@@ -7,114 +9,117 @@ import 'provider/updates_provider.dart';
 
 // ignore_for_file: must_be_immutable
 class UpdatesPage extends StatelessWidget {
-  List<Lists>? list;
+  List<EventList>? list;
+  String? type;
 
-  UpdatesPage(this.list);
+  UpdatesPage(this.list, String? type);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: _buildScrollView(context, list),
-      ),
-    );
+    return _buildScrollView(context, list, type);
   }
 
   /// Section Widget
-  Widget _buildScrollView(BuildContext context, List<Lists>? list) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 16.v),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22.h),
-            child: Column(
-              children: [
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text(
-                //       "lbl_birthday".tr,
-                //       style: CustomTextStyles.titleMediumBluegray900,
-                //     ),
-                //     Text(
-                //       "lbl_31_1_24".tr,
-                //       style: CustomTextStyles.titleSmallIndigo40001,
-                //     ),
-                //   ],
-                // ),
-                _buildFortyFive(context, list)
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+  Widget _buildScrollView(
+      BuildContext context, List<EventList>? list, String? type) {
+    return _buildFortyFive(context, list, type);
   }
 }
 
-Widget _buildFortyFive(BuildContext context, List<Lists>? list) {
+Widget _buildFortyFive(
+    BuildContext context, List<EventList>? list, String? type) {
   return Padding(
     padding: EdgeInsets.only(
-      left: 1.h,
+      left: 22.h,
       right: 22.h,
     ),
     child: ListView.separated(
-      physics: NeverScrollableScrollPhysics(),
+      // physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       separatorBuilder: (
         context,
         index,
       ) {
         return SizedBox(
-          height: 12.v,
+          height: 10.v,
         );
       },
       itemCount: list?.length ?? 0,
       itemBuilder: (context, index) {
-        Lists? model = list?[index];
-        return Container(
-          width: 368.h,
-          margin: EdgeInsets.symmetric(horizontal: 1.h),
-          padding: EdgeInsets.symmetric(
-            horizontal: 14.h,
-            vertical: 12.v,
-          ),
-          decoration: AppDecoration.fillWhiteA.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder16,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 2.v),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.imgLocationPin1,
-                    height: 12.adaptSize,
-                    width: 12.adaptSize,
-                    margin: EdgeInsets.only(
-                      top: 2.v,
-                      bottom: 5.v,
-                    ),
+        EventList? model = list?[index];
+        return InkWell(
+          onTap: (() => {
+                // NavigatorService.pushNamed(AppRoutes.bulletinDetails,
+                //     arguments: detail)
+              }),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.h,
+              vertical: 7.v,
+            ),
+            margin: EdgeInsets.only(bottom: 5),
+            decoration: AppDecoration.fillWhiteA.copyWith(
+              borderRadius: BorderRadiusStyle.roundedBorder16,
+            ),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: CustomImageView(
+                    imagePath: model?.image,
+                    height: 70.v,
+                    width: 72.h,
+                    fit: BoxFit.fitHeight,
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 6.h),
-                    child: Text(
-                      "msg_valiyaparambil_house".tr,
-                      style: CustomTextStyles.bodyMediumBluegray600,
-                    ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 15.h,
+                    top: 10.v,
                   ),
-                ],
-              ),
-              SizedBox(height: 3.v),
-              Text(
-                "msg_thomas_jacob_s_birthday".tr,
-                style: theme.textTheme.titleSmall,
-              ),
-            ],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          CustomImageView(
+                              imagePath: ImageConstant.oval_download,
+                              height: 10.v,
+                              width: 10.h,
+                              color: getColor(model?.heading),
+                              margin: EdgeInsets.only(bottom: 2.v)),
+                          Opacity(
+                            opacity: 0.9,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 9.h),
+                              child: Text(
+                                model?.date ?? "",
+                                style: CustomTextStyles.bodySmallBluegray600ab,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 3.v),
+                      Text(
+                        model?.heading ?? "",
+                        style: CustomTextStyles.titleMediumBluegray90002Medium,
+                      ),
+                      SizedBox(height: 4.v),
+                      SizedBox(
+                        width: SizeUtils.width - 170,
+                        height: 30,
+                        child: AutoSizeText(
+                          model?.subHeading ?? "",
+                          maxLines: 2,
+                          style:
+                              CustomTextStyles.bodyMediumManropeBluegray600_1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

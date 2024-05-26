@@ -8,7 +8,7 @@ import '../models/directory_prayer_group_model.dart';
 
 class PrayerGroupProfileRepo {
   Future<DirectoryPrayerGroupModel> getPrayerGroup({
-    required String id,
+    required String id,kp   
   }) async {
     DioBuilderResponse dioBuilderResponse =
         await DioBuilder().buildNonCachedDio(hasAuth: true);

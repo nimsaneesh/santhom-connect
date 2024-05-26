@@ -1,5 +1,5 @@
 import '../../core/app_export.dart';
-import '../../widgets/app_bar/appbar_leading_iconbutton_one.dart';
+import '../../widgets/app_bar/appbar_leading_iconbutton.dart';
 import '../../widgets/app_bar/appbar_subtitle.dart';
 import '../../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
@@ -31,207 +31,197 @@ class EditProfileScreenState extends State<EditFamilyProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: _buildAppBar(context),
-            body: SizedBox(
-                width: SizeUtils.width,
-                child: SingleChildScrollView(
-                    child: Container(
-                        height: 864.v,
-                        width: 368.h,
-                        margin: EdgeInsets.symmetric(horizontal: 23.h),
-                        child:
-                            Stack(alignment: Alignment.bottomCenter, children: [
-                          Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 23.h),
-                                  child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 2.h),
-                                            child: Text("lbl_name".tr,
-                                                style: CustomTextStyles
-                                                    .titleSmallGray600)),
-                                        SizedBox(height: 6.v),
-                                        Selector<EditFamilyProfileProvider,
-                                                TextEditingController?>(
-                                            selector: (context, provider) =>
-                                                provider.nameController,
-                                            builder: (context, nameController,
-                                                child) {
-                                              return CustomTextFormField(
-                                                  controller: nameController,
-                                                  hintText:
-                                                      "lbl_basil_thomas".tr);
-                                            }),
-                                        SizedBox(height: 14.v),
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 2.h),
-                                            child: Text("lbl_family_status".tr,
-                                                style: CustomTextStyles
-                                                    .titleSmallGray600)),
-                                        SizedBox(height: 5.v),
-                                        Selector<EditFamilyProfileProvider,
-                                                EditProfileModel?>(
-                                            selector: (context, provider) =>
-                                                provider.editProfileModelObj,
-                                            builder: (context,
-                                                editProfileModelObj, child) {
-                                              return CustomDropDown(
-                                                  hintText: "lbl_son".tr,
-                                                  items: editProfileModelObj
-                                                          ?.dropdownItemList ??
-                                                      [],
-                                                  onChanged: (value) {
-                                                    context
-                                                        .read<
-                                                            EditFamilyProfileProvider>()
-                                                        .onSelected(value);
-                                                  });
-                                            }),
-                                        SizedBox(height: 12.v),
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 2.h),
-                                            child: Text("lbl_gender".tr,
-                                                style: CustomTextStyles
-                                                    .titleSmallGray600)),
-                                        SizedBox(height: 7.v),
-                                        Selector<EditFamilyProfileProvider,
-                                                EditProfileModel?>(
-                                            selector: (context, provider) =>
-                                                provider.editProfileModelObj,
-                                            builder: (context,
-                                                editProfileModelObj, child) {
-                                              return CustomDropDown(
-                                                  hintText: "lbl_male".tr,
-                                                  items: editProfileModelObj
-                                                          ?.dropdownItemList1 ??
-                                                      [],
-                                                  onChanged: (value) {
-                                                    context
-                                                        .read<
-                                                            EditFamilyProfileProvider>()
-                                                        .onSelected1(value);
-                                                  });
-                                            }),
-                                        SizedBox(height: 12.v),
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 2.h),
-                                            child: Text("lbl_dob".tr,
-                                                style: CustomTextStyles
-                                                    .titleSmallGray600)),
-                                        SizedBox(height: 7.v),
-                                        _buildEight(context,
-                                            dDMMYYYY: "lbl_dd_mm_yyyy".tr),
-                                        SizedBox(height: 14.v),
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 2.h),
-                                            child: Text("lbl_blood_group".tr,
-                                                style: CustomTextStyles
-                                                    .titleSmallGray600)),
-                                        SizedBox(height: 5.v),
-                                        Selector<EditFamilyProfileProvider,
-                                                EditProfileModel?>(
-                                            selector: (context, provider) =>
-                                                provider.editProfileModelObj,
-                                            builder: (context,
-                                                editProfileModelObj, child) {
-                                              return CustomDropDown(
-                                                  hintText: "lbl_a".tr,
-                                                  items: editProfileModelObj
-                                                          ?.dropdownItemList2 ??
-                                                      [],
-                                                  onChanged: (value) {
-                                                    context
-                                                        .read<
-                                                            EditFamilyProfileProvider>()
-                                                        .onSelected2(value);
-                                                  });
-                                            }),
-                                        SizedBox(height: 14.v),
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 2.h),
-                                            child: Text(
-                                                "lbl_date_of_baptism".tr,
-                                                style: CustomTextStyles
-                                                    .titleSmallGray600)),
-                                        SizedBox(height: 5.v),
-                                        _buildEight(context,
-                                            dDMMYYYY: "lbl_dd_mm_yyyy".tr),
-                                        SizedBox(height: 14.v),
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 2.h),
-                                            child: Text(
-                                                "msg_relationship_status".tr,
-                                                style: CustomTextStyles
-                                                    .titleSmallGray600)),
-                                        SizedBox(height: 5.v),
-                                        Selector<EditFamilyProfileProvider,
-                                                EditProfileModel?>(
-                                            selector: (context, provider) =>
-                                                provider.editProfileModelObj,
-                                            builder: (context,
-                                                editProfileModelObj, child) {
-                                              return CustomDropDown(
-                                                  hintText: "lbl_married".tr,
-                                                  items: editProfileModelObj
-                                                          ?.dropdownItemList3 ??
-                                                      [],
-                                                  onChanged: (value) {
-                                                    context
-                                                        .read<
-                                                            EditFamilyProfileProvider>()
-                                                        .onSelected3(value);
-                                                  });
-                                            }),
-                                        SizedBox(height: 14.v),
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 2.h),
-                                            child: Text(
-                                                "msg_relationship_with".tr,
-                                                style: CustomTextStyles
-                                                    .titleSmallGray600)),
-                                        SizedBox(height: 5.v),
-                                        Selector<EditFamilyProfileProvider,
-                                                TextEditingController?>(
-                                            selector: (context, provider) =>
-                                                provider.cindiyaJacobController,
-                                            builder: (context,
-                                                cindiyaJacobController, child) {
-                                              return CustomTextFormField(
-                                                  controller:
-                                                      cindiyaJacobController,
-                                                  hintText:
-                                                      "lbl_cindiya_jacob".tr,
-                                                  textInputAction:
-                                                      TextInputAction.done);
-                                            }),
-                                        SizedBox(height: 21.v),
-                                        Row(children: [
-                                          CustomImageView(
-                                              imagePath:
-                                                  ImageConstant.imgMaximize,
-                                              height: 21.adaptSize,
-                                              width: 21.adaptSize,
-                                              margin:
-                                                  EdgeInsets.only(bottom: 3.v)),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 9.h),
-                                              child: Text(
-                                                  "msg_edit_family_members".tr,
-                                                  style: CustomTextStyles
-                                                      .titleSmallIndigoA700))
-                                        ])
-                                      ])))
-                        ]))))));
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: _buildAppBar(context),
+        body: SizedBox(
+            width: SizeUtils.width,
+            child: SingleChildScrollView(
+                child: Container(
+                    height: 864.v,
+                    width: 368.h,
+                    margin: EdgeInsets.symmetric(horizontal: 23.h),
+                    child: Stack(alignment: Alignment.bottomCenter, children: [
+                      Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 23.h),
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 2.h),
+                                        child: Text("lbl_name".tr,
+                                            style: CustomTextStyles
+                                                .titleSmallGray600)),
+                                    SizedBox(height: 6.v),
+                                    Selector<EditFamilyProfileProvider,
+                                            TextEditingController?>(
+                                        selector: (context, provider) =>
+                                            provider.nameController,
+                                        builder:
+                                            (context, nameController, child) {
+                                          return CustomTextFormField(
+                                              controller: nameController,
+                                              hintText: "lbl_basil_thomas".tr);
+                                        }),
+                                    SizedBox(height: 14.v),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 2.h),
+                                        child: Text("lbl_family_status".tr,
+                                            style: CustomTextStyles
+                                                .titleSmallGray600)),
+                                    SizedBox(height: 5.v),
+                                    Selector<EditFamilyProfileProvider,
+                                            EditProfileModel?>(
+                                        selector: (context, provider) =>
+                                            provider.editProfileModelObj,
+                                        builder: (context, editProfileModelObj,
+                                            child) {
+                                          return CustomDropDown(
+                                              hintText: "lbl_son".tr,
+                                              items: editProfileModelObj
+                                                      ?.dropdownItemList ??
+                                                  [],
+                                              onChanged: (value) {
+                                                context
+                                                    .read<
+                                                        EditFamilyProfileProvider>()
+                                                    .onSelected(value);
+                                              });
+                                        }),
+                                    SizedBox(height: 12.v),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 2.h),
+                                        child: Text("lbl_gender".tr,
+                                            style: CustomTextStyles
+                                                .titleSmallGray600)),
+                                    SizedBox(height: 7.v),
+                                    Selector<EditFamilyProfileProvider,
+                                            EditProfileModel?>(
+                                        selector: (context, provider) =>
+                                            provider.editProfileModelObj,
+                                        builder: (context, editProfileModelObj,
+                                            child) {
+                                          return CustomDropDown(
+                                              hintText: "lbl_male".tr,
+                                              items: editProfileModelObj
+                                                      ?.dropdownItemList1 ??
+                                                  [],
+                                              onChanged: (value) {
+                                                context
+                                                    .read<
+                                                        EditFamilyProfileProvider>()
+                                                    .onSelected1(value);
+                                              });
+                                        }),
+                                    SizedBox(height: 12.v),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 2.h),
+                                        child: Text("lbl_dob".tr,
+                                            style: CustomTextStyles
+                                                .titleSmallGray600)),
+                                    SizedBox(height: 7.v),
+                                    _buildEight(context,
+                                        dDMMYYYY: "lbl_dd_mm_yyyy".tr),
+                                    SizedBox(height: 14.v),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 2.h),
+                                        child: Text("lbl_blood_group".tr,
+                                            style: CustomTextStyles
+                                                .titleSmallGray600)),
+                                    SizedBox(height: 5.v),
+                                    Selector<EditFamilyProfileProvider,
+                                            EditProfileModel?>(
+                                        selector: (context, provider) =>
+                                            provider.editProfileModelObj,
+                                        builder: (context, editProfileModelObj,
+                                            child) {
+                                          return CustomDropDown(
+                                              hintText: "lbl_a".tr,
+                                              items: editProfileModelObj
+                                                      ?.dropdownItemList2 ??
+                                                  [],
+                                              onChanged: (value) {
+                                                context
+                                                    .read<
+                                                        EditFamilyProfileProvider>()
+                                                    .onSelected2(value);
+                                              });
+                                        }),
+                                    SizedBox(height: 14.v),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 2.h),
+                                        child: Text("lbl_date_of_baptism".tr,
+                                            style: CustomTextStyles
+                                                .titleSmallGray600)),
+                                    SizedBox(height: 5.v),
+                                    _buildEight(context,
+                                        dDMMYYYY: "lbl_dd_mm_yyyy".tr),
+                                    SizedBox(height: 14.v),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 2.h),
+                                        child: Text(
+                                            "msg_relationship_status".tr,
+                                            style: CustomTextStyles
+                                                .titleSmallGray600)),
+                                    SizedBox(height: 5.v),
+                                    Selector<EditFamilyProfileProvider,
+                                            EditProfileModel?>(
+                                        selector: (context, provider) =>
+                                            provider.editProfileModelObj,
+                                        builder: (context, editProfileModelObj,
+                                            child) {
+                                          return CustomDropDown(
+                                              hintText: "lbl_married".tr,
+                                              items: editProfileModelObj
+                                                      ?.dropdownItemList3 ??
+                                                  [],
+                                              onChanged: (value) {
+                                                context
+                                                    .read<
+                                                        EditFamilyProfileProvider>()
+                                                    .onSelected3(value);
+                                              });
+                                        }),
+                                    SizedBox(height: 14.v),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 2.h),
+                                        child: Text("msg_relationship_with".tr,
+                                            style: CustomTextStyles
+                                                .titleSmallGray600)),
+                                    SizedBox(height: 5.v),
+                                    Selector<EditFamilyProfileProvider,
+                                            TextEditingController?>(
+                                        selector: (context, provider) =>
+                                            provider.cindiyaJacobController,
+                                        builder: (context,
+                                            cindiyaJacobController, child) {
+                                          return CustomTextFormField(
+                                              controller:
+                                                  cindiyaJacobController,
+                                              hintText: "lbl_cindiya_jacob".tr,
+                                              textInputAction:
+                                                  TextInputAction.done);
+                                        }),
+                                    SizedBox(height: 21.v),
+                                    Row(children: [
+                                      CustomImageView(
+                                          imagePath: ImageConstant.imgMaximize,
+                                          height: 21.adaptSize,
+                                          width: 21.adaptSize,
+                                          margin: EdgeInsets.only(bottom: 3.v)),
+                                      Padding(
+                                          padding: EdgeInsets.only(left: 9.h),
+                                          child: Text(
+                                              "msg_edit_family_members".tr,
+                                              style: CustomTextStyles
+                                                  .titleSmallIndigoA700))
+                                    ]),
+                                    SizedBox(height: 21.v),
+                                  ])))
+                    ])))));
   }
 
   /// Section Widget
@@ -239,7 +229,7 @@ class EditProfileScreenState extends State<EditFamilyProfileScreen> {
     return CustomAppBar(
         height: 54.v,
         leadingWidth: 51.h,
-        leading: AppbarLeadingIconbuttonOne(
+        leading: AppbarLeadingIconbutton(
             imagePath: ImageConstant.imgArrowLeft,
             margin: EdgeInsets.only(left: 25.h, top: 13.v, bottom: 15.v),
             onTap: () {

@@ -78,6 +78,9 @@ class ImageConstant {
 
   static String imgMenu = '$imagePath/img_menu.svg';
 
+  static String qr_code = '$imagePath/qr_code.svg';
+  static String qr_png = '$imagePath/qr_png.png';
+
   static String imgTeaching = '$imagePath/img_teaching.svg';
 
   static String imgUser = '$imagePath/img_user.svg';
@@ -163,8 +166,10 @@ class ImageConstant {
   static String imgEllipse2851 = '$imagePath/img_ellipse_2851.png';
 
   static String imgImage = '$imagePath/img_image.png';
-  static String pdf_icon = '$imagePath/document-pdf 1';
+  static String pdf_icon = '$imagePath/document-pdf 1.svg';
+  static String oval_download = '$imagePath/oval_download.svg';
   static String oval_copy = '$imagePath/oval_copy.png';
+  static String download_icon = '$imagePath/download_icon.svg';
 
   static String mother = '$imagePath/mother.svg';
   static String son = '$imagePath/son.svg';
@@ -172,4 +177,9 @@ class ImageConstant {
   static String daughter = '$imagePath/daughter.svg';
   static String grand_son = '$imagePath/grand_son.svg';
   static String daughter_in_law = '$imagePath/daughter_in_law.svg';
+  static String daily_schedule = '$imagePath/calendar-days-svgrepo-com.svg';
+  static String events = '$imagePath/events-svgrepo-com.svg';
+  static String birthday = '$imagePath/birthday-cupcake-svgrepo-com.svg';
+  static String obituary = '$imagePath/outdoor-trip-schedule-svgrepo-com.svg';
+  static String priest = '$imagePath/priest-1-svgrepo-com.svg';
 }

@@ -1,15 +1,12 @@
 class BulletinModel {
   String? status;
-  Metadata? metadata;
   List<Data>? data;
 
-  BulletinModel({this.status, this.metadata, this.data});
+  BulletinModel({this.status, this.data});
 
   BulletinModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    metadata = json['metadata'] != null
-        ? new Metadata.fromJson(json['metadata'])
-        : null;
+
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -21,65 +18,9 @@ class BulletinModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    if (this.metadata != null) {
-      data['metadata'] = this.metadata!.toJson();
-    }
+
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Metadata {
-  EventsMetadata? eventsMetadata;
-  EventsMetadata? newsAnnouncementsMetadata;
-  EventsMetadata? notificationsMetadata;
-  EventsMetadata? vicarMessagesMetadata;
-  EventsMetadata? obituariesMetadata;
-
-  Metadata(
-      {this.eventsMetadata,
-      this.newsAnnouncementsMetadata,
-      this.notificationsMetadata,
-      this.vicarMessagesMetadata,
-      this.obituariesMetadata});
-
-  Metadata.fromJson(Map<String, dynamic> json) {
-    eventsMetadata = json['events_metadata'] != null
-        ? new EventsMetadata.fromJson(json['events_metadata'])
-        : null;
-    newsAnnouncementsMetadata = json['newsAnnouncements_metadata'] != null
-        ? new EventsMetadata.fromJson(json['newsAnnouncements_metadata'])
-        : null;
-    notificationsMetadata = json['notifications_metadata'] != null
-        ? new EventsMetadata.fromJson(json['notifications_metadata'])
-        : null;
-    vicarMessagesMetadata = json['VicarMessages_metadata'] != null
-        ? new EventsMetadata.fromJson(json['VicarMessages_metadata'])
-        : null;
-    obituariesMetadata = json['obituaries_metadata'] != null
-        ? new EventsMetadata.fromJson(json['obituaries_metadata'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.eventsMetadata != null) {
-      data['events_metadata'] = this.eventsMetadata!.toJson();
-    }
-    if (this.newsAnnouncementsMetadata != null) {
-      data['newsAnnouncements_metadata'] =
-          this.newsAnnouncementsMetadata!.toJson();
-    }
-    if (this.notificationsMetadata != null) {
-      data['notifications_metadata'] = this.notificationsMetadata!.toJson();
-    }
-    if (this.vicarMessagesMetadata != null) {
-      data['VicarMessages_metadata'] = this.vicarMessagesMetadata!.toJson();
-    }
-    if (this.obituariesMetadata != null) {
-      data['obituaries_metadata'] = this.obituariesMetadata!.toJson();
     }
     return data;
   }
@@ -163,7 +104,7 @@ class Lists {
   String? subItem;
   String? details;
   String? image;
-  // String? type;
+  dynamic type;
   // Null? groupOrgId;
   // String? groupOrganizationName;
 
@@ -174,7 +115,7 @@ class Lists {
     this.subItem,
     this.details,
     this.image,
-    // this.type,
+    this.type,
     // this.groupOrgId,
     // this.groupOrganizationName
   });
@@ -186,7 +127,7 @@ class Lists {
     subItem = json['sub_item'];
     details = json['details'];
     image = json['image'];
-    // type = json['type'];
+    type = json['type_value'];
     // groupOrgId = json['group_org_id'];
     // groupOrganizationName = json['group_organization_name'];
   }
@@ -199,7 +140,7 @@ class Lists {
     data['sub_item'] = this.subItem;
     data['details'] = this.details;
     data['image'] = this.image;
-    // data['type'] = this.type;
+    data['type_value'] = this.type;
     // data['group_org_id'] = this.groupOrgId;
     // data['group_organization_name'] = this.groupOrganizationName;
     return data;

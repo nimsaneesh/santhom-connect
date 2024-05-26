@@ -1,15 +1,13 @@
 class DirectoryModel {
   String? status;
-  Metadata? metadata;
+
   List<Data>? data;
 
-  DirectoryModel({this.status, this.metadata, this.data});
+  DirectoryModel({this.status, this.data});
 
   DirectoryModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    metadata = json['metadata'] != null
-        ? new Metadata.fromJson(json['metadata'])
-        : null;
+
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -21,9 +19,7 @@ class DirectoryModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    if (this.metadata != null) {
-      data['metadata'] = this.metadata!.toJson();
-    }
+
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -194,35 +190,108 @@ class Data {
 
 class Lists {
   int? id;
-  String? item;
-  String? image;
-  String? subItem;
-  String? type;
+  dynamic? item;
+  dynamic? subItem;
+  dynamic? image;
+  dynamic? type;
+  dynamic? familyHeadName;
+  dynamic? prayerGroupName;
+  dynamic? familyHeadImage;
+  dynamic? familyId;
+  dynamic? familyName;
+  dynamic? bloodGroupName;
+  dynamic? maritalStatusName;
+  dynamic? relationshipName;
+  dynamic obituaryId;
 
-  Lists({
-    this.id,
-    this.item,
-    this.image,
-    this.subItem,
-    this.type,
-  });
+  Lists(
+      {this.id,
+      this.item,
+      this.subItem,
+      this.image,
+      this.type,
+      this.familyHeadName,
+      this.prayerGroupName,
+      this.familyHeadImage,
+      this.familyId,
+      this.familyName,
+      this.bloodGroupName,
+      this.maritalStatusName,
+      this.relationshipName,
+      this.obituaryId});
 
   Lists.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     item = json['item'];
-    image = json['image'];
     subItem = json['sub_item'];
+    image = json['image'];
     type = json['type'];
+    familyHeadName = json['family_head_name'];
+    prayerGroupName = json['prayer_group_name'];
+    familyHeadImage = json['family_head_image'];
+    familyId = json['family_id'];
+    familyName = json['family_name'];
+    bloodGroupName = json['blood_group_name'];
+    maritalStatusName = json['marital_status_name'];
+    relationshipName = json['relationship_name'];
+    obituaryId = json['obituary_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['item'] = this.item;
-    data['image'] = this.image;
     data['sub_item'] = this.subItem;
+    data['image'] = this.image;
     data['type'] = this.type;
-
+    data['family_head_name'] = this.familyHeadName;
+    data['prayer_group_name'] = this.prayerGroupName;
+    data['family_head_image'] = this.familyHeadImage;
+    data['family_id'] = this.familyId;
+    data['family_name'] = this.familyName;
+    data['blood_group_name'] = this.bloodGroupName;
+    data['marital_status_name'] = this.maritalStatusName;
+    data['relationship_name'] = this.relationshipName;
+    data['obituary_id'] = this.obituaryId;
     return data;
   }
 }
+//   }
+// class Lists {
+//   int? id;
+//   String? item;
+//   String? image;
+//   String? subItem;
+//   String? type;
+//   String? link;
+
+//   Lists({
+//     this.id,
+//     this.item,
+//     this.image,
+//     this.subItem,
+//     this.type,
+//     this.link,
+//   });
+
+//   Lists.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     item = json['item'];
+//     image = json['image'];
+//     subItem = json['sub_item'];
+//     type = json['type'];
+//     link = json['link'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['item'] = this.item;
+//     data['image'] = this.image;
+//     data['sub_item'] = this.subItem;
+//     data['type'] = this.type;
+//     data['link'] = this.link;
+
+//     return data;
+//   }
+// }

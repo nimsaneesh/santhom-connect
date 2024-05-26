@@ -45,55 +45,53 @@ class VikarsMessageScreenState extends State<VikarsMessageScreen>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildAppBar(context),
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            SizedBox(
-              width: double.maxFinite,
-              child: Consumer<VikarsMessageProvider>(
-                  builder: (context, provider, child) {
-                return Column(
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          SizedBox(
+            width: double.maxFinite,
+            child: Consumer<VikarsMessageProvider>(
+                builder: (context, provider, child) {
+              return SingleChildScrollView(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 21.v),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 24.h,
-                          right: 21.h,
-                        ),
-                        child: CustomSearchView(
-                          controller: provider.searchController,
-                          hintText: "lbl_search_here".tr,
-                          onChanged: (value) => {provider.getVikarsMessage()},
-                          alignment: Alignment.center,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 21.v),
+                    // SizedBox(height: 21.v),
+                    // Align(
+                    //   alignment: Alignment.center,
+                    //   child: Padding(
+                    //     padding: EdgeInsets.only(
+                    //       left: 24.h,
+                    //       right: 21.h,
+                    //     ),
+                    //     child: CustomSearchView(
+                    //       controller: provider.searchController,
+                    //       hintText: "lbl_search_here".tr,
+                    //       onChanged: (value) => {provider.getVikarsMessage()},
+                    //       alignment: Alignment.center,
+                    //     ),
+                    //   ),
+                    // ),
                     Padding(
                       padding: EdgeInsets.only(left: 16, right: 16),
                       child: _buildMonday(context, provider.respo.data),
                     )
                   ],
-                );
-              }),
-            ),
-            SizedBox(height: 21.v),
-            Selector<VikarsMessageProvider, bool>(
-              selector: (context, provider) => provider.isLoading,
-              builder: (context, value, child) {
-                return value ? CircularLoader() : SizedBox();
-              },
-            ),
-          ],
-        ),
-        // bottomNavigationBar: _buildBottomBar(context),
+                ),
+              );
+            }),
+          ),
+          Selector<VikarsMessageProvider, bool>(
+            selector: (context, provider) => provider.isLoading,
+            builder: (context, value, child) {
+              return value ? CircularLoader() : SizedBox();
+            },
+          ),
+        ],
       ),
+      // bottomNavigationBar: _buildBottomBar(context),
     );
   }
 }
@@ -104,10 +102,10 @@ Widget _buildMonday(BuildContext context, List<VikarsData>? data) {
   }
   return ListView.builder(
     shrinkWrap: true,
+    itemCount: data.length,
     physics: NeverScrollableScrollPhysics(),
-    itemCount: data?.length,
     itemBuilder: (context, index) {
-      VikarsData item = data![index];
+      VikarsData item = data[index];
       return VikarsItemWidget(item);
     },
   );
@@ -132,7 +130,6 @@ PreferredSizeWidget _buildAppBar(BuildContext context) {
         //     margin: EdgeInsets.only(left: 22.h, top: 17.v, right: 16.h)),
         AppbarTrailingImage(
             imagePath: ImageConstant.imgSend,
-            
             margin: EdgeInsets.only(left: 5.h, top: 17.v, right: 38.h))
       ]);
 }

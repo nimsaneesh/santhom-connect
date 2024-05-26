@@ -42,287 +42,344 @@ class ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: _buildAppBar(context),
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Consumer<ProfileProvider>(
-                    builder: (context, provider, child) {
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 5.v),
-                    padding: EdgeInsets.symmetric(horizontal: 22.h),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 14.v),
-                        _buildOctober(context, provider),
-                        SizedBox(height: 18.v),
-                        Container(
-                          margin: EdgeInsets.only(left: 1.h),
-                          padding: EdgeInsets.symmetric(vertical: 14.v),
-                          decoration: AppDecoration.fillWhiteA.copyWith(
-                            borderRadius: BorderRadiusStyle.roundedBorder16,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(height: 6.v),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 25.h,
-                                  right: 15.h,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                        top: 5.v,
-                                        bottom: 2.v,
-                                      ),
-                                      child: Text(
-                                        "msg_family_information".tr,
-                                        style: CustomTextStyles
-                                            .titleMediumBlack900,
-                                      ),
-                                    ),
-                                    CustomElevatedButton(
-                                      onPressed: () => {
-                                        NavigatorService.pushNamed(
-                                            AppRoutes.editProfileScreen,
-                                            arguments:
-                                                provider.family_respo.data)
-                                      },
-                                      width: 117.h,
-                                      height: 40.h,
-                                      text: "lbl_edit_profile".tr,
-                                      rightIcon: Container(
-                                        margin: EdgeInsets.only(left: 2.h),
-                                        child: CustomImageView(
-                                          imagePath:
-                                              ImageConstant.imgClockWhiteA700,
-                                          height: 18.adaptSize,
-                                          width: 18.adaptSize,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: _buildAppBar(context),
+      body: SizedBox(
+        width: SizeUtils.width,
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Consumer<ProfileProvider>(
+                  builder: (context, provider, child) {
+                return Container(
+                  margin: EdgeInsets.only(bottom: 5.v),
+                  padding: EdgeInsets.symmetric(horizontal: 22.h),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 14.v),
+                      _buildOctober(context, provider),
+                      SizedBox(height: 18.v),
+                      Container(
+                        margin: EdgeInsets.only(left: 1.h),
+                        padding: EdgeInsets.symmetric(vertical: 14.v),
+                        decoration: AppDecoration.fillWhiteA.copyWith(
+                          borderRadius: BorderRadiusStyle.roundedBorder16,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(height: 6.v),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 25.h,
+                                right: 15.h,
                               ),
-                              SizedBox(height: 9.v),
-                              Divider(),
-                              SizedBox(height: 8.v),
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: 25.h),
-                                    child: _buildListView(
-                                        provider.family_respo.data?.memebers),
-                                  )),
-                              SizedBox(height: 12.v),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 5.v,
+                                      bottom: 2.v,
+                                    ),
+                                    child: Text(
+                                      "msg_family_information".tr,
+                                      style:
+                                          CustomTextStyles.titleMediumBlack900,
+                                    ),
+                                  ),
+                                  CustomElevatedButton(
+                                    onPressed: () => {
+                                      NavigatorService.pushNamed(
+                                              AppRoutes.editProfileScreen,
+                                              arguments:
+                                                  provider.family_respo.data)
+                                          .then(
+                                              (value) => provider.getMyFamily())
+                                    },
+                                    width: 117.h,
+                                    height: 40.h,
+                                    text: "lbl_edit_profile".tr,
+                                    rightIcon: Container(
+                                      margin: EdgeInsets.only(left: 2.h),
+                                      child: CustomImageView(
+                                        imagePath:
+                                            ImageConstant.imgClockWhiteA700,
+                                        height: 18.adaptSize,
+                                        width: 18.adaptSize,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 9.v),
+                            Divider(),
+                            SizedBox(height: 8.v),
+                            Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 25.h, right: 25.h),
+                                  child: _buildListView(
+                                      provider.family_respo.data?.members),
+                                )),
+                            SizedBox(height: 12.v),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 25.h),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomImageView(
+                                    imagePath: ImageConstant.imgAddress1,
+                                    height: 18.adaptSize,
+                                    width: 18.adaptSize,
+                                    margin: EdgeInsets.only(bottom: 22.v),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      width: 280.h,
+                                      margin: EdgeInsets.only(left: 16.h),
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: "lbl_address".tr,
+                                              style: CustomTextStyles
+                                                  .bodyMediumff767676,
+                                            ),
+                                            TextSpan(
+                                              text: provider.family_respo.data
+                                                      ?.family?.address1 ??
+                                                  "",
+                                              style: theme.textTheme.bodyMedium,
+                                            ),
+                                          ],
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            SizedBox(height: 4.v),
+                            Divider(
+                              indent: 25.h,
+                              endIndent: 27.h,
+                            ),
+                            Divider(
+                              indent: 25.h,
+                              endIndent: 27.h,
+                            ),
+                            SizedBox(height: 12.v),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 25.h),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomImageView(
+                                    imagePath: ImageConstant.imgAddress1,
+                                    height: 18.adaptSize,
+                                    width: 18.adaptSize,
+                                    margin: EdgeInsets.only(bottom: 22.v),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      width: 280.h,
+                                      margin: EdgeInsets.only(left: 16.h),
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: "Address 2 :".tr,
+                                              style: CustomTextStyles
+                                                  .bodyMediumff767676,
+                                            ),
+                                            TextSpan(
+                                              text: provider.family_respo.data
+                                                      ?.family?.address2 ??
+                                                  "",
+                                              style: theme.textTheme.bodyMedium,
+                                            ),
+                                          ],
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            // SizedBox(height: 4.v),
+                            Divider(
+                              indent: 25.h,
+                              endIndent: 27.h,
+                            ),
+                            Divider(
+                              indent: 25.h,
+                              endIndent: 27.h,
+                            ),
+                            SizedBox(height: 9.v),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 25.h),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomImageView(
-                                      imagePath: ImageConstant.imgAddress1,
-                                      height: 18.adaptSize,
-                                      width: 18.adaptSize,
-                                      margin: EdgeInsets.only(bottom: 22.v),
+                                      imagePath: ImageConstant.imgChristianity,
+                                      height: 20.adaptSize,
+                                      width: 20.adaptSize,
+                                      margin: EdgeInsets.only(bottom: 2.v),
                                     ),
-                                    Expanded(
-                                      child: Container(
-                                        width: 280.h,
-                                        margin: EdgeInsets.only(left: 16.h),
-                                        child: RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              TextSpan(
-                                                text: "lbl_address".tr,
-                                                style: CustomTextStyles
-                                                    .bodyMediumff767676,
-                                              ),
-                                              TextSpan(
-                                                text: provider.family_respo.data
-                                                        ?.family?.address1 ??
-                                                    "",
-                                                style:
-                                                    theme.textTheme.bodyMedium,
-                                              ),
-                                            ],
-                                          ),
-                                          textAlign: TextAlign.left,
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        left: 15.h,
+                                        top: 5.v,
+                                      ),
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: "Prayer Group :".tr,
+                                              style: CustomTextStyles
+                                                  .bodyMediumff767676,
+                                            ),
+                                            TextSpan(
+                                              text: provider
+                                                      .family_respo
+                                                      .data
+                                                      ?.family
+                                                      ?.prayerGroupName ??
+                                                  "",
+                                              style: theme.textTheme.bodyMedium,
+                                            ),
+                                          ],
                                         ),
+                                        textAlign: TextAlign.left,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 4.v),
-                              Divider(
-                                indent: 25.h,
-                                endIndent: 27.h,
-                              ),
-                              Divider(
-                                indent: 25.h,
-                                endIndent: 27.h,
-                              ),
-                              SizedBox(height: 9.v),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 25.h),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomImageView(
-                                        imagePath:
-                                            ImageConstant.imgChristianity,
-                                        height: 20.adaptSize,
-                                        width: 20.adaptSize,
-                                        margin: EdgeInsets.only(bottom: 2.v),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          left: 15.h,
-                                          top: 5.v,
+                            ),
+                            SizedBox(height: 5.v),
+                            Divider(
+                              indent: 25.h,
+                              endIndent: 27.h,
+                            ),
+                            Divider(
+                              indent: 25.h,
+                              endIndent: 27.h,
+                            ),
+                            SizedBox(height: 12.v),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 25.h),
+                                child: Row(
+                                  children: [
+                                    CustomImageView(
+                                      imagePath: ImageConstant.homeAddress,
+                                      height: 19.v,
+                                      width: 18.h,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 16.h),
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: "Post Office : ",
+                                              style: CustomTextStyles
+                                                  .bodyMediumff767676,
+                                            ),
+                                            TextSpan(
+                                              text: provider.family_respo.data
+                                                      ?.family?.postOffice ??
+                                                  "",
+                                              style: theme.textTheme.bodyMedium,
+                                            ),
+                                          ],
                                         ),
-                                        child: RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              TextSpan(
-                                                text: "lbl_prayer_group".tr,
-                                                style: CustomTextStyles
-                                                    .bodyMediumff767676,
-                                              ),
-                                              TextSpan(
-                                                text: provider
-                                                        .family_respo
-                                                        .data
-                                                        ?.family
-                                                        ?.prayerGroupName ??
-                                                    "",
-                                                style:
-                                                    theme.textTheme.bodyMedium,
-                                              ),
-                                            ],
-                                          ),
-                                          textAlign: TextAlign.left,
-                                        ),
+                                        textAlign: TextAlign.left,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              SizedBox(height: 5.v),
-                              Divider(
-                                indent: 25.h,
-                                endIndent: 27.h,
-                              ),
-                              Divider(
-                                indent: 25.h,
-                                endIndent: 27.h,
-                              ),
-                              SizedBox(height: 12.v),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 25.h),
-                                  child: Row(
-                                    children: [
-                                      CustomImageView(
-                                        imagePath: ImageConstant.homeAddress,
-                                        height: 19.v,
-                                        width: 18.h,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 16.h),
-                                        child: RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              TextSpan(
-                                                text: "location : ",
-                                                style: CustomTextStyles
-                                                    .bodyMediumff767676,
-                                              ),
-                                              TextSpan(
-                                                text: provider.family_respo.data
-                                                        ?.family?.mapLocation ??
-                                                    "",
-                                                style:
-                                                    theme.textTheme.bodyMedium,
-                                              ),
-                                            ],
-                                          ),
-                                          textAlign: TextAlign.left,
+                            ),
+
+                            SizedBox(height: 12.v),
+                            Divider(
+                              indent: 25.h,
+                              endIndent: 27.h,
+                            ),
+                            Divider(
+                              indent: 25.h,
+                              endIndent: 27.h,
+                            ),
+                            SizedBox(height: 12.v),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 25.h),
+                                child: Row(
+                                  children: [
+                                    CustomImageView(
+                                      imagePath: ImageConstant.homeAddress,
+                                      height: 19.v,
+                                      width: 18.h,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 16.h),
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: "Pin Code".tr,
+                                              style: CustomTextStyles
+                                                  .bodyMediumff767676,
+                                            ),
+                                            TextSpan(
+                                              text: provider.family_respo.data
+                                                      ?.family?.pincode ??
+                                                  "",
+                                              style: theme.textTheme.bodyMedium,
+                                            ),
+                                          ],
                                         ),
+                                        textAlign: TextAlign.left,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              SizedBox(height: 12.v),
-                              Divider(
-                                indent: 25.h,
-                                endIndent: 27.h,
-                              ),
-                              Divider(
-                                indent: 25.h,
-                                endIndent: 27.h,
-                              ),
-                              SizedBox(height: 12.v),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 25.h),
-                                  child: Row(
-                                    children: [
-                                      CustomImageView(
-                                        imagePath: ImageConstant.imgTelephone,
-                                        height: 19.v,
-                                        width: 18.h,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 16.h),
-                                        child: RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              TextSpan(
-                                                text: "lbl_mobile_number".tr,
-                                                style: CustomTextStyles
-                                                    .bodyMediumff767676,
-                                              ),
-                                              TextSpan(
-                                                text: provider.family_respo.data
-                                                        ?.family?.address2 ??
-                                                    "",
-                                                style:
-                                                    theme.textTheme.bodyMedium,
-                                              ),
-                                            ],
-                                          ),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 18.v),
-                              Divider(),
-                              SizedBox(height: 13.v),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 25.h),
+                            ),
+                            SizedBox(height: 18.v),
+                            Divider(),
+                            SizedBox(height: 13.v),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 25.h),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    NavigatorService.pushNamed(
+                                            AppRoutes.addMemberScreen,
+                                            arguments:
+                                                provider.family_respo.data)
+                                        .then(
+                                            (value) => provider.getMyFamily());
+                                  },
                                   child: Row(
                                     children: [
                                       CustomImageView(
@@ -346,22 +403,22 @@ class ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                }),
-              ),
-              Selector<ProfileProvider, bool>(
-                selector: (context, provider) => provider.isLoading,
-                builder: (context, value, child) {
-                  return value ? CircularLoader() : SizedBox();
-                },
-              ),
-            ],
-          ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ),
+            Selector<ProfileProvider, bool>(
+              selector: (context, provider) => provider.isLoading,
+              builder: (context, value, child) {
+                return value ? CircularLoader() : SizedBox();
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -372,14 +429,16 @@ class ProfilePageState extends State<ProfilePage> {
     return CustomAppBar(
       title: AppbarTitle(
         text: "lbl_my_profile".tr,
-        margin: EdgeInsets.only(left: 25.h, top: 15.v),
+        margin: EdgeInsets.only(left: 25.h),
       ),
       actions: [
         AppbarTrailingImage(
           imagePath: ImageConstant.imgClock,
-          margin: EdgeInsets.fromLTRB(0.h, 25.h, 15.h, 15.v),
+          margin: EdgeInsets.fromLTRB(0.h, 15.h, 15.h, 15.v),
           text: "Logout",
-          // onTap: Provider.of<ProfileProvider>(context, listen: false).logout(),
+          onTap: () {
+            Provider.of<ProfileProvider>(context, listen: false).logout();
+          },
         ),
       ],
     );
@@ -418,7 +477,7 @@ class ProfilePageState extends State<ProfilePage> {
               borderRadius: BorderRadiusStyle.circleBorder43,
             ),
             child: CustomImageView(
-              imagePath: ImageConstant.imgEllipse2851,
+              imagePath: provider.family_respo.data?.family?.familyHeadImage,
               height: 76.adaptSize,
               width: 76.adaptSize,
               radius: BorderRadius.circular(
@@ -477,50 +536,6 @@ class ProfilePageState extends State<ProfilePage> {
   }
 }
 
-// Widget _buildListView(List<Memebers>? memebers) {
-//   return ListView.builder(
-//     shrinkWrap: true,
-//     physics: NeverScrollableScrollPhysics(),
-//     itemCount: memebers?.length, // Example itemCount
-//     itemBuilder: (context, index) {
-//       Memebers? model = memebers?[index];
-//       return Row(
-//         children: [
-//           CustomImageView(
-//             imagePath: ImageConstant.imgClockBlack900,
-//             height: 21.adaptSize,
-//             width: 21.adaptSize,
-//             margin: EdgeInsets.only(bottom: 3.v),
-//           ),
-//           Padding(
-//             padding: EdgeInsets.only(
-//               left: 15.h,
-//               top: 4.v,
-//             ),
-//             child: RichText(
-//               text: TextSpan(
-//                 children: [
-//                   TextSpan(
-//                     text: model?.name ?? "",
-//                     style: CustomTextStyles.titleSmallff1f6291,
-//                   ),
-//                   TextSpan(
-//                     text: model?.relationshipName ?? "",
-//                     style: theme.textTheme.bodyMedium,
-//                   ),
-//                 ],
-//               ),
-//               textAlign: TextAlign.left,
-//             ),
-//           ),
-//         ],
-//       );
-
-//       // return Text(model?.relationshipName ?? "");
-//     },
-//   );
-// }
-
 Widget _buildListView(List<Memebers>? memebers) {
   List<Widget> rows = [];
 
@@ -530,36 +545,47 @@ Widget _buildListView(List<Memebers>? memebers) {
       rows.add(
         Column(
           children: [
-            Row(
-              children: [
-                CustomImageView(
-                  imagePath: ImageConstant.imgNavProfile,
-                  height: 21.adaptSize,
-                  width: 21.adaptSize,
-                  margin: EdgeInsets.only(bottom: 3.v),
+            GestureDetector(
+              onTap: () {
+                NavigatorService.pushNamed(AppRoutes.directoryProfileScreen,
+                    arguments: model.id.toString());
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 8.0,
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: 15.h,
-                    top: 4.v,
-                  ),
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: model.name ?? "",
-                          style: CustomTextStyles.titleSmallff1f6291,
-                        ),
-                        TextSpan(
-                          text: model.relationshipName ?? "",
-                          style: theme.textTheme.bodyMedium,
-                        ),
-                      ],
+                child: Row(
+                  children: [
+                    CustomImageView(
+                      imagePath: ImageConstant.imgNavProfile,
+                      height: 21.adaptSize,
+                      width: 21.adaptSize,
+                      margin: EdgeInsets.only(bottom: 3.v),
                     ),
-                    textAlign: TextAlign.left,
-                  ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 15.h,
+                        top: 4.v,
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            model.name ?? "",
+                            style: CustomTextStyles.titleSmallff1f6291,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            model.relationshipName ?? "",
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
             SizedBox(height: 7.v),
             Divider(),

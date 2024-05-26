@@ -19,10 +19,7 @@ class VikarsItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (() => {
-            NavigatorService.pushNamed(
-              AppRoutes.vicarsScreen,
-              arguments: item
-            )
+            NavigatorService.pushNamed(AppRoutes.vicarsScreen, arguments: item)
           }),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

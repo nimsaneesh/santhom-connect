@@ -8,12 +8,13 @@ class AppbarSubtitle extends StatelessWidget {
     required this.text,
     this.margin,
     this.onTap,
+    this.style,
   }) : super(
           key: key,
         );
 
   String text;
-
+  TextStyle? style;
   EdgeInsetsGeometry? margin;
 
   Function? onTap;
@@ -28,7 +29,7 @@ class AppbarSubtitle extends StatelessWidget {
         padding: margin ?? EdgeInsets.zero,
         child: Text(
           text,
-          style: theme.textTheme.titleMedium,
+          style: style ?? theme.textTheme.titleMedium,
         ),
       ),
     );

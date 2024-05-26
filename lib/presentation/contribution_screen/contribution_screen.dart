@@ -1,3 +1,5 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:santhom_connect/presentation/contribution_screen/models/contribution_model.dart';
 import 'package:santhom_connect/widgets/custom_search_view.dart';
@@ -45,37 +47,76 @@ class ContributionScreenState extends State<ContributionScreen>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildAppBar(context),
-        resizeToAvoidBottomInset: false,
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Stack(
-            children: [
-              SizedBox(
-                width: double.maxFinite,
-                child: Consumer<ContributionProvider>(
-                    builder: (context, provider, child) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildMonday(context, provider.respo.data?.payments)
-                    ],
-                  );
-                }),
-              ),
-              Selector<ContributionProvider, bool>(
-                selector: (context, provider) => provider.isLoading,
-                builder: (context, value, child) {
-                  return value ? CircularLoader() : SizedBox();
-                },
-              ),
-            ],
-          ),
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      resizeToAvoidBottomInset: false,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Consumer<ContributionProvider>(
+                  builder: (context, provider, child) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: appTheme.whiteA70001,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(16),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: appTheme.black900.withOpacity(0.03),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: CustomImageView(
+                                height: 200,
+                                imagePath: ImageConstant.qr_png,
+                              ),
+                            ),
+                            Text(
+                              "Church QR Code",
+                              style: theme.textTheme.titleMedium,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 40.0, right: 40.0, top: 10, bottom: 20),
+                              child: AutoSizeText(
+                                "Make payments to this QR code for providing contributions",
+                                maxLines: 2,
+                                textAlign: TextAlign.center,
+                                style: theme.textTheme.titleSmall,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    _buildMonday(context, provider.respo.data?.payments)
+                  ],
+                );
+              }),
+            ),
+            Selector<ContributionProvider, bool>(
+              selector: (context, provider) => provider.isLoading,
+              builder: (context, value, child) {
+                return value ? CircularLoader() : SizedBox();
+              },
+            ),
+          ],
         ),
-        // bottomNavigationBar: _buildBottomBar(context),
       ),
+      // bottomNavigationBar: _buildBottomBar(context),
     );
   }
 }

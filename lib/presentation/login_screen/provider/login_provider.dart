@@ -35,6 +35,7 @@ class LoginProvider extends ChangeNotifier {
       loader(false);
       if (loginRepo.status == "success") {
         PrefUtils().setEmail(emailController.text);
+        PrefUtils().setfamilyCode(passwordController.text);
         NavigatorService.pushNamed(
           AppRoutes.verifyEmailScreen,
         );
@@ -49,15 +50,15 @@ class LoginProvider extends ChangeNotifier {
             fontSize: 16.0);
         loader(false);
       }
-    }else{
-         Fluttertoast.showToast(
-            msg: "Please enter email and Family Code",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+    } else {
+      Fluttertoast.showToast(
+          msg: "Please enter email and Family Code",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
   }
 

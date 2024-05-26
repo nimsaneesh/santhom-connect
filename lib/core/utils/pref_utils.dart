@@ -71,6 +71,18 @@ class PrefUtils {
     }
   }
 
+  Future<void> setfamilyCode(String value) {
+    return _sharedPreferences!.setString('familyCode', value);
+  }
+
+  String getfamilyode() {
+    try {
+      return _sharedPreferences!.getString('familyCode') ?? "";
+    } catch (e) {
+      return "";
+    }
+  }
+
   Future<void> setImage(String value) {
     return _sharedPreferences!.setString('image', value);
   }

@@ -1,14 +1,18 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:santhom_connect/core/app_export.dart';
+import 'package:santhom_connect/data/models/detail_model.dart';
 import 'package:santhom_connect/presentation/home_tab_container_page/models/updates_model.dart';
+import 'package:santhom_connect/utils/utils.dart';
 
 import 'widgets/fortyfive_item_widget.dart';
 
 // ignore_for_file: must_be_immutable
 class UpdatePage extends StatelessWidget {
   List<ItemList>? list;
-  UpdatePage(this.list);
+  String? category;
+  UpdatePage(this.list, this.category);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,11 @@ class UpdatePage extends StatelessWidget {
           if (model?.color == "True") {
             return dailyScheduleWidget(context, model);
           } else {
-            return eventWidget(context, model);
+            // if (model?.type == "True") {
+            //   return eventWidget(context, model, category);
+            // } else {
+              return eventOnlyWidget(context, model, category);
+            // }
           }
         },
       ),
@@ -43,15 +51,18 @@ class UpdatePage extends StatelessWidget {
 }
 
 Widget dailyScheduleWidget(BuildContext context, ItemList? model) {
+  DetailModel items = DetailModel(title: "Daily Schedule" ?? "", model: model);
+
   return InkWell(
     onTap: (() => {
-          NavigatorService.pushNamed(AppRoutes.updatesScreen, arguments: model)
+          NavigatorService.pushNamed(AppRoutes.updatesScreen, arguments: items)
         }),
     child: Container(
       padding: EdgeInsets.symmetric(
         horizontal: 10.h,
         vertical: 7.v,
       ),
+      margin: EdgeInsets.only(bottom: 4),
       decoration: AppDecoration.fillWhiteA.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder16,
         gradient: LinearGradient(
@@ -122,30 +133,112 @@ Widget dailyScheduleWidget(BuildContext context, ItemList? model) {
   );
 }
 
-Widget eventWidget(BuildContext context, ItemList? model) {
+Widget eventWidget(BuildContext context, ItemList? model, String? category) {
+  DetailModel items = DetailModel(title: category ?? "", model: model);
+
   return InkWell(
     onTap: (() => {
-          NavigatorService.pushNamed(AppRoutes.updatesScreen, arguments: model)
+          NavigatorService.pushNamed(AppRoutes.updatesScreen, arguments: items)
         }),
     child: Container(
-      height: 80,
+      height: 92,
+      margin: EdgeInsets.only(bottom: 4),
+      decoration: AppDecoration.fillWhiteA.copyWith(
+        borderRadius: BorderRadiusStyle.roundedBorder16,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        CustomImageView(
+                            imagePath: getImage(category),
+                            height: 10.v,
+                            width: 10.h,
+                            margin: EdgeInsets.only(bottom: 2.v)),
+                        Opacity(
+                          opacity: 0.9,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 9.h),
+                            child: Text(
+                              model?.type ?? "",
+                              style: CustomTextStyles.titleMediumGray14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 6.v),
+                    Text(
+                      model?.heading ?? "",
+                      style: CustomTextStyles.titleMediumBlackMed15,
+                    ),
+                    SizedBox(height: 4.v),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomImageView(
+                          imagePath: ImageConstant.oval_copy,
+                          height: 10.v,
+                          width: 10.h,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          model?.date ?? "",
+                          style:
+                              CustomTextStyles.titleMediumBluegray90002Medium,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget eventOnlyWidget(
+    BuildContext context, ItemList? model, String? category) {
+  DetailModel items = DetailModel(title: category ?? "", model: model);
+
+  return InkWell(
+    onTap: (() => {
+          NavigatorService.pushNamed(AppRoutes.updatesScreen, arguments: items)
+        }),
+    child: Container(
       padding: EdgeInsets.symmetric(
         horizontal: 10.h,
+        vertical: 7.v,
       ),
-      margin: EdgeInsets.only(bottom: 4),
+      margin: EdgeInsets.only(bottom: 5),
       decoration: AppDecoration.fillWhiteA.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder16,
       ),
       child: Row(
         children: [
-          CustomImageView(
-            imagePath: model?.image,
-            height: 70.v,
-            width: 72.h,
-            radius: BorderRadius.circular(
-              12.h,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(14),
+            child: CustomImageView(
+              imagePath: model?.image,
+              height: 70.v,
+              width: 72.h,
+              fit: BoxFit.fitHeight,
             ),
-            margin: EdgeInsets.symmetric(vertical: 3.v),
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -157,17 +250,12 @@ Widget eventWidget(BuildContext context, ItemList? model) {
               children: [
                 Row(
                   children: [
-                    Container(
-                      height: 9.adaptSize,
-                      width: 9.adaptSize,
-                      margin: EdgeInsets.only(
-                        top: 2.v,
-                        bottom: 6.v,
-                      ),
-                      decoration: BoxDecoration(
-                        color: appTheme.indigo300,
-                      ),
-                    ),
+                    CustomImageView(
+                        imagePath: ImageConstant.oval_download,
+                        height: 10.v,
+                        width: 10.h,
+                        color: getColor(model?.type),
+                        margin: EdgeInsets.only(bottom: 2.v)),
                     Opacity(
                       opacity: 0.9,
                       child: Padding(
@@ -183,11 +271,11 @@ Widget eventWidget(BuildContext context, ItemList? model) {
                       child: Padding(
                         padding: EdgeInsets.only(left: 8.h),
                         child: SizedBox(
-                          width: SizeUtils.width / 3,
-                          child: Text(
-                            model?.type ?? "",
-                            style: CustomTextStyles.bodySmallPoppinsIndigo300,
-                          ),
+                          width: SizeUtils.width / 3.5,
+                          child: AutoSizeText("#" + model!.type!.toString(),
+                              maxLines: 2,
+                              style: TextStyle(
+                                  color: getColor(model.type), fontSize: 10)),
                         ),
                       ),
                     ),
@@ -198,11 +286,14 @@ Widget eventWidget(BuildContext context, ItemList? model) {
                   model?.heading ?? "",
                   style: CustomTextStyles.titleMediumBluegray90002Medium,
                 ),
+                SizedBox(height: 4.v),
                 SizedBox(
                   width: SizeUtils.width - 170,
                   height: 30,
-                  child: Html(
-                    data: model?.subHeading ?? "",
+                  child: AutoSizeText(
+                    model?.subHeading ?? "",
+                    maxLines: 2,
+                    style: CustomTextStyles.bodyMediumManropeBluegray600_1,
                   ),
                 ),
               ],

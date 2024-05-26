@@ -13,8 +13,9 @@ import 'provider/home_provider.dart';
 // ignore_for_file: must_be_immutable
 class BulletinPage extends StatelessWidget {
   List<Lists>? list;
+  String? category;
 
-  BulletinPage(this.list);
+  BulletinPage(this.list, this.category);
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +39,7 @@ class BulletinPage extends StatelessWidget {
         itemCount: itemCount,
         itemBuilder: (context, index) {
           Lists? model = list?[index];
-          return FortyfiveItemWidget(
-            model,
-          );
+          return FortyfiveItemWidget(model, category ?? "");
         },
       ),
     );

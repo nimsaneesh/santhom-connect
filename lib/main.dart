@@ -22,17 +22,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   statusBarColor: Color.fromARGB(255, 234, 234, 245), // Status bar color
-    // ));
     return Sizer(
       builder: (context, orientation, deviceType) {
         return ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
           child: Consumer<ThemeProvider>(
             builder: (context, provider, child) {
+              double textScaleFactor = 0.88;
               return MaterialApp(
-                
                 theme: theme,
                 title: 'santhom_connect',
                 navigatorKey: NavigatorService.navigatorKey,
@@ -49,6 +46,12 @@ class MyApp extends StatelessWidget {
                     '',
                   ),
                 ],
+                builder: (context, child) {
+                  return MediaQuery(
+                      data: MediaQuery.of(context)
+                          .copyWith(textScaleFactor: textScaleFactor),
+                      child: child!);
+                },
                 initialRoute: AppRoutes.initialRoute,
                 routes: AppRoutes.routes,
               );

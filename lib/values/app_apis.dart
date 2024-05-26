@@ -17,6 +17,10 @@ class AppAPIs {
   static const String update_family = 'update_family';
   static const String prayer_groups = 'prayer_groups';
   static const String vicar_messages = 'vicar_messages';
+  static const String organizations = 'organizations';
+  static const String vicars_list = 'vicars_list';
+  static const String organization_details = 'organization_details';
+  static const String vicar_details = 'vicar_details';
 
   static const String home1 = 'api/home1';
   static const String fileUpload = 'api/fileUpload';

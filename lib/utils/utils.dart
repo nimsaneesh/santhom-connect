@@ -3,6 +3,7 @@
 
 import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -55,8 +56,11 @@ final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
 final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
 
 getImage(relationshipName) {
+  print("relationshipName :" + relationshipName ?? "no image");
   var image = "null";
-  if (relationshipName == "Son") {
+  if (relationshipName == null) {
+    image = ImageConstant.imageNotFound;
+  } else if (relationshipName == "Son") {
     image = ImageConstant.son;
   } else if (relationshipName == "Daughter") {
     image = ImageConstant.daughter;
@@ -70,10 +74,35 @@ getImage(relationshipName) {
     image = ImageConstant.daughter;
   } else if (relationshipName == "Daughter-in-law") {
     image = ImageConstant.daughter_in_law;
-  } else if (relationshipName == "Daughter-in-law") {
-    image = ImageConstant.daughter_in_law;
+  } else if (relationshipName == "Daily Schedules") {
+    image = ImageConstant.daily_schedule;
+  } else if (relationshipName == "Events") {
+    image = ImageConstant.events;
+  } else if (relationshipName == "Birthdays") {
+    image = ImageConstant.birthday;
+  } else if (relationshipName == "Obituary") {
+    image = ImageConstant.obituary;
+  }else{
+    image = ImageConstant.imageNotFound;
   }
+  print("relationshipName :" + relationshipName);
   return image;
+}
+
+getColor(category) {
+  var color = Color(0XFF699DC5);
+  if (category == "News & Announcements") {
+    color = Color(0XFF00B383);
+  } else if (category == "Events") {
+    color = Color(0XFFFF9310);
+  } else if (category == "Downloads") {
+    color = Color(0XFF6D29F6);
+  } else if (category == "Vicar Messages") {
+    color = Color.fromARGB(255, 56, 147, 136);
+  } else if (category == "Notifications") {
+    color = Color.fromARGB(255, 134, 163, 71);
+  }
+  return color;
 }
 
 void shareToWhatsApp(String message, String url) {

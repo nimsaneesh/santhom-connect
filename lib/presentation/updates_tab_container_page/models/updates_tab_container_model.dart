@@ -1,24 +1,19 @@
 class UpdatesTabContainerModel {
   String? status;
-  Metadata? metadata;
-  Data? data;
+  UpdateData? data;
 
-  UpdatesTabContainerModel({this.status, this.metadata, this.data});
+  UpdatesTabContainerModel({this.status, this.data});
 
   UpdatesTabContainerModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    metadata = json['metadata'] != null
-        ? new Metadata.fromJson(json['metadata'])
-        : null;
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+
+    data = json['data'] != null ? new UpdateData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    if (this.metadata != null) {
-      data['metadata'] = this.metadata!.toJson();
-    }
+
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -26,135 +21,18 @@ class UpdatesTabContainerModel {
   }
 }
 
-class Metadata {
-  BirthdaysMetadata? birthdaysMetadata;
-  ObituaryMetadata? obituaryMetadata;
-
-  Metadata({this.birthdaysMetadata, this.obituaryMetadata});
-
-  Metadata.fromJson(Map<String, dynamic> json) {
-    birthdaysMetadata = json['birthdays_metadata'] != null
-        ? new BirthdaysMetadata.fromJson(json['birthdays_metadata'])
-        : null;
-    obituaryMetadata = json['obituary_metadata'] != null
-        ? new ObituaryMetadata.fromJson(json['obituary_metadata'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.birthdaysMetadata != null) {
-      data['birthdays_metadata'] = this.birthdaysMetadata!.toJson();
-    }
-    if (this.obituaryMetadata != null) {
-      data['obituary_metadata'] = this.obituaryMetadata!.toJson();
-    }
-    return data;
-  }
-}
-
-class BirthdaysMetadata {
-  int? total;
-  int? perPage;
-  int? currentPage;
-  int? lastPage;
-  Null? nextPageUrl;
-  Null? prevPageUrl;
-  int? from;
-  int? to;
-
-  BirthdaysMetadata(
-      {this.total,
-      this.perPage,
-      this.currentPage,
-      this.lastPage,
-      this.nextPageUrl,
-      this.prevPageUrl,
-      this.from,
-      this.to});
-
-  BirthdaysMetadata.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    perPage = json['per_page'];
-    currentPage = json['current_page'];
-    lastPage = json['last_page'];
-    nextPageUrl = json['next_page_url'];
-    prevPageUrl = json['prev_page_url'];
-    from = json['from'];
-    to = json['to'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['total'] = this.total;
-    data['per_page'] = this.perPage;
-    data['current_page'] = this.currentPage;
-    data['last_page'] = this.lastPage;
-    data['next_page_url'] = this.nextPageUrl;
-    data['prev_page_url'] = this.prevPageUrl;
-    data['from'] = this.from;
-    data['to'] = this.to;
-    return data;
-  }
-}
-
-class ObituaryMetadata {
-  int? total;
-  int? perPage;
-  int? currentPage;
-  int? lastPage;
-  String? nextPageUrl;
-  String? prevPageUrl;
-  Null? from;
-  Null? to;
-
-  ObituaryMetadata(
-      {this.total,
-      this.perPage,
-      this.currentPage,
-      this.lastPage,
-      this.nextPageUrl,
-      this.prevPageUrl,
-      this.from,
-      this.to});
-
-  ObituaryMetadata.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    perPage = json['per_page'];
-    currentPage = json['current_page'];
-    lastPage = json['last_page'];
-    nextPageUrl = json['next_page_url'];
-    prevPageUrl = json['prev_page_url'];
-    from = json['from'];
-    to = json['to'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['total'] = this.total;
-    data['per_page'] = this.perPage;
-    data['current_page'] = this.currentPage;
-    data['last_page'] = this.lastPage;
-    data['next_page_url'] = this.nextPageUrl;
-    data['prev_page_url'] = this.prevPageUrl;
-    data['from'] = this.from;
-    data['to'] = this.to;
-    return data;
-  }
-}
-
-class Data {
+class UpdateData {
   int? numberOfEvents;
-  List<Events>? events;
+  List<CalenderEvents>? events;
 
-  Data({this.numberOfEvents, this.events});
+  UpdateData({this.numberOfEvents, this.events});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  UpdateData.fromJson(Map<String, dynamic> json) {
     numberOfEvents = json['number_of_events'];
     if (json['events'] != null) {
-      events = <Events>[];
+      events = <CalenderEvents>[];
       json['events'].forEach((v) {
-        events!.add(new Events.fromJson(v));
+        events!.add(new CalenderEvents.fromJson(v));
       });
     }
   }
@@ -169,18 +47,18 @@ class Data {
   }
 }
 
-class Events {
-  String? type;
-  List<Lists>? list;
+class CalenderEvents {
+  dynamic type;
+  List<EventList>? list;
 
-  Events({this.type, this.list});
+  CalenderEvents({this.type, this.list});
 
-  Events.fromJson(Map<String, dynamic> json) {
+  CalenderEvents.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     if (json['list'] != null) {
-      list = <Lists>[];
+      list = <EventList>[];
       json['list'].forEach((v) {
-        list!.add(new Lists.fromJson(v));
+        list!.add(new EventList.fromJson(v));
       });
     }
   }
@@ -195,10 +73,12 @@ class Events {
   }
 }
 
-class Lists {
+class EventList {
   int? id;
-  String? name;
-  String? dob;
+  String? heading;
+  String? subHeading;
+  String? date;
+  String? image;
   int? familyId;
   String? familyName;
   String? familyHeadName;
@@ -208,10 +88,12 @@ class Lists {
   String? relationshipName;
   String? obituaryId;
 
-  Lists(
+  EventList(
       {this.id,
-      this.name,
-      this.dob,
+      this.heading,
+      this.subHeading,
+      this.date,
+      this.image,
       this.familyId,
       this.familyName,
       this.familyHeadName,
@@ -221,10 +103,12 @@ class Lists {
       this.relationshipName,
       this.obituaryId});
 
-  Lists.fromJson(Map<String, dynamic> json) {
+  EventList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
-    dob = json['dob'];
+    heading = json['heading'];
+    subHeading = json['sub_heading'];
+    date = json['date'];
+    image = json['image'];
     familyId = json['family_id'];
     familyName = json['family_name'];
     familyHeadName = json['family_head_name'];
@@ -238,8 +122,10 @@ class Lists {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['name'] = this.name;
-    data['dob'] = this.dob;
+    data['heading'] = this.heading;
+    data['sub_heading'] = this.subHeading;
+    data['date'] = this.date;
+    data['image'] = this.image;
     data['family_id'] = this.familyId;
     data['family_name'] = this.familyName;
     data['family_head_name'] = this.familyHeadName;

@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 class Constants {
   const Constants._();
   static const baseUrl = 'https://santhom.intellyze.in/api/';
+
+  static List<Color> colors = [
+    Color(0xFF735BF2), //0
+    Color(0xFFFBA43A),
+    Color(0xFF009540), //3
+    Color(0xFF009540), //3
+    Color(0xFF05bA53),
+    Color(0xFF05bA53),
+  ];
 }
 
 const defaultPadding = 16.0;

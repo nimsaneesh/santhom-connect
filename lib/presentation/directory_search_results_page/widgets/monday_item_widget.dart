@@ -28,6 +28,11 @@ class MondayItemWidget extends StatelessWidget {
                 NavigatorService.pushNamed(AppRoutes.directoryPrayerGroupScreen,
                     arguments: item.id.toString()),
               }
+            else if (item.type == "Organizations")
+              {
+                // NavigatorService.pushNamed(AppRoutes.organizationDetailScreen,
+                //     arguments: item.id),
+              }
             else
               {
                 NavigatorService.pushNamed(AppRoutes.directoryProfileScreen,
@@ -36,34 +41,53 @@ class MondayItemWidget extends StatelessWidget {
           }),
       child: Container(
         child: Padding(
-          padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
-          child: Row(
+          padding: EdgeInsets.only(left: 20, top: 0, bottom: 10),
+          child: Column(
             children: [
-              CustomImageView(
-                imagePath: item.image ?? ImageConstant.imageNotFound,
-                height: 33.adaptSize,
-                width: 33.adaptSize,
-                radius: BorderRadius.circular(
-                  16.h,
-                ),
-                margin: EdgeInsets.symmetric(vertical: 2.v),
+              Row(
+                children: [
+                  CustomImageView(
+                    imagePath: item.image ?? ImageConstant.imageNotFound,
+                    height: 40.adaptSize,
+                    width: 40.adaptSize,
+                    radius: BorderRadius.circular(
+                      50.h,
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 2.v),
+                    personName: item.item,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 17.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item.item ?? "",
+                          style: theme.textTheme.titleSmall,
+                        ),
+                        Text(
+                          item.subItem?.toString() ?? "",
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 17.h),
+                padding: const EdgeInsets.only(left: 50, right: 20),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      item.item ?? "",
-                      style: theme.textTheme.titleSmall,
-                    ),
-                    Text(
-                      item.subItem ?? "",
-                      style: theme.textTheme.bodySmall,
+                    Divider(
+                      height: 2,
+                      color: Colors.white,
                     ),
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ),

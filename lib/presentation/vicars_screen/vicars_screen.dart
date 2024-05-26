@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 import '../../core/app_export.dart';
@@ -36,77 +37,71 @@ class UpdatesScreenState extends State<VicarsScreen> {
     VikarsData? model =
         ModalRoute.of(context)!.settings.arguments as VikarsData;
 
-    return SafeArea(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: _buildAppBar(context, model),
-            body: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.symmetric(horizontal: 22.h, vertical: 4.v),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomImageView(
-                          imagePath: model.image ?? ImageConstant.imgImage,
-                          height: 325.v,
-                          width: 367.h,
-                          radius: BorderRadius.circular(8.h),
-                          margin: EdgeInsets.only(left: 3.h)),
-                      SizedBox(height: 26.v),
-                      Padding(
-                          padding: EdgeInsets.only(left: 3.h),
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    height: 9.adaptSize,
-                                    width: 9.adaptSize,
-                                    margin:
-                                        EdgeInsets.only(top: 3.v, bottom: 5.v),
-                                    decoration: BoxDecoration(
-                                        color: appTheme.orangeA400)),
-                                Opacity(
-                                    opacity: 0.9,
-                                    child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 8.h, top: 1.v),
-                                        child: Text(model.subject ?? "",
-                                            style: CustomTextStyles
-                                                .bodyMediumBluegray600ab))),
-                                Opacity(
-                                    opacity: 0.9,
-                                    child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 8.h, bottom: 1.v),
-                                        child: Text(model.messageBody ?? "",
-                                            style: CustomTextStyles
-                                                .bodyMediumOrangeA400)))
-                              ])),
-                      SizedBox(height: 8.v),
-                      Padding(
-                          padding: EdgeInsets.only(left: 2.h),
-                          child:
-                              Selector<VicarsProvider, TextEditingController?>(
-                                  selector: (context, provider) =>
-                                      provider.thirtyTwoController,
-                                  builder:
-                                      (context, thirtyTwoController, child) {
-                                    return Text(model.subject ?? "",
-                                        maxLines: 8,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: CustomTextStyles
-                                            .bodyMediumBluegray600
-                                            .copyWith(height: 1.57));
-                                  })),
-                      SizedBox(height: 11.v),
-                      Container(
-                          width: 359.h,
-                          margin: EdgeInsets.only(left: 3.h, right: 7.h),
-                          child: Html(
-                            data: model.messageBody ?? "",
-                          )),
-                      SizedBox(height: 5.v)
-                    ]))));
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: _buildAppBar(context, model),
+        body: Container(
+            width: double.maxFinite,
+            padding: EdgeInsets.symmetric(horizontal: 22.h, vertical: 4.v),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              CustomImageView(
+                  imagePath: model.image ?? ImageConstant.imgImage,
+                  height: 325.v,
+                  width: 367.h,
+                  radius: BorderRadius.circular(8.h),
+                  margin: EdgeInsets.only(left: 3.h)),
+              SizedBox(height: 26.v),
+              Padding(
+                  padding: EdgeInsets.only(left: 3.h),
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            height: 9.adaptSize,
+                            width: 9.adaptSize,
+                            margin: EdgeInsets.only(top: 3.v, bottom: 5.v),
+                            decoration:
+                                BoxDecoration(color: appTheme.orangeA400)),
+                        Opacity(
+                            opacity: 0.9,
+                            child: Padding(
+                                padding: EdgeInsets.only(left: 8.h, top: 1.v),
+                                child: AutoSizeText(model.subject ?? "",
+                                    maxLines: 2,
+                                    style: CustomTextStyles
+                                        .bodyMediumBluegray600ab))),
+                        Opacity(
+                            opacity: 0.9,
+                            child: Padding(
+                                padding:
+                                    EdgeInsets.only(left: 8.h, bottom: 1.v),
+                                child: Text("#Vicars Message",
+                                    style:
+                                        CustomTextStyles.bodyMediumOrangeA400)))
+                      ])),
+              SizedBox(height: 8.v),
+              Padding(
+                  padding: EdgeInsets.only(left: 2.h),
+                  child: Selector<VicarsProvider, TextEditingController?>(
+                      selector: (context, provider) =>
+                          provider.thirtyTwoController,
+                      builder: (context, thirtyTwoController, child) {
+                        return Text(model.subject ?? "",
+                            maxLines: 8,
+                            overflow: TextOverflow.ellipsis,
+                            style: CustomTextStyles.bodyMediumBluegray600
+                                .copyWith(height: 1.57));
+                      })),
+              SizedBox(height: 11.v),
+              Container(
+                  width: 359.h,
+                  margin: EdgeInsets.only(left: 3.h, right: 7.h),
+                  child: Html(
+                    data: model.messageBody ?? "",
+                  )),
+              SizedBox(height: 5.v)
+            ])));
   }
 
   /// Section Widget
@@ -126,6 +121,15 @@ class UpdatesScreenState extends State<VicarsScreen> {
           // AppbarSubtitleOne(
           //     text: "lbl_share".tr,
           //     margin: EdgeInsets.only(left: 22.h, top: 17.v, right: 16.h)),
+          Text(
+            "Share".tr,
+            style: TextStyle(
+              color: Color(0XFF000000),
+              fontSize: 16.fSize,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w400,
+            ),
+          ),
           AppbarTrailingImage(
               imagePath: ImageConstant.imgSend,
               onTap: () =>

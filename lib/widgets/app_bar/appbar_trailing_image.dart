@@ -30,11 +30,14 @@ class AppbarTrailingImage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CustomImageView(
-            imagePath: imagePath,
-            height: 21.h,
-            width: 24.h,
-            fit: BoxFit.contain,
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: CustomImageView(
+              imagePath: imagePath,
+              height: 21.h,
+              width: 24.h,
+              fit: BoxFit.contain,
+            ),
           ),
           // SizedBox(
           //   width: 5,

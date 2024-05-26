@@ -39,32 +39,30 @@ class HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SizedBox(
-          height: 200,
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 16.v),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 23.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildSixtyFive(context),
-                        SizedBox(height: 13.v),
-                        _buildFortyNine(context),
-                        SizedBox(height: 24.v),
-                      ],
-                    ),
+    return Scaffold(
+      body: SizedBox(
+        height: 200,
+        width: SizeUtils.width,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 16.v),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 23.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildSixtyFive(context),
+                      SizedBox(height: 13.v),
+                      _buildFortyNine(context),
+                      SizedBox(height: 24.v),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

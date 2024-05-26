@@ -11,6 +11,12 @@ import '../models/updates_model.dart';
 /// This provider manages the state of the HomeTabContainerPage, including the
 /// current homeTabContainerModelObj
 class HomeTabContainerProvider extends ChangeNotifier {
+  int _index = 0;
+  int get index => _index;
+
+  int _index1 = 0;
+  int get index1 => _index1;
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   UpdatesModel _directory_respo = UpdatesModel();

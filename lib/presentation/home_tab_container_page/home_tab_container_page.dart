@@ -77,7 +77,7 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                 borderRadius: BorderRadiusStyle.circleBorder43,
               ),
               child: CustomImageView(
-                imagePath: ImageConstant.imgEllipse2851,
+                imagePath: provider.image,
                 height: 46.adaptSize,
                 width: 46.adaptSize,
                 border: Border.all(color: Colors.white, width: 1),
@@ -89,16 +89,20 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
             ),
             SizedBox(width: 7.v),
             Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   provider.familyName.capitalize() ?? "",
                   style: CustomTextStyles.titleMediumPoppinsWhiteA700,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Family Head : ",
-                      style: CustomTextStyles.titleMediumWhiteA70001,
+                      style: CustomTextStyles.bodyPoppinsffffc885,
                     ),
                     Text(
                       provider.familyHeadName.capitalize() ?? "",
@@ -132,14 +136,14 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
       }).toList();
 
       tabViewChildrenDir = provider.directory_respo.data?.map((data) {
-        return UpdatePage(data.list);
+        return UpdatePage(data.list, data.category);
       }).toList();
 
       tabItem = provider.bulletin_respo.data?.map((data) {
         return TabItemWidget(data.category ?? "");
       }).toList();
       tabViewChildren = provider.bulletin_respo.data?.map((data) {
-        return BulletinPage(data.list);
+        return BulletinPage(data.list, data.category);
       }).toList();
 
       tabviewController = TabController(
@@ -148,14 +152,18 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
           length: provider.bulletin_respo.data?.length ?? 0, vsync: this);
       return Scaffold(
         key: _scaffoldKey,
+        resizeToAvoidBottomInset: true,
         drawer: Drawer(
           elevation: 0,
+          clipBehavior: Clip.hardEdge,
           backgroundColor: Colors.white,
           child: Column(
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Expanded(
                 child: ListView(
-                  // Important: Remove any padding from the ListView.
                   padding: EdgeInsets.zero,
                   children: [
                     Padding(
@@ -183,11 +191,11 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: 20.0, right: 20.0, top: 20, bottom: 16),
+                          left: 20.0, right: 20.0, top: 20, bottom: 1),
                       child: _buildOctober(context, provider),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
                     ListTile(
                       title: Container(
@@ -211,6 +219,55 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                         _scaffoldKey.currentState?.closeDrawer();
                         NavigatorService.pushNamed(
                             AppRoutes.vikarsMessageScreen);
+                        // Update the state of the app.
+                        // ...
+                      },
+                    ),
+                    ListTile(
+                      title: Container(
+                          child: Row(
+                        children: [
+                          CustomImageView(
+                            imagePath: ImageConstant.contributions,
+                            height: 24.v,
+                            width: 24.h,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Organization',
+                            style: CustomTextStyles.sideNavText,
+                          ),
+                        ],
+                      )),
+                      onTap: () {
+                        _scaffoldKey.currentState?.closeDrawer();
+                        NavigatorService.pushNamed(
+                            AppRoutes.organizationScreen);
+                      },
+                    ),
+                    ListTile(
+                      title: Container(
+                          child: Row(
+                        children: [
+                          CustomImageView(
+                            imagePath: ImageConstant.priest,
+                            height: 24.v,
+                            width: 24.h,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Vicar’s List',
+                            style: CustomTextStyles.sideNavText,
+                          ),
+                        ],
+                      )),
+                      onTap: () {
+                        _scaffoldKey.currentState?.closeDrawer();
+                        NavigatorService.pushNamed(AppRoutes.vikarsListScreen);
                         // Update the state of the app.
                         // ...
                       },
@@ -335,7 +392,6 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
         body: Stack(
           children: [
             Container(
-              width: double.maxFinite,
               decoration: AppDecoration.fillGray,
               child: SingleChildScrollView(
                 child: Column(
@@ -417,8 +473,8 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(height: 83.v),
                           Container(
                             width: 312.h,
                             margin: EdgeInsets.only(right: 2.h),
@@ -428,7 +484,7 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                                   provider.directory_respo.dailyDigest
                                           ?.heading ??
                                       "",
-                                  maxLines: 3,
+                                  maxLines: 8,
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.center,
                                   style: CustomTextStyles
@@ -521,13 +577,12 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                   margin: EdgeInsets.only(
                     left: 20.h,
                     top: 6.v,
-                    right: 2.h,
                   ),
                 ),
                 Container(
                   height: 24.adaptSize,
                   width: 24.adaptSize,
-                  margin: EdgeInsets.fromLTRB(13.h, 7.v, 22.h, 4.v),
+                  margin: EdgeInsets.fromLTRB(0, 7.v, 22.h, 4.v),
                   child: Stack(
                     alignment: Alignment.topRight,
                     children: [
@@ -593,5 +648,3 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
     NavigatorService.pushNamed(routeName);
   }
 }
-
-

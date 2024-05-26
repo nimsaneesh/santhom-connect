@@ -12,6 +12,10 @@ class UpdatesTabContainerProvider extends ChangeNotifier {
   List<DateTime?>? selectedDatesFromCalendar1;
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  int _index = 0;
+  int get index => _index;
+
   final UpdatesRepo _repo = UpdatesRepo();
   CalendarEventsRespo _events_respo = CalendarEventsRespo();
   UpdatesTabContainerModel _bulletin_respo = UpdatesTabContainerModel();
@@ -74,5 +78,10 @@ class UpdatesTabContainerProvider extends ChangeNotifier {
     }
 
     return eventList;
+  }
+
+  void setIndex(int index) {
+    _index = index;
+    notifyListeners();
   }
 }

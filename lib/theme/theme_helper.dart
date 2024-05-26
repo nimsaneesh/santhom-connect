@@ -185,6 +185,7 @@ class PrimaryColors {
 
   // Indigo
   Color get indigo300 => Color(0XFF699DC5);
+  Color get downloadColor => Color(0XFF6D29F6);
   Color get indigo400 => Color(0XFF4F8FCA);
   Color get indigo40001 => Color(0XFF5090CB);
   Color get indigo40002 => Color(0XFF488ABD);

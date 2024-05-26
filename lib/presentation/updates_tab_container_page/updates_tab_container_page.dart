@@ -1,8 +1,10 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
+import 'package:santhom_connect/presentation/widgets/tab_item_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../core/app_export.dart';
 import '../../utils/utils.dart';
+import '../../values/constants.dart';
 import '../../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/circular_loader.dart';
@@ -50,70 +52,67 @@ class UpdatesTabContainerPageState extends State<UpdatesTabContainerPage>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Stack(
-          children: [
-            SizedBox(
-              width: SizeUtils.width,
-              child: Consumer<UpdatesTabContainerProvider>(
-                  builder: (context, provider, child) {
-                print("Consumer");
-                print(provider.bulletin_respo.data.toString());
-                print(provider.bulletin_respo.data?.events?.length);
-                List<Widget>? tabViewChildren = [];
-                List<Widget>? tabItem = [];
-                tabItem = provider.bulletin_respo.data?.events?.map((data) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: Tab(
-                      child: Text(data.type ?? ""),
-                    ),
-                  );
-                }).toList();
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: Stack(
+        children: [
+          SizedBox(
+            width: SizeUtils.width,
+            child: Consumer<UpdatesTabContainerProvider>(
+                builder: (context, provider, child) {
+              print("Consumer");
 
-                tabViewChildren =
-                    provider.bulletin_respo.data?.events?.map((data) {
-                  return UpdatesPage(data.list);
-                }).toList();
+              print(provider.bulletin_respo.data?.events?.length);
+              List<Widget>? tabViewChildren = [];
+              List<Widget>? tabItem = [];
+              tabItem = provider.bulletin_respo.data?.events?.map((data) {
+                return TabItemWidget(data.type ?? "");
+              }).toList();
 
-                tabviewController = TabController(
-                    length: provider.bulletin_respo.data?.events?.length ?? 0,
-                    vsync: this);
+              tabViewChildren =
+                  provider.bulletin_respo.data?.events?.map((data) {
+                print("data.type");
+                print(data.type);
+                return UpdatesPage(data.list, data.type);
+              }).toList();
 
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 16.v),
-                    Padding(
-                      padding: EdgeInsets.only(left: 25.h),
-                      child: Text(
-                        "Calender",
-                        style: theme.textTheme.titleMedium,
-                      ),
+              tabviewController = TabController(
+                  length: provider.bulletin_respo.data?.events?.length ?? 0,
+                  vsync: this);
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 40.v),
+                  Padding(
+                    padding: EdgeInsets.only(left: 25.h),
+                    child: Text(
+                      "Calender",
+                      style: theme.textTheme.titleMedium,
                     ),
-                    SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 5.v),
-                          _buildCalendar(context),
-                          _buildTabview(context, tabItem),
-                          _buildTabBarView(context, tabViewChildren),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              }),
-            ),
-            Selector<UpdatesTabContainerProvider, bool>(
-              selector: (context, provider) => provider.isLoading,
-              builder: (context, value, child) {
-                return value ? CircularLoader() : SizedBox();
-              },
-            ),
-          ],
-        ),
+                  ),
+                  // SingleChildScrollView(
+                  //   child:
+                  Column(
+                    children: [
+                      SizedBox(height: 5.v),
+                      _buildCalendar(context),
+                      _buildTabview(context, tabItem),
+                      _buildTabBarViews(context, tabViewChildren),
+                    ],
+                  ),
+                  // ),
+                ],
+              );
+            }),
+          ),
+          Selector<UpdatesTabContainerProvider, bool>(
+            selector: (context, provider) => provider.isLoading,
+            builder: (context, value, child) {
+              return value ? CircularLoader() : SizedBox();
+            },
+          ),
+        ],
       ),
     );
   }
@@ -151,8 +150,6 @@ class UpdatesTabContainerPageState extends State<UpdatesTabContainerPage>
         _rangeEnd = null;
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
-
-      // _selectedEvents.value = _getEventsForDay(selectedDay);
     }
   }
 
@@ -223,88 +220,123 @@ class UpdatesTabContainerPageState extends State<UpdatesTabContainerPage>
     );
   }
 
+  CalendarStyle buildCalendarStyle() {
+    return CalendarStyle(
+      cellPadding: EdgeInsets.zero,
+      isTodayHighlighted: true,
+      markerSize: 8,
+      defaultTextStyle: TextStyle(color: Colors.black),
+      weekNumberTextStyle: TextStyle(color: Colors.black),
+      weekendTextStyle: TextStyle(color: Colors.black),
+      cellMargin: const EdgeInsets.all(8),
+      canMarkersOverflow: false,
+      disabledDecoration: const BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      rowDecoration: const BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      outsideDecoration: const BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      weekendDecoration: const BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      markerDecoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        border: Border.all(
+          color: Constants.colors[0], // Color of the border
+          width: 2, // Width of the border
+        ),
+      ),
+      holidayDecoration: const BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      todayDecoration: BoxDecoration(
+        color: Constants.colors[1],
+        // shape: BoxShape.circle,
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      ),
+      defaultDecoration: const BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      rangeStartDecoration: const BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      selectedDecoration: BoxDecoration(
+        color: Colors.yellow,
+        gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Constants.colors[4],
+              Constants.colors[3],
+            ]),
+        // shape: BoxShape.rectangle,
+        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+      ),
+    );
+  }
+
   Widget _buildCalendar(BuildContext context) {
     return Consumer<UpdatesTabContainerProvider>(
       builder: (context, provider, child) {
-        return SizedBox(
-          height: 386.v,
-          width: 368.h,
-
-          child: TableCalendar<Event>(
-            firstDay: kFirstDay,
-            lastDay: kLastDay,
-            focusedDay: _focusedDay,
-            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-            rangeStartDay: _rangeStart,
-            rangeEndDay: _rangeEnd,
-            calendarFormat: _calendarFormat,
-            rangeSelectionMode: _rangeSelectionMode,
-            eventLoader: provider.getEventsForDay,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            calendarStyle: CalendarStyle(
-              outsideDaysVisible: false,
+        return Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: appTheme.whiteA70001,
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: appTheme.black900.withOpacity(0.03),
+                ),
+              ],
             ),
-            onDaySelected: (selectedDay, focusedDay) {
-              provider.selectedDate(selectedDay);
-            },
-            onRangeSelected: _onRangeSelected,
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-            },
+            child: SizedBox(
+              child: TableCalendar<Event>(
+                firstDay: kFirstDay,
+                lastDay: kLastDay,
+                focusedDay: _focusedDay,
+                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                rangeStartDay: _rangeStart,
+                rangeEndDay: _rangeEnd,
+                headerStyle: HeaderStyle(
+                    formatButtonVisible: false,
+                    titleTextStyle:
+                        TextStyle(color: Colors.black, fontSize: 18)),
+                calendarFormat: _calendarFormat,
+                rangeSelectionMode: _rangeSelectionMode,
+                eventLoader: provider.getEventsForDay,
+                startingDayOfWeek: StartingDayOfWeek.monday,
+                onDaySelected: (selectedDay, focusedDay) {
+                  provider.selectedDate(selectedDay);
+                },
+                calendarStyle: buildCalendarStyle(),
+                onRangeSelected: _onRangeSelected,
+                onFormatChanged: (format) {
+                  if (_calendarFormat != format) {
+                    setState(() {
+                      _calendarFormat = format;
+                    });
+                  }
+                },
+                onPageChanged: (focusedDay) {
+                  _focusedDay = focusedDay;
+                },
+              ),
+            ),
           ),
-
-          // child: CalendarDatePicker2(
-          //   config: CalendarDatePicker2Config(
-          //     calendarType: CalendarDatePicker2Type.single,
-          //     firstDate: DateTime(DateTime.now().year - 5),
-          //     lastDate: DateTime(DateTime.now().year + 5),
-          //     selectedDayHighlightColor: Color(0XFFFAA33A),
-          //     centerAlignModePicker: true,
-          //     firstDayOfWeek: 1,
-          //     controlsHeight: 35.2,
-          //     weekdayLabelTextStyle: TextStyle(
-          //       color: appTheme.blueGray300,
-          //       fontFamily: 'Manrope',
-          //       fontWeight: FontWeight.w400,
-          //     ),
-          //     selectedDayTextStyle: TextStyle(
-          //       color: Color(0XFF000000),
-          //       fontFamily: 'Poppins',
-          //       fontWeight: FontWeight.w400,
-          //     ),
-          //     controlsTextStyle: TextStyle(
-          //       color: appTheme.blueGray900,
-          //       fontFamily: 'Manrope',
-          //       fontWeight: FontWeight.w500,
-          //     ),
-          //     dayTextStyle: TextStyle(
-          //       color: appTheme.blueGray300,
-          //       fontFamily: 'Poppins',
-          //       fontWeight: FontWeight.w400,
-          //     ),
-          //     disabledDayTextStyle: TextStyle(
-          //       color: appTheme.blueGray300,
-          //       fontFamily: 'Poppins',
-          //       fontWeight: FontWeight.w400,
-          //     ),
-          //     weekdayLabels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-          //     dayBorderRadius: BorderRadius.circular(
-          //       7.h,
-          //     ),
-          //   ),
-          //   value: provider.selectedDatesFromCalendar1 ?? [],
-          //   onValueChanged: (dates) {
-          //     provider.selectedDates(dates);
-          //     provider.selectedDatesFromCalendar1 = dates;
-          //   },
-          // ),
         );
       },
     );
@@ -342,13 +374,42 @@ class UpdatesTabContainerPageState extends State<UpdatesTabContainerPage>
   }
 
   /// Section Widget
-  Widget _buildTabBarView(BuildContext context, List<Widget>? tabViewChildren) {
+  Widget _buildTabBarViews(
+      BuildContext context, List<Widget>? tabViewChildren) {
     return SizedBox(
-      height: 267.v,
+      height: 1000.v,
       child: TabBarView(
         controller: tabviewController,
         children: tabViewChildren ?? [],
       ),
+    );
+  }
+
+  /// Section Widget
+  Widget _buildTabBarView(BuildContext context, List<Widget>? tabViewChildren) {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: tabViewChildren?.length,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            // tabController.animateTo(index);
+          },
+          child: Container(
+            width:
+                MediaQuery.of(context).size.width, // Full width of the screen
+            child: tabViewChildren?[index],
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  width: 3.0,
+                  // color:tabController.index == index ? Colors.blue : Colors.transparent,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class TabBodyDetailsWidget extends StatelessWidget {
   TabBodyDetailsWidget(
     this.tabViewChildrenDir,
@@ -15,7 +14,7 @@ class TabBodyDetailsWidget extends StatelessWidget {
       return SizedBox();
     }
     return SizedBox(
-      height: 400,
+      height: 430,
       child: TabBarView(
           controller: tabviewController, children: tabViewChildrenDir ?? []),
     );

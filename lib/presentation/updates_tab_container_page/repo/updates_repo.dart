@@ -24,6 +24,7 @@ class UpdatesRepo {
       },
     ));
 
+    print("DATE of searh" + date);
     UpdatesTabContainerModel model = UpdatesTabContainerModel();
     if (response.statusCode == 200) {
       model = UpdatesTabContainerModel.fromJson((response.data));

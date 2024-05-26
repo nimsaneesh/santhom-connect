@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:santhom_connect/presentation/vikars_list/vikars_list_details_screen.dart';
+import 'package:santhom_connect/presentation/vikars_list/vikars_list_screen.dart';
+import '../presentation/add_member_screen/add_member_screen.dart';
 import '../presentation/bulletin_screen/bulletin_screen.dart';
 import '../presentation/bulletin_tab_container_screen/bulletin_tab_container_screen.dart';
 import '../presentation/contribution_screen/contribution_screen.dart';
@@ -11,6 +14,8 @@ import '../presentation/home_container_screen/home_container_screen.dart';
 import '../presentation/directory_profile_screen/directory_profile_screen.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
 import '../presentation/login_screen/login_screen.dart';
+import '../presentation/organization/organization_details_screen.dart';
+import '../presentation/organization/organization_screen.dart';
 import '../presentation/profile_page/profile_page.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/updates_screen/update_screen.dart';
@@ -56,6 +61,11 @@ class AppRoutes {
   static const String verifyEmailScreen = '/verify_email_screen';
   static const String updatesScreen = '/updates_screen';
   static const String vicarsScreen = '/vicars_creen';
+  static const String vikarsListDetailScreen = '/vikarsListDetailScreen';
+  static const String vikarsListScreen = '/vikarsListScreen';
+  static const String addMemberScreen = '/addMemberScreen';
+  static const String organizationScreen = '/organization_screen';
+  static const String organizationDetailScreen = '/organizationDetailScreen';
   static const String directoryFamilyProfileScreen =
       '/directory_family_profile_screen';
   static const String directoryPrayerGroupScreen =
@@ -82,7 +92,12 @@ class AppRoutes {
         updatesScreen: UpdatesScreen.builder,
         contributionScreen: ContributionScreen.builder,
         vikarsMessageScreen: VikarsMessageScreen.builder,
+        organizationScreen: OrganizationScreen.builder,
+        vikarsListScreen: VikarsListScreen.builder,
+        vikarsListDetailScreen: VikarsListDetailScreen.builder,
         directoryFamilyProfileScreen: DirectoryFamilyProfileScreen.builder,
         vicarsScreen: VicarsScreen.builder,
+        organizationDetailScreen: OrganizationDetailScreen.builder,
+        addMemberScreen: AddMemberScreen.builder,
       };
 }

@@ -38,66 +38,65 @@ class DirectoryPrayerGroupScreenState
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            body: Stack(
-      children: [
-        Container(
-          child: Consumer<DirectoryPrayerGroupProvider>(
-              builder: (context, provider, child) {
-            return Column(children: [
-              _buildSixty(context),
-              SizedBox(height: 6.v),
-              Expanded(
-                  child: SingleChildScrollView(
-                      child: Column(children: [
-                Text(provider.respo.data?.prayerGroup?.groupName ?? "",
-                    style: CustomTextStyles.titleLargeBluegray90001),
-                SizedBox(height: 1.v),
-                RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                          text: "Leader : ",
-                          style: CustomTextStyles.bodyLargeff214d6c),
-                      TextSpan(
-                          text: provider.respo.data?.prayerGroup?.leader ?? "",
-                          style: CustomTextStyles.titleMediumff214d6c)
-                    ]),
-                    textAlign: TextAlign.left),
-                SizedBox(height: 16.v),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 21.h, vertical: 21.v),
-                  child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 21.h, vertical: 19.v),
-                      decoration: AppDecoration.fillWhiteA.copyWith(
-                          borderRadius: BorderRadiusStyle.roundedBorder16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Members".tr,
-                              style: CustomTextStyles.titleMediumBlack900),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          _buildDirectoryPrayer(
-                              context, provider.respo.data?.members ?? []),
-                        ],
-                      )),
-                ),
-              ])))
-            ]);
-          }),
-        ),
-        Selector<DirectoryPrayerGroupProvider, bool>(
-          selector: (context, provider) => provider.isLoading,
-          builder: (context, value, child) {
-            return value ? CircularLoader() : SizedBox();
-          },
-        ),
-      ],
-    )));
+    return Scaffold(
+        body: Stack(
+          children: [
+    Container(
+      child: Consumer<DirectoryPrayerGroupProvider>(
+          builder: (context, provider, child) {
+        return Column(children: [
+          _buildSixty(context),
+          SizedBox(height: 6.v),
+          Expanded(
+              child: SingleChildScrollView(
+                  child: Column(children: [
+            Text(provider.respo.data?.prayerGroup?.groupName ?? "",
+                style: CustomTextStyles.titleLargeBluegray90001),
+            SizedBox(height: 1.v),
+            RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "Leader : ",
+                      style: CustomTextStyles.bodyLargeff214d6c),
+                  TextSpan(
+                      text: provider.respo.data?.prayerGroup?.leader ?? "",
+                      style: CustomTextStyles.titleMediumff214d6c)
+                ]),
+                textAlign: TextAlign.left),
+            SizedBox(height: 16.v),
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 21.h, vertical: 21.v),
+              child: Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 21.h, vertical: 19.v),
+                  decoration: AppDecoration.fillWhiteA.copyWith(
+                      borderRadius: BorderRadiusStyle.roundedBorder16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Members".tr,
+                          style: CustomTextStyles.titleMediumBlack900),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _buildDirectoryPrayer(
+                          context, provider.respo.data?.members ?? []),
+                    ],
+                  )),
+            ),
+          ])))
+        ]);
+      }),
+    ),
+    Selector<DirectoryPrayerGroupProvider, bool>(
+      selector: (context, provider) => provider.isLoading,
+      builder: (context, value, child) {
+        return value ? CircularLoader() : SizedBox();
+      },
+    ),
+          ],
+        ));
   }
 
   /// Section Widget

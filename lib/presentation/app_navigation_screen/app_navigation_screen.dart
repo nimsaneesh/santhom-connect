@@ -27,53 +27,51 @@ class AppNavigationScreenState extends State<AppNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0XFFFFFFFF),
-        body: SizedBox(
-          width: 375.h,
-          child: Column(
-            children: [
-              _buildAppNavigation(context),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0XFFFFFFFF),
-                    ),
-                    child: Column(
-                      children: [
-                        _buildScreenTitle(
-                          context,
-                          screenTitle: "Login".tr,
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(AppRoutes.loginScreen),
-                        ),
-                        _buildScreenTitle(
-                          context,
-                          screenTitle: "Home - Container".tr,
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(AppRoutes.homeContainerScreen),
-                        ),
-                        _buildScreenTitle(
-                          context,
-                          screenTitle: "Directory - Tab Container".tr,
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              AppRoutes.directoryTabContainerScreen),
-                        ),
-                        _buildScreenTitle(
-                          context,
-                          screenTitle: "Directory Profile".tr,
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              AppRoutes.directoryProfileScreen),
-                        ),
-                      ],
-                    ),
+    return Scaffold(
+      backgroundColor: Color(0XFFFFFFFF),
+      body: SizedBox(
+        width: 375.h,
+        child: Column(
+          children: [
+            _buildAppNavigation(context),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color(0XFFFFFFFF),
+                  ),
+                  child: Column(
+                    children: [
+                      _buildScreenTitle(
+                        context,
+                        screenTitle: "Login".tr,
+                        onTapScreenTitle: () =>
+                            onTapScreenTitle(AppRoutes.loginScreen),
+                      ),
+                      _buildScreenTitle(
+                        context,
+                        screenTitle: "Home - Container".tr,
+                        onTapScreenTitle: () =>
+                            onTapScreenTitle(AppRoutes.homeContainerScreen),
+                      ),
+                      _buildScreenTitle(
+                        context,
+                        screenTitle: "Directory - Tab Container".tr,
+                        onTapScreenTitle: () => onTapScreenTitle(
+                            AppRoutes.directoryTabContainerScreen),
+                      ),
+                      _buildScreenTitle(
+                        context,
+                        screenTitle: "Directory Profile".tr,
+                        onTapScreenTitle: () =>
+                            onTapScreenTitle(AppRoutes.directoryProfileScreen),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

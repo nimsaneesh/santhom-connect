@@ -24,10 +24,11 @@ class VerifyEmailProvider extends ChangeNotifier {
 
   verifyEmail(BuildContext context) async {
     var email = PrefUtils().getEmail();
-    if (otpController.text != "" && email != "") {
+    var familyCode = PrefUtils().getfamilyode();
+    if (otpController.text != "" && email != "" && familyCode != "") {
       loader(true);
-      VerifyModel respo =
-          await _repo.verify(email: email, otp: otpController.text);
+      VerifyModel respo = await _repo.verify(
+          email: email, otp: otpController.text, familyCode: familyCode);
       loader(false);
       if (respo.status == "success") {
         if (null != respo.data?.token) {

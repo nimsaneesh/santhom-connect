@@ -78,6 +78,7 @@ class Metadata {
 
 class Data {
   int? id;
+  String? date;
   String? title;
   String? file;
   String? type;
@@ -89,6 +90,7 @@ class Data {
     id = json['id'];
     title = json['title'];
     file = json['file'];
+    date = json['title'];
     type = json['type'];
     details = json['details'];
   }
@@ -98,6 +100,7 @@ class Data {
     data['id'] = this.id;
     data['title'] = this.title;
     data['file'] = this.file;
+    data['title'] = this.date;
     data['type'] = this.type;
     data['details'] = this.details;
     return data;
