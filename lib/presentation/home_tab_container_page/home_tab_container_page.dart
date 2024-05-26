@@ -267,6 +267,7 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                       )),
                       onTap: () {
                         _scaffoldKey.currentState?.closeDrawer();
+
                         NavigatorService.pushNamed(AppRoutes.vikarsListScreen);
                         // Update the state of the app.
                         // ...
@@ -341,6 +342,9 @@ class HomeTabContainerPageState extends State<HomeTabContainerPage>
                       )),
                       onTap: () {
                         _scaffoldKey.currentState?.closeDrawer();
+                        NavigatorService.pushNamed(
+                            AppRoutes.notificationScreen);
+
                         // Update the state of the app.
                         // ...
                       },

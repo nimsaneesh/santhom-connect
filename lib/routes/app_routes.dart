@@ -14,6 +14,7 @@ import '../presentation/home_container_screen/home_container_screen.dart';
 import '../presentation/directory_profile_screen/directory_profile_screen.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
 import '../presentation/login_screen/login_screen.dart';
+import '../presentation/notification/notification.dart';
 import '../presentation/organization/organization_details_screen.dart';
 import '../presentation/organization/organization_screen.dart';
 import '../presentation/profile_page/profile_page.dart';
@@ -64,6 +65,7 @@ class AppRoutes {
   static const String vikarsListDetailScreen = '/vikarsListDetailScreen';
   static const String vikarsListScreen = '/vikarsListScreen';
   static const String addMemberScreen = '/addMemberScreen';
+  static const String notificationScreen = '/notificationScreen';
   static const String organizationScreen = '/organization_screen';
   static const String organizationDetailScreen = '/organizationDetailScreen';
   static const String directoryFamilyProfileScreen =
@@ -99,5 +101,6 @@ class AppRoutes {
         vicarsScreen: VicarsScreen.builder,
         organizationDetailScreen: OrganizationDetailScreen.builder,
         addMemberScreen: AddMemberScreen.builder,
+    notificationScreen: NotificationScreen.builder,
       };
 }

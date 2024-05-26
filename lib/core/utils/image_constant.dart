@@ -28,6 +28,7 @@ class ImageConstant {
 
   static String imgDocumentPdf1 = '$imagePath/img_document_pdf_1.svg';
   static String imgCalendar2 = '$imagePath/img_calendar_2.svg';
+  static String notificaionImg = '$imagePath/notifications.png';
 
   static String imgFile1 = '$imagePath/img_file_1.svg';
 
